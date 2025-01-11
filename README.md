@@ -6,3 +6,7 @@
 | Tiny The Titan    | GMTK Jam 2024           | [Play Now](https://alevanderbatman.itch.io/tiny-the-titan)           |
 | (@)venture        | Acerola Jam 0           | [Play Now](https://alevanderbatman.itch.io/at-venture)               |
 | Nachoroids        | Stop Waiting for Godot Jam | [Play Now](https://alevanderbatman.itch.io/nachoroids)               |
+
+
+## License
+This project is currently not licensed. Please contact me if you would like to use or adapt any part of it.
