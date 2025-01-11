@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cwwahxhjr8qe7"
+path="res://.godot/imported/whatliesbeneath FADED - Wolfgang_ CCBY.mp3-eb5e612e4ce3543c566f6f3313527a43.mp3str"
+
+[deps]
+
+source_file="res://Audio/Sounds/Music/whatliesbeneath FADED - Wolfgang_ CCBY.mp3"
+dest_files=["res://.godot/imported/whatliesbeneath FADED - Wolfgang_ CCBY.mp3-eb5e612e4ce3543c566f6f3313527a43.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

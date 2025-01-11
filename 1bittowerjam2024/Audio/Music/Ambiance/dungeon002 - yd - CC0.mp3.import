@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dwybjq05p6np2"
+path="res://.godot/imported/dungeon002 - yd - CC0.mp3-b53705a965d80746fdefb214aab7e993.mp3str"
+
+[deps]
+
+source_file="res://Audio/Music/Ambiance/dungeon002 - yd - CC0.mp3"
+dest_files=["res://.godot/imported/dungeon002 - yd - CC0.mp3-b53705a965d80746fdefb214aab7e993.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

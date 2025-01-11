@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ci63sbv3xl7mt"
+path="res://.godot/imported/evil_temple - Brandon Morris - CC0.mp3-5ef0a85d456bc306d4ff9732fce486e6.mp3str"
+
+[deps]
+
+source_file="res://Audio/Music/Unused/evil_temple - Brandon Morris - CC0.mp3"
+dest_files=["res://.godot/imported/evil_temple - Brandon Morris - CC0.mp3-5ef0a85d456bc306d4ff9732fce486e6.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

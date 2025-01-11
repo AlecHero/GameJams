@@ -1,0 +1,91 @@
+[gd_scene load_steps=12 format=3 uid="uid://dgwpn2u6hpj3y"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_12lxb"]
+[ext_resource type="Shader" path="res://Shaders/MovementSparkle.gdshader" id="2_22ryy"]
+[ext_resource type="Texture2D" uid="uid://mnb04moy345k" path="res://Tiles & Art/PrintChars.png" id="3_mw4iy"]
+[ext_resource type="Texture2D" uid="uid://c3nl0vnk616fg" path="res://Tiles & Art/PrintParticle.png" id="4_c6bki"]
+[ext_resource type="Script" path="res://Camera2D.gd" id="5_t3pb1"]
+[ext_resource type="AudioStream" uid="uid://bppwwqtqj6lsd" path="res://Music & Sound/wet_step.wav" id="7_y5xrl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s0qn5"]
+shader = ExtResource("2_22ryy")
+shader_parameter/speed = 0.0
+shader_parameter/center = Vector2(128, 128)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_msw2c"]
+radius = 23.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sbx12"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_xu1ri"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.415385, 0.593407), 0.0, 0.0, 0, 0, Vector2(0.789744, 0.428571), -0.370798, -0.370798, 0, 0, Vector2(1, 0.164835), -1.40977, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_5p6ao"]
+offsets = PackedFloat32Array(0, 0.215569, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.819608, 1, 1, 1, 0)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 253
+floor_constant_speed = true
+floor_block_on_wall = false
+script = ExtResource("1_12lxb")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+material = SubResource("ShaderMaterial_s0qn5")
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_mw4iy")
+centered = false
+hframes = 9
+vframes = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(32, 32)
+shape = SubResource("CircleShape2D_msw2c")
+
+[node name="WalkParticle" type="CPUParticles2D" parent="."]
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_sbx12")
+position = Vector2(32, 32)
+emitting = false
+amount = 30
+lifetime = 0.7
+explosiveness = 0.16
+texture = ExtResource("4_c6bki")
+emission_shape = 2
+emission_sphere_radius = 8.47
+spread = 180.0
+gravity = Vector2(0, 0)
+linear_accel_min = 0.69
+linear_accel_max = 1.09
+damping_min = 24.339
+damping_max = 27.715
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_xu1ri")
+color_ramp = SubResource("Gradient_5p6ao")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(32, 32)
+position_smoothing_enabled = true
+editor_draw_drag_margin = true
+script = ExtResource("5_t3pb1")
+
+[node name="WalkSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_y5xrl")
+volume_db = -5.0
+pitch_scale = 2.0
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

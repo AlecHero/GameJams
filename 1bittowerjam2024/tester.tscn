@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://771r5iba3rot"]
+
+[ext_resource type="Shader" path="res://Shaders/slice.gdshader" id="1_krv44"]
+[ext_resource type="Texture2D" uid="uid://cgw58igdl5vg4" path="res://Textures/fireballer_sheet.png" id="2_foh3x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8o4bj"]
+shader = ExtResource("1_krv44")
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/angle = 2.79
+shader_parameter/t = 0.0
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_8o4bj")
+position = Vector2(17, 18)
+texture = ExtResource("2_foh3x")

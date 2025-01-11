@@ -1,0 +1,395 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://Misc/ExplosionGradient.tres" type="Gradient" id=1]
+[ext_resource path="res://Spaceship.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/ParticleSpark.png" type="Texture2D" id=3]
+[ext_resource path="res://Sound/Shoot1.wav" type="AudioStream" id=4]
+[ext_resource path="res://Sound/Shoot2.wav" type="AudioStream" id=5]
+[ext_resource path="res://Sprites/ThrusterParticle.png" type="Texture2D" id=6]
+[ext_resource path="res://Sprites/ShipExplosion.png" type="Texture2D" id=7]
+[ext_resource path="res://Sound/Explosion.wav" type="AudioStream" id=8]
+[ext_resource path="res://Sound/Collision.wav" type="AudioStream" id=9]
+[ext_resource path="res://Sprites/Ship.png" type="Texture2D" id=10]
+[ext_resource path="res://Sound/Click.wav" type="AudioStream" id=11]
+
+[sub_resource type="Curve" id=17]
+min_value = 5.0
+max_value = 20.0
+_data = [ Vector2( 0, 5 ), 0.0, 0.0, 0, 0, Vector2( 0.555556, 9.22727 ), 18.1106, 18.1106, 0, 0, Vector2( 0.851852, 20 ), 2.74909, 0.0, 0, 1, Vector2( 1, 20 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CanvasItemMaterial" id=11]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=13]
+offsets = PackedFloat32Array( 0, 0.127976, 0.339286, 0.535714, 0.764881, 1 )
+colors = PackedColorArray( 0, 0.390625, 1, 1, 1, 0.959412, 0.628906, 1, 0.882813, 0.527322, 0.18277, 1, 1, 0.078125, 0.207764, 1, 0.09375, 0, 0.074707, 1, 0.0627451, 0.0627451, 0.0627451, 0.376471 )
+
+[sub_resource type="GradientTexture2D" id=14]
+gradient = SubResource( 13 )
+
+[sub_resource type="Curve" id=15]
+_data = [ Vector2( 0, 1 ), 0.0, -0.0630018, 0, 0, Vector2( 1, 0 ), -0.636328, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=16]
+width = 32
+curve = SubResource( 15 )
+
+[sub_resource type="ParticleProcessMaterial" id=12]
+lifetime_randomness = 1.0
+flag_disable_z = true
+direction = Vector3( -1, 0, 0 )
+spread = 6.14
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 80.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -10.0
+scale = 1.2
+scale_random = 1.0
+scale_curve = SubResource( 16 )
+color = Color( 1, 0.992157, 0.760784, 1 )
+color_ramp = SubResource( 14 )
+
+[sub_resource type="GradientTexture2D" id=10]
+gradient = ExtResource( 1 )
+
+[sub_resource type="ParticleProcessMaterial" id=8]
+lifetime_randomness = 1.0
+flag_disable_z = true
+spread = 69.66
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 112.16
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 1.5
+scale_random = 1.0
+color_ramp = SubResource( 10 )
+
+[sub_resource type="Animation" id=4]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Hull:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=5]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Hull:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+
+[sub_resource type="Animation" id=6]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Hull:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=7]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Hull:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Explosion"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Explosion:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PackedFloat32Array( 0, 0.3, 0.6, 0.9, 1.2, 1.5 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 6 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Explosion:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PackedFloat32Array( 0, 1.8 ),
+"transitions": PackedFloat32Array( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "audio"
+tracks/2/path = NodePath("Explode")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 8 )
+} ],
+"times": PackedFloat32Array( 0 )
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Hull:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Explosion:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PackedFloat32Array( 0, 1.8 ),
+"transitions": PackedFloat32Array( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 5, 5 ), Vector2( 3, 3 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("CollisionPolygon2D4:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Hit"
+length = 2.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Explosion:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PackedFloat32Array( 0, 0.3, 0.55 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 6 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Explosion:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PackedFloat32Array( 0, 0.8 ),
+"transitions": PackedFloat32Array( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "audio"
+tracks/2/path = NodePath("Collision")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 9 )
+} ],
+"times": PackedFloat32Array( 0 )
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CollisionPolygon2D4:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PackedFloat32Array( 0, 2.3 ),
+"transitions": PackedFloat32Array( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Explosion:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
+"update": 0,
+"values": [ Vector2( 3, 3 ) ]
+}
+
+[node name="Spaceship" type="CharacterBody2D"]
+scale = Vector2( 0.5, 0.5 )
+collision_layer = 2
+collision_mask = 5
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+heat_loss = SubResource( 17 )
+
+[node name="Reflect" type="Area2D" parent="."]
+visible = false
+z_index = 1
+collision_layer = 1024
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="Reflect"]
+z_index = 1
+polygon = PackedVector2Array( -53, -50, 8, -51, 36, -35, 58, -1, 38, 35, 16, 51, -53, 52, -74, 18, -75, -19 )
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="."]
+visible = false
+z_index = 1
+polygon = PackedVector2Array( -46.7352, -44.0132, -31.0508, -35.6705, 5.99095, -40.0087, 14, -29.6637, 31.3529, -28.9963, 30.6855, -12.6445, 53.0441, 0.0365143, 30.6855, 14.386, 32.354, 32.0727, 17.3371, 32.4064, 11.9977, 43.4188, -30.0497, 37.0783, -50.406, 44.7536, -50.406, 18.3906, -68.0927, 18.0569, -69.0938, -18.3175, -50.0723, -19.6524 )
+disabled = true
+
+[node name="Hull" type="Sprite2D" parent="."]
+texture = ExtResource( 10 )
+hframes = 2
+vframes = 2
+
+[node name="Thruster" type="GPUParticles2D" parent="Hull"]
+material = SubResource( 11 )
+position = Vector2( -80, 0 )
+emitting = false
+amount = 100
+lifetime = 5.5
+speed_scale = 5.0
+randomness = 0.48
+local_coords = false
+process_material = SubResource( 12 )
+texture = ExtResource( 6 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Gun1" type="Marker2D" parent="Hull"]
+position = Vector2( 83.839, -20.5404 )
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Hull/Gun1"]
+material = SubResource( 11 )
+emitting = false
+amount = 12
+lifetime = 3.16
+speed_scale = 14.54
+local_coords = false
+process_material = SubResource( 8 )
+texture = ExtResource( 3 )
+
+[node name="Gun2" type="Marker2D" parent="Hull"]
+position = Vector2( 83.839, 21.451 )
+
+[node name="Particles2D2" type="GPUParticles2D" parent="Hull/Gun2"]
+material = SubResource( 11 )
+emitting = false
+amount = 12
+lifetime = 3.16
+speed_scale = 14.54
+randomness = 1.0
+local_coords = false
+process_material = SubResource( 8 )
+texture = ExtResource( 3 )
+
+[node name="Explosion" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2( 5, 5 )
+texture = ExtResource( 7 )
+hframes = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Idle = SubResource( 4 )
+anims/Shoot = SubResource( 5 )
+anims/Thrust = SubResource( 6 )
+anims/Thrust&Shoot = SubResource( 7 )
+
+[node name="AnimationExplosion" type="AnimationPlayer" parent="."]
+anims/Explosion = SubResource( 2 )
+anims/Hit = SubResource( 3 )
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = -15.0
+pitch_scale = 3.5
+
+[node name="Shoot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -20.0
+pitch_scale = 0.64
+bus = "SoundFX"
+
+[node name="Shoot2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -20.0
+pitch_scale = 0.64
+bus = "SoundFX"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Explode" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+
+[node name="Collision" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -13.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2( 0.7, 0.7 )
+limit_left = 0
+limit_top = 0
+limit_right = 1920
+limit_bottom = 1000
+position_smoothing_enabled = true
+drag_vertical_offset = 0.82
+
+[connection signal="body_entered" from="Reflect" to="." method="_on_Area2D_body_entered"]

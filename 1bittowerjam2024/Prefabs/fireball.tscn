@@ -1,0 +1,114 @@
+[gd_scene load_steps=9 format=3 uid="uid://ddx545icfsn8q"]
+
+[ext_resource type="Shader" path="res://Shaders/enemy.gdshader" id="1_7otao"]
+[ext_resource type="Texture2D" uid="uid://dexr6su6po0kp" path="res://Textures/Projectiles/fireball_sheet.png" id="1_8xray"]
+[ext_resource type="Script" path="res://Prefabs/fireball.gd" id="2_3o8n4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wgual"]
+resource_local_to_scene = true
+shader = ExtResource("1_7otao")
+shader_parameter/anim_speed = 10.0
+shader_parameter/squish_amount = 0.0
+shader_parameter/alpha = 1.0
+shader_parameter/rand = 1.0
+shader_parameter/gt = null
+shader_parameter/is_flying = false
+shader_parameter/is_ghost = false
+shader_parameter/is_wavy = false
+shader_parameter/is_climby = false
+shader_parameter/is_dying = true
+shader_parameter/death_type = 1
+shader_parameter/columns = 4.0
+shader_parameter/rows = 1.0
+shader_parameter/frame = 0.0
+shader_parameter/angle = 0.0
+shader_parameter/t = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ljjt2"]
+radius = 6.08276
+
+[sub_resource type="Animation" id="Animation_2o8a8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material:shader_parameter/frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_n3kjm"]
+resource_name = "fireball"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material:shader_parameter/frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 1.0, 2.0, 3.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_op7ty"]
+_data = {
+"RESET": SubResource("Animation_2o8a8"),
+"fireball": SubResource("Animation_n3kjm")
+}
+
+[node name="Fireball" type="Area2D"]
+material = SubResource("ShaderMaterial_wgual")
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("2_3o8n4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+use_parent_material = true
+texture = ExtResource("1_8xray")
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_ljjt2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_op7ty")
+}
+speed_scale = 2.0
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

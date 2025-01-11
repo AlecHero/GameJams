@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://brhwwaxxxkaen"]
+
+[ext_resource type="PackedScene" uid="uid://dgwpn2u6hpj3y" path="res://Player.tscn" id="1_el2fh"]
+[ext_resource type="PackedScene" uid="uid://u2cb3mpwx7bv" path="res://Prefabs/FlyingSpike.tscn" id="2_6d6dj"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_el2fh")]
+
+[node name="FlyingSpike" parent="." instance=ExtResource("2_6d6dj")]
+position = Vector2(411, 8)

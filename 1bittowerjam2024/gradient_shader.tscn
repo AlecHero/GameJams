@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4tn6m42115c1"]
+
+[ext_resource type="Script" path="res://gradient_shader.gd" id="1_th8cc"]
+[ext_resource type="Shader" path="res://Shaders/gradient.gdshader" id="2_ymygy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ymk5h"]
+shader = ExtResource("2_ymygy")
+shader_parameter/primary = Color(1, 1, 1, 1)
+shader_parameter/secondary = Color(0, 0, 0, 1)
+
+[node name="GradientShader" type="CanvasLayer"]
+visible = false
+script = ExtResource("1_th8cc")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ymk5h")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true

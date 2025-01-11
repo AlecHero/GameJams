@@ -1,0 +1,43 @@
+[gd_resource type="TileSet" load_steps=4 format=3 uid="uid://b0du84nkdixv1"]
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_8c301"]
+tile_data = PackedInt32Array(0, 1048577, 14, 65536, 1048577, 15, 1, 1114113, 14, 65537, 1114113, 15)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_l1811"]
+tile_data = PackedInt32Array(0, 786433, 17, 65536, 786433, 18, 131072, 786433, 19, 1, 851969, 17, 65537, 851969, 18, 131073, 851969, 19, 2, 917505, 17, 65538, 917505, 18, 131074, 917505, 19)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_8iw00"]
+tile_data = PackedInt32Array(0, 589825, 17, 65536, 589825, 18, 131072, 589825, 19, 1, 655361, 17, 65537, 655361, 18, 131073, 655361, 19, 2, 720897, 17, 65538, 720897, 18, 131074, 720897, 19)
+
+[resource]
+tile_size = Vector2i(8, 8)
+physics_layer_0/collision_layer = 2
+physics_layer_0/collision_mask = 0
+physics_layer_1/collision_layer = 4
+physics_layer_1/collision_mask = 0
+physics_layer_2/collision_layer = 8
+physics_layer_2/collision_mask = 0
+physics_layer_3/collision_layer = 16
+physics_layer_3/collision_mask = 0
+physics_layer_4/collision_layer = 32
+physics_layer_4/collision_mask = 0
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Bricks"
+terrain_set_0/terrain_0/color = Color(0.401089, 0.474894, 0.845719, 1)
+terrain_set_0/terrain_1/name = "Platform"
+terrain_set_0/terrain_1/color = Color(0.753812, 0.195811, 0.381266, 1)
+terrain_set_0/terrain_2/name = "Grass"
+terrain_set_0/terrain_2/color = Color(0.46875, 0.5, 0.25, 1)
+terrain_set_0/terrain_3/name = "Tree"
+terrain_set_0/terrain_3/color = Color(0.206287, 0.284328, 0.127527, 1)
+terrain_set_0/terrain_4/name = "Dirt"
+terrain_set_0/terrain_4/color = Color(0.301255, 0.189828, 0.119447, 1)
+terrain_set_0/terrain_5/name = "Chain"
+terrain_set_0/terrain_5/color = Color(0.82915, 0.239451, 0.511619, 1)
+terrain_set_0/terrain_6/name = "GrassDirt"
+terrain_set_0/terrain_6/color = Color(0.25, 0.5, 0.40625, 1)
+terrain_set_0/terrain_7/name = "Spikes"
+terrain_set_0/terrain_7/color = Color(0.634512, 0.317908, 1.92523e-07, 1)
+pattern_0 = SubResource("TileMapPattern_8c301")
+pattern_1 = SubResource("TileMapPattern_l1811")
+pattern_2 = SubResource("TileMapPattern_8iw00")

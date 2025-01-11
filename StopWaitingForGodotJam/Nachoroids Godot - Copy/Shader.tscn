@@ -1,0 +1,129 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Shader.gd" type="Script" id=1]
+[ext_resource path="res://Shaders/Chromatic Abberation.shader" type="Shader" id=2]
+[ext_resource path="res://Shaders/CRT.shader" type="Shader" id=3]
+[ext_resource path="res://Shaders/Blur.shader" type="Shader" id=4]
+[ext_resource path="res://Sprites/CRT-Border.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/StageTest.png" type="Texture" id=6]
+[ext_resource path="res://Shaders/Bloom.shader" type="Shader" id=7]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 3 )
+shader_param/scan_line_count = 0.0
+shader_param/scan_line_contrast = 0.5
+shader_param/scan_line_thickness = 0.25
+shader_param/horizontal_curve = 4.0
+shader_param/vertical_curve = 3.0
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 4 )
+shader_param/blur = 5.0
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 7 )
+shader_param/hdr_threshold = 0.109
+shader_param/blur_size = 4.044
+shader_param/glow_intensity = 0.25
+shader_param/blend_percent = 0.641
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 2 )
+shader_param/amount = 0.5
+
+[node name="Shader" type="CanvasLayer"]
+layer = 5
+script = ExtResource( 1 )
+
+[node name="CRT Layer" type="BackBufferCopy" parent="."]
+z_index = 1
+copy_mode = 2
+rect = Rect2( 0, 0, 1920, 1080 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="ColorRect" type="ColorRect" parent="CRT Layer"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Border" type="NinePatchRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource( 5 )
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="Blur Layer" type="BackBufferCopy" parent="."]
+copy_mode = 2
+rect = Rect2( 0, 0, 1920, 1080 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="ColorRect" type="ColorRect" parent="Blur Layer"]
+material = SubResource( 6 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Bloom Layer" type="BackBufferCopy" parent="."]
+copy_mode = 2
+rect = Rect2( 0, 0, 1920, 1080 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="ColorRect" type="ColorRect" parent="Bloom Layer"]
+material = SubResource( 3 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Chromatic Abberation Layer" type="BackBufferCopy" parent="."]
+copy_mode = 2
+rect = Rect2( 0, 0, 1920, 1080 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="ColorRect" type="ColorRect" parent="Chromatic Abberation Layer"]
+material = SubResource( 4 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": true,
+"_editor_description_": ""
+}
+
+[node name="Test" type="Sprite" parent="."]
+visible = false
+z_index = -1
+texture = ExtResource( 6 )
+centered = false

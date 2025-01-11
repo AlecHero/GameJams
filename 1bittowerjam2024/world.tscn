@@ -1,0 +1,680 @@
+[gd_scene load_steps=39 format=3 uid="uid://1w8s3ial7gxe"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_eu08y"]
+[ext_resource type="Script" path="res://enemy_handler.gd" id="2_yndqo"]
+[ext_resource type="PackedScene" uid="uid://b4tn6m42115c1" path="res://gradient_shader.tscn" id="3_f8c1a"]
+[ext_resource type="Script" path="res://UI.gd" id="3_qayli"]
+[ext_resource type="PackedScene" uid="uid://b8gnd6byq0u5m" path="res://DEBUG_UI.tscn" id="4_dqyuo"]
+[ext_resource type="Texture2D" uid="uid://c4shcvxvv1alc" path="res://Textures/Icons/icon_spikes.png" id="5_uqhy1"]
+[ext_resource type="Texture2D" uid="uid://c4shcvxvv1alc" path="res://Textures/Icons/icon_spikes.png" id="6_l4xeo"]
+[ext_resource type="FontFile" uid="uid://uifqqktbhdqt" path="res://Fonts/04b03 Regular.ttf" id="6_stpn6"]
+[ext_resource type="Script" path="res://camera.gd" id="6_ufhti"]
+[ext_resource type="Texture2D" uid="uid://bebf5nkad367t" path="res://Textures/Icons/icon_vine.png" id="7_hfkes"]
+[ext_resource type="Texture2D" uid="uid://d01rfx88rg8od" path="res://Textures/Icons/icon_fire.png" id="7_tufax"]
+[ext_resource type="Texture2D" uid="uid://bwdrsnsdv5b0b" path="res://Textures/paper9patch.png" id="7_v2jam"]
+[ext_resource type="Texture2D" uid="uid://dag5qpaox27r1" path="res://Textures/Icons/icon_ballista.png" id="8_rehpm"]
+[ext_resource type="PackedScene" uid="uid://biauc0iwk28tb" path="res://Prefabs/tower.tscn" id="9_24n5s"]
+[ext_resource type="Shader" path="res://icon.gdshader" id="10_6u375"]
+[ext_resource type="Texture2D" uid="uid://c80esvfxsi1hy" path="res://Textures/Icons/icon_sword.png" id="10_lg0w7"]
+[ext_resource type="PackedScene" uid="uid://c4b1p1vj0ft3d" path="res://player.tscn" id="11_7htvh"]
+[ext_resource type="PackedScene" uid="uid://dqihtrbdm6aio" path="res://Prefabs/Ballista.tscn" id="11_du13q"]
+[ext_resource type="Texture2D" uid="uid://c83kr7bh3s6an" path="res://Textures/Icons/icon_bow.png" id="11_t4gx8"]
+[ext_resource type="PackedScene" uid="uid://or635ydccitp" path="res://LevelHandler.tscn" id="11_tfnma"]
+[ext_resource type="Texture2D" uid="uid://b0v40ejfthfpm" path="res://Textures/Icons/icon_hammer.png" id="13_v8v56"]
+[ext_resource type="Texture2D" uid="uid://dej267nd5a6h7" path="res://Textures/button_sheet.png" id="14_0eq02"]
+[ext_resource type="Texture2D" uid="uid://bk5o12ly44ufx" path="res://Textures/Icons/icon_empty.png" id="14_yik5t"]
+[ext_resource type="Script" path="res://big_button.gd" id="15_yh2a5"]
+[ext_resource type="Texture2D" uid="uid://dg8sqg8doaam0" path="res://Textures/bigbutton_sheet.png" id="16_4bamu"]
+[ext_resource type="PackedScene" uid="uid://2mkivfwnxmny" path="res://Spikes.tscn" id="17_rm2fo"]
+[ext_resource type="PackedScene" uid="uid://cg8dnjq6hrvyo" path="res://VineSnare.tscn" id="18_niqag"]
+[ext_resource type="PackedScene" uid="uid://2ovmgj8jfnuq" path="res://Prefabs/Fireballer.tscn" id="24_6e55u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_odnwl"]
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ij7k"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q411i"]
+bg_color = Color(0.122252, 0.122252, 0.122252, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m8d6c"]
+bg_color = Color(0.051971, 0.051971, 0.051971, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x412l"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f0ync"]
+shader = ExtResource("10_6u375")
+shader_parameter/is_activated = false
+shader_parameter/t = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5e1mj"]
+shader = ExtResource("10_6u375")
+shader_parameter/is_activated = false
+shader_parameter/t = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sn4rg"]
+shader = ExtResource("10_6u375")
+shader_parameter/is_activated = false
+shader_parameter/t = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f8tgw"]
+shader = ExtResource("10_6u375")
+shader_parameter/is_activated = false
+shader_parameter/t = null
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uiu50"]
+radius = 15.0063
+
+[node name="World" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_eu08y")
+
+[node name="EnemyHandler" type="Node" parent="."]
+script = ExtResource("2_yndqo")
+
+[node name="WaveTimer" type="Timer" parent="EnemyHandler"]
+wait_time = 60.0
+
+[node name="SpawnTimer" type="Timer" parent="EnemyHandler"]
+wait_time = 1.5
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("3_qayli")
+
+[node name="ShopUI" type="PanelContainer" parent="UI"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -132.0
+offset_top = -202.0
+offset_right = 220.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_odnwl")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/ShopUI"]
+texture_filter = 1
+layout_mode = 2
+mouse_filter = 1
+texture = ExtResource("7_v2jam")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/ShopUI"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="ShopElements" type="VBoxContainer" parent="UI/ShopUI/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Header" type="HBoxContainer" parent="UI/ShopUI/MarginContainer/ShopElements"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/ShopUI/MarginContainer/ShopElements/Header"]
+texture_filter = 1
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+expand_mode = 2
+
+[node name="RichTextLabel" type="Label" parent="UI/ShopUI/MarginContainer/ShopElements/Header"]
+texture_filter = 1
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_stpn6")
+theme_override_font_sizes/font_size = 32
+text = "TOWERS:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel2" type="Label" parent="UI/ShopUI/MarginContainer/ShopElements/Header"]
+texture_filter = 1
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_stpn6")
+theme_override_font_sizes/font_size = 32
+text = "PRICE:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spikes" type="HBoxContainer" parent="UI/ShopUI/MarginContainer/ShopElements"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/ShopUI/MarginContainer/ShopElements/Spikes"]
+texture_filter = 1
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("6_l4xeo")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="UI/ShopUI/MarginContainer/ShopElements/Spikes"]
+texture_filter = 1
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_stpn6")
+theme_override_font_sizes/font_size = 32
+text = "Spikes"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpikeButton" type="Button" parent="UI/ShopUI/MarginContainer/ShopElements/Spikes"]
+texture_filter = 1
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("6_stpn6")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxFlat_1ij7k")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_q411i")
+theme_override_styles/hover = SubResource("StyleBoxFlat_m8d6c")
+theme_override_styles/normal = SubResource("StyleBoxFlat_x412l")
+text = "5"
+
+[node name="Vine" type="HBoxContainer" parent="UI/ShopUI/MarginContainer/ShopElements"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/ShopUI/MarginContainer/ShopElements/Vine"]
+texture_filter = 1
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("7_hfkes")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="UI/ShopUI/MarginContainer/ShopElements/Vine"]
+texture_filter = 1
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_stpn6")
+theme_override_font_sizes/font_size = 32
+text = "Vine"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpikeButton" type="Button" parent="UI/ShopUI/MarginContainer/ShopElements/Vine"]
+texture_filter = 1
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("6_stpn6")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxFlat_1ij7k")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_q411i")
+theme_override_styles/hover = SubResource("StyleBoxFlat_m8d6c")
+theme_override_styles/normal = SubResource("StyleBoxFlat_x412l")
+text = "5"
+
+[node name="Fireball" type="HBoxContainer" parent="UI/ShopUI/MarginContainer/ShopElements"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/ShopUI/MarginContainer/ShopElements/Fireball"]
+texture_filter = 1
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("7_tufax")
+expand_mode = 2
+
+[node name="Label2" type="Label" parent="UI/ShopUI/MarginContainer/ShopElements/Fireball"]
+texture_filter = 1
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_stpn6")
+theme_override_font_sizes/font_size = 32
+text = "Fireball"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BallistaButton" type="Button" parent="UI/ShopUI/MarginContainer/ShopElements/Fireball"]
+texture_filter = 1
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("6_stpn6")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxFlat_1ij7k")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_q411i")
+theme_override_styles/hover = SubResource("StyleBoxFlat_m8d6c")
+theme_override_styles/normal = SubResource("StyleBoxFlat_x412l")
+text = "5"
+
+[node name="Ballista" type="HBoxContainer" parent="UI/ShopUI/MarginContainer/ShopElements"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/ShopUI/MarginContainer/ShopElements/Ballista"]
+texture_filter = 1
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("8_rehpm")
+expand_mode = 2
+
+[node name="Label2" type="Label" parent="UI/ShopUI/MarginContainer/ShopElements/Ballista"]
+texture_filter = 1
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_stpn6")
+theme_override_font_sizes/font_size = 32
+text = "Ballista"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BallistaButton" type="Button" parent="UI/ShopUI/MarginContainer/ShopElements/Ballista"]
+texture_filter = 1
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("6_stpn6")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxFlat_1ij7k")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_q411i")
+theme_override_styles/hover = SubResource("StyleBoxFlat_m8d6c")
+theme_override_styles/normal = SubResource("StyleBoxFlat_x412l")
+text = "5"
+
+[node name="WaveTimer" type="MarginContainer" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -158.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="PanelContainer" type="NinePatchRect" parent="UI/WaveTimer"]
+texture_filter = 1
+layout_mode = 2
+mouse_filter = 1
+texture = ExtResource("7_v2jam")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="PanelContainer2" type="MarginContainer" parent="UI/WaveTimer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="WaveTimerText" type="Label" parent="UI/WaveTimer/PanelContainer2"]
+texture_filter = 1
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_stpn6")
+theme_override_font_sizes/font_size = 16
+text = "Next Wave : 00s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerUI" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/PlayerUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 250
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 250
+
+[node name="PanelContainer" type="NinePatchRect" parent="UI/PlayerUI/MarginContainer"]
+texture_filter = 1
+layout_mode = 2
+mouse_filter = 1
+texture = ExtResource("7_v2jam")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/PlayerUI/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/PlayerUI/MarginContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="IconSword" type="TextureRect" parent="UI/PlayerUI/MarginContainer/MarginContainer/HBoxContainer"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_f0ync")
+layout_mode = 2
+texture = ExtResource("10_lg0w7")
+expand_mode = 2
+
+[node name="IconBow" type="TextureRect" parent="UI/PlayerUI/MarginContainer/MarginContainer/HBoxContainer"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_5e1mj")
+layout_mode = 2
+texture = ExtResource("11_t4gx8")
+expand_mode = 2
+
+[node name="IconSep" type="TextureRect" parent="UI/PlayerUI/MarginContainer/MarginContainer/HBoxContainer"]
+modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("5_uqhy1")
+expand_mode = 2
+
+[node name="IconHeld" type="TextureRect" parent="UI/PlayerUI/MarginContainer/MarginContainer/HBoxContainer"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_sn4rg")
+layout_mode = 2
+texture = ExtResource("14_yik5t")
+expand_mode = 2
+
+[node name="IconHammer" type="TextureRect" parent="UI/PlayerUI/MarginContainer/MarginContainer/HBoxContainer"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_f8tgw")
+layout_mode = 2
+texture = ExtResource("13_v8v56")
+expand_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="UI/PlayerUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 485
+theme_override_constants/margin_right = 70
+
+[node name="PanelContainer2" type="NinePatchRect" parent="UI/PlayerUI/MarginContainer2"]
+texture_filter = 1
+layout_mode = 2
+mouse_filter = 1
+texture = ExtResource("7_v2jam")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/PlayerUI/MarginContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="GoldLabel" type="Label" parent="UI/PlayerUI/MarginContainer2/MarginContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_stpn6")
+theme_override_font_sizes/font_size = 16
+text = "Gold : 000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GradientShader" parent="." instance=ExtResource("3_f8c1a")]
+visible = true
+
+[node name="DEBUG_UI" parent="." instance=ExtResource("4_dqyuo")]
+layer = 2
+
+[node name="Camera" type="Camera2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(336, 208)
+limit_left = -16
+limit_top = -16
+limit_right = 688
+limit_bottom = 432
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+script = ExtResource("6_ufhti")
+SHAKE_SPEED = 80.0
+SHAKE_STRENGTH = 30.0
+metadata/_edit_lock_ = true
+
+[node name="LevelHandler" parent="." instance=ExtResource("11_tfnma")]
+unique_name_in_owner = true
+z_as_relative = false
+
+[node name="IntroGuide" type="Node2D" parent="."]
+unique_name_in_owner = true
+z_index = 1
+z_as_relative = false
+
+[node name="KeyUp" type="Sprite2D" parent="IntroGuide"]
+texture_filter = 1
+position = Vector2(302, 55)
+texture = ExtResource("14_0eq02")
+hframes = 5
+vframes = 4
+
+[node name="KeyLeft" type="Sprite2D" parent="IntroGuide"]
+texture_filter = 1
+position = Vector2(284, 73)
+texture = ExtResource("14_0eq02")
+hframes = 5
+vframes = 4
+frame = 1
+
+[node name="KeyDown" type="Sprite2D" parent="IntroGuide"]
+texture_filter = 1
+position = Vector2(302, 73)
+texture = ExtResource("14_0eq02")
+hframes = 5
+vframes = 4
+frame = 2
+
+[node name="KeyRight" type="Sprite2D" parent="IntroGuide"]
+texture_filter = 1
+position = Vector2(320, 73)
+texture = ExtResource("14_0eq02")
+hframes = 5
+vframes = 4
+frame = 3
+
+[node name="KeyW" type="Sprite2D" parent="IntroGuide"]
+texture_filter = 1
+position = Vector2(370, 55)
+texture = ExtResource("14_0eq02")
+hframes = 5
+vframes = 4
+frame = 5
+
+[node name="KeyA" type="Sprite2D" parent="IntroGuide"]
+texture_filter = 1
+position = Vector2(352, 73)
+texture = ExtResource("14_0eq02")
+hframes = 5
+vframes = 4
+frame = 6
+
+[node name="KeyS" type="Sprite2D" parent="IntroGuide"]
+texture_filter = 1
+position = Vector2(370, 73)
+texture = ExtResource("14_0eq02")
+hframes = 5
+vframes = 4
+frame = 7
+
+[node name="KeyD" type="Sprite2D" parent="IntroGuide"]
+texture_filter = 1
+position = Vector2(388, 73)
+texture = ExtResource("14_0eq02")
+hframes = 5
+vframes = 4
+frame = 8
+
+[node name="Key1" type="Sprite2D" parent="IntroGuide"]
+texture_filter = 1
+position = Vector2(309, 317)
+texture = ExtResource("14_0eq02")
+hframes = 5
+vframes = 4
+frame = 10
+
+[node name="Key2" type="Sprite2D" parent="IntroGuide"]
+texture_filter = 1
+position = Vector2(327, 317)
+texture = ExtResource("14_0eq02")
+hframes = 5
+vframes = 4
+frame = 11
+
+[node name="Key3" type="Sprite2D" parent="IntroGuide"]
+texture_filter = 1
+position = Vector2(345, 317)
+texture = ExtResource("14_0eq02")
+hframes = 5
+vframes = 4
+frame = 12
+
+[node name="Key4" type="Sprite2D" parent="IntroGuide"]
+texture_filter = 1
+position = Vector2(363, 317)
+texture = ExtResource("14_0eq02")
+hframes = 5
+vframes = 4
+frame = 13
+
+[node name="KeyE" type="Sprite2D" parent="IntroGuide"]
+texture_filter = 1
+position = Vector2(220, 192)
+texture = ExtResource("14_0eq02")
+hframes = 5
+vframes = 4
+frame = 4
+
+[node name="KeyE2" type="Sprite2D" parent="IntroGuide"]
+texture_filter = 1
+position = Vector2(387, 184)
+texture = ExtResource("14_0eq02")
+hframes = 5
+vframes = 4
+frame = 4
+
+[node name="KeyE3" type="Sprite2D" parent="IntroGuide"]
+texture_filter = 1
+position = Vector2(433, 184)
+texture = ExtResource("14_0eq02")
+hframes = 5
+vframes = 4
+frame = 19
+
+[node name="KeyE4" type="Sprite2D" parent="IntroGuide"]
+texture_filter = 1
+position = Vector2(414, 184)
+texture = ExtResource("14_0eq02")
+hframes = 5
+vframes = 4
+frame = 13
+
+[node name="KeySpace" type="Sprite2D" parent="IntroGuide"]
+texture_filter = 1
+position = Vector2(272, 239)
+texture = ExtResource("14_0eq02")
+hframes = 2
+vframes = 4
+frame = 6
+
+[node name="Spikes" parent="IntroGuide" instance=ExtResource("17_rm2fo")]
+position = Vector2(392, 248)
+
+[node name="VineSnare" parent="IntroGuide" instance=ExtResource("18_niqag")]
+position = Vector2(424, 248)
+
+[node name="Ballista" parent="." instance=ExtResource("11_du13q")]
+position = Vector2(320, 256)
+
+[node name="Fireballer" parent="." instance=ExtResource("24_6e55u")]
+position = Vector2(440, 232)
+
+[node name="BigButton" type="StaticBody2D" parent="."]
+z_index = 1
+z_as_relative = false
+position = Vector2(220, 215)
+collision_layer = 2
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="BigButton"]
+visible = false
+scale = Vector2(1, 0.8)
+polygon = PackedVector2Array(-10, 1.25, -10, 8.75, -7, 13.75, -3, 17.5, 3, 17.5, 7, 13.75, 10, 8.75, 10, 1.25, 4, -3.75, -4, -3.75)
+
+[node name="Area2D" type="Area2D" parent="BigButton"]
+z_index = 1
+z_as_relative = false
+y_sort_enabled = true
+script = ExtResource("15_yh2a5")
+
+[node name="Sprite2D" type="Sprite2D" parent="BigButton/Area2D"]
+texture_filter = 1
+position = Vector2(0, 4)
+texture = ExtResource("16_4bamu")
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BigButton/Area2D"]
+visible = false
+position = Vector2(0, 4)
+shape = SubResource("CircleShape2D_uiu50")
+
+[node name="Tower" parent="." instance=ExtResource("9_24n5s")]
+unique_name_in_owner = true
+y_sort_enabled = true
+position = Vector2(336, 216)
+
+[node name="Player" parent="." instance=ExtResource("11_7htvh")]
+unique_name_in_owner = true
+z_index = -1
+y_sort_enabled = true
+position = Vector2(336, 232)
+
+[connection signal="timeout" from="EnemyHandler/WaveTimer" to="EnemyHandler" method="_on_wave_timer_timeout"]
+[connection signal="timeout" from="EnemyHandler/SpawnTimer" to="EnemyHandler" method="_on_spawn_timer_timeout"]
+[connection signal="pressed" from="UI/ShopUI/MarginContainer/ShopElements/Spikes/SpikeButton" to="UI" method="_on_spike_button_pressed"]
+[connection signal="pressed" from="UI/ShopUI/MarginContainer/ShopElements/Vine/SpikeButton" to="UI" method="_on_spike_button_pressed"]
+[connection signal="pressed" from="UI/ShopUI/MarginContainer/ShopElements/Fireball/BallistaButton" to="UI" method="_on_ballista_button_pressed"]
+[connection signal="pressed" from="UI/ShopUI/MarginContainer/ShopElements/Ballista/BallistaButton" to="UI" method="_on_ballista_button_pressed"]
+[connection signal="body_entered" from="BigButton/Area2D" to="BigButton/Area2D" method="_on_body_entered"]
+[connection signal="body_exited" from="BigButton/Area2D" to="BigButton/Area2D" method="_on_body_exited"]

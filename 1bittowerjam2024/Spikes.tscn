@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://2mkivfwnxmny"]
+
+[ext_resource type="PackedScene" uid="uid://bnwcnvv0tsngf" path="res://Prefabs/GroundTower.tscn" id="1_lbxw8"]
+
+[node name="Spikes" instance=ExtResource("1_lbxw8")]
+damage = 10
+tower_type = "Spikes"
+slow_factor = 0.75

@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://dgvig18w1q8eb"]
+
+[ext_resource type="Shader" path="res://Shaders/Rainbow.gdshader" id="1_pfqye"]
+[ext_resource type="Texture2D" uid="uid://bqujfxdyqejlh" path="res://Tiles & Art/PrintBack.png" id="2_g3j51"]
+[ext_resource type="Script" path="res://Prefabs/Spike.gd" id="2_j03xy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sbj53"]
+shader = ExtResource("1_pfqye")
+shader_parameter/do_rainbow = true
+shader_parameter/density = 10.0
+shader_parameter/speed = 20.0
+shader_parameter/non_uniform_rainbow = false
+shader_parameter/factor = 0.0
+
+[sub_resource type="ConcavePolygonShape2D" id="ConcavePolygonShape2D_ppjr1"]
+
+[node name="Spike" type="Area2D"]
+material = SubResource("ShaderMaterial_sbj53")
+scale = Vector2(0.25, 0.25)
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("2_j03xy")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+use_parent_material = true
+texture = ExtResource("2_g3j51")
+centered = false
+hframes = 17
+vframes = 16
+frame = 116
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(128, 128)
+shape = SubResource("ConcavePolygonShape2D_ppjr1")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

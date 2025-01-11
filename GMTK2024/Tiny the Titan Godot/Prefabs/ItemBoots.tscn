@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://hwjfbwfd518l"]
+
+[ext_resource type="PackedScene" uid="uid://b0u7yytdqmsv6" path="res://Prefabs/AbstractItem.tscn" id="1_7c0dh"]
+
+[node name="Boots" instance=ExtResource("1_7c0dh")]
+item_type = 1
+
+[node name="Sprite2D" parent="." index="1"]
+frame = 1

@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmdli6754mtsq"]
+
+[ext_resource type="FontFile" uid="uid://cbw04xeg0xo57" path="res://Fonts/AveriaSerifGWF-Regular.ttf" id="1_n4ydt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ulx21"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color(0.643137, 0.643137, 0.643137, 1)
+corner_radius_top_left = 70
+corner_radius_top_right = 70
+corner_radius_bottom_right = 70
+corner_radius_bottom_left = 70
+corner_detail = 15
+shadow_size = 15
+shadow_offset = Vector2(0, 7)
+
+[node name="Panel" type="Panel"]
+offset_right = 384.0
+offset_bottom = 224.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ulx21")
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_n4ydt")
+theme_override_font_sizes/font_size = 52
+text = "Cyan...
+It's in the way
+though"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+clip_text = true

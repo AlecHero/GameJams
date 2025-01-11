@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bppwwqtqj6lsd"
+path="res://.godot/imported/wet_step.wav-dc9659a7ae036e200d3a2e7f9dc9849e.sample"
+
+[deps]
+
+source_file="res://Music & Sound/wet_step.wav"
+dest_files=["res://.godot/imported/wet_step.wav-dc9659a7ae036e200d3a2e7f9dc9849e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

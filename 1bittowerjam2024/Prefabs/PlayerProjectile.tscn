@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckb87opmr0vec"]
+
+[ext_resource type="Script" path="res://Prefabs/projectile.gd" id="1_w1c8l"]
+[ext_resource type="Texture2D" uid="uid://n26pcw8aegon" path="res://Textures/Projectiles/bullet_sheet.png" id="2_dqblv"]
+
+[node name="PlayerProjectile" type="Area2D" groups=["PlayerProjectile"]]
+z_index = 10
+collision_layer = 64
+collision_mask = 16
+script = ExtResource("1_w1c8l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(11, 0.5)
+texture = ExtResource("2_dqblv")
+hframes = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(7, 0)
+polygon = PackedVector2Array(0, -2, 6, -2, 7, -1, 7, 1, 6, 2, 0, 2)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

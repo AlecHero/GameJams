@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://oditvdvwadqk"]
+
+[ext_resource type="Shader" path="res://Shaders/Spiral.gdshader" id="1_qreij"]
+[ext_resource type="Script" path="res://Prefabs/Portal.gd" id="2_qu12m"]
+[ext_resource type="Texture2D" uid="uid://i4x5mphva1fb" path="res://Tiles & Art/PrintSpiral.png" id="3_u1u3u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3fi55"]
+shader = ExtResource("1_qreij")
+shader_parameter/speed = 8.915
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ay12q"]
+radius = 100.0
+
+[node name="Portal" type="Area2D"]
+material = SubResource("ShaderMaterial_3fi55")
+position = Vector2(3232, 480)
+scale = Vector2(0.25, 0.25)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("2_qu12m")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+use_parent_material = true
+texture = ExtResource("3_u1u3u")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_ay12q")
+metadata/_edit_lock_ = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

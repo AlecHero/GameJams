@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://wiw13vfminkp"]
+
+[ext_resource type="PackedScene" uid="uid://cfpsrog51llhe" path="res://Prefabs/items_old/item.tscn" id="1_eorcq"]
+
+[node name="GenericItem" instance=ExtResource("1_eorcq")]
+scale = Vector2(4, 4)

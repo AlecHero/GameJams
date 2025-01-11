@@ -1,0 +1,150 @@
+[gd_scene load_steps=19 format=3 uid="uid://dk1qse3angg6h"]
+
+[ext_resource type="Script" path="res://Prefabs/Enemy/enemy.gd" id="1_4gmmy"]
+[ext_resource type="Shader" path="res://Shaders/enemy.gdshader" id="2_ig3y1"]
+[ext_resource type="Texture2D" uid="uid://cr1lbfdrgm0kw" path="res://Textures/BeastSheets/goblin_sheet.png" id="3_nrwxq"]
+[ext_resource type="Shader" path="res://Shaders/health_bar.gdshader" id="4_e3n2y"]
+[ext_resource type="Script" path="res://Prefabs/Enemy/armor.gd" id="5_4gc7m"]
+[ext_resource type="Shader" path="res://Shaders/armor.gdshader" id="6_4rifi"]
+[ext_resource type="Texture2D" uid="uid://bvpghb11sfcn5" path="res://Textures/armor.png" id="7_x1gee"]
+[ext_resource type="Texture2D" uid="uid://cbc58syiwrfno" path="res://Textures/coin_sheet.png" id="8_mq0ka"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_upiwk"]
+resource_local_to_scene = true
+shader = ExtResource("2_ig3y1")
+shader_parameter/anim_speed = 10.0
+shader_parameter/squish_amount = 0.0
+shader_parameter/alpha = 1.0
+shader_parameter/rand = 0.0
+shader_parameter/gt = Vector2(0, 0)
+shader_parameter/is_flying = false
+shader_parameter/is_ghost = false
+shader_parameter/is_wavy = false
+shader_parameter/is_climby = false
+shader_parameter/is_dying = false
+shader_parameter/death_type = 0
+shader_parameter/columns = 6.0
+shader_parameter/rows = 2.0
+shader_parameter/frame = 0.0
+shader_parameter/angle = 0.0
+shader_parameter/t = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mjtj1"]
+resource_local_to_scene = true
+radius = 7.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o2bkh"]
+resource_local_to_scene = true
+shader = ExtResource("4_e3n2y")
+shader_parameter/alpha = 1.0
+shader_parameter/progress = 1.0
+shader_parameter/grille_amount = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i7dxu"]
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uorut"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7b6d1"]
+resource_local_to_scene = true
+shader = ExtResource("6_4rifi")
+shader_parameter/t = 0.0
+shader_parameter/amplitude = 8.0
+shader_parameter/frequecy = 10.0
+shader_parameter/x_axis = true
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4jnfu"]
+resource_local_to_scene = true
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Gradient" id="Gradient_4ef02"]
+offsets = PackedFloat32Array(0.385246, 0.442623)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_anb6p"]
+gradient = SubResource("Gradient_4ef02")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lks0b"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 4.0
+direction = Vector3(0, -1, 0)
+spread = 20.0
+initial_velocity_min = 40.36
+initial_velocity_max = 40.36
+angular_velocity_min = -387.1
+angular_velocity_max = 340.65
+gravity = Vector3(0, 80, 0)
+scale_min = 0.75
+scale_max = 0.75
+color_ramp = SubResource("GradientTexture1D_anb6p")
+anim_speed_min = 3.52
+anim_speed_max = 3.52
+
+[node name="Enemy" type="Area2D" groups=["Enemies"]]
+z_index = 2
+y_sort_enabled = true
+texture_filter = 1
+position = Vector2(8, 8)
+collision_layer = 16
+collision_mask = 69
+script = ExtResource("1_4gmmy")
+beast_type = 3
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 2
+texture_filter = 1
+material = SubResource("ShaderMaterial_upiwk")
+texture = ExtResource("3_nrwxq")
+hframes = 6
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_mjtj1")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+z_index = 4
+material = SubResource("ShaderMaterial_o2bkh")
+offset_left = -8.0
+offset_top = -12.0
+offset_right = 120.0
+offset_bottom = 4.0
+scale = Vector2(0.125, 0.125)
+theme_override_styles/background = SubResource("StyleBoxFlat_i7dxu")
+theme_override_styles/fill = SubResource("StyleBoxFlat_uorut")
+value = 100.0
+show_percentage = false
+
+[node name="Armor" type="Node2D" parent="."]
+visible = false
+script = ExtResource("5_4gc7m")
+
+[node name="Sprite2D" type="Sprite2D" parent="Armor"]
+z_index = 3
+texture_filter = 1
+material = SubResource("ShaderMaterial_7b6d1")
+texture = ExtResource("7_x1gee")
+offset = Vector2(0, 3)
+
+[node name="ParticleGolden" type="GPUParticles2D" parent="."]
+z_index = 3
+material = SubResource("CanvasItemMaterial_4jnfu")
+position = Vector2(0, -8)
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_lks0b")
+texture = ExtResource("8_mq0ka")
+lifetime = 3.0
+explosiveness = 0.8
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

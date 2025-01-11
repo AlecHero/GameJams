@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnfdfvnsvtgep"]
+
+[ext_resource type="Shader" path="res://Shaders/gradient.gdshader" id="1_0miwh"]
+[ext_resource type="Script" path="res://Shaders/gradient.gd" id="1_o5rio"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1x87c"]
+shader = ExtResource("1_0miwh")
+shader_parameter/feather = 1.06
+shader_parameter/radius = -0.12
+shader_parameter/color = Color(0.921569, 0.898039, 0.462745, 1)
+shader_parameter/shift_hue = 0.58
+
+[node name="Gradient" type="Node2D"]
+material = SubResource("ShaderMaterial_1x87c")
+script = ExtResource("1_o5rio")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+use_parent_material = true
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+size_flags_horizontal = 4
+size_flags_vertical = 4

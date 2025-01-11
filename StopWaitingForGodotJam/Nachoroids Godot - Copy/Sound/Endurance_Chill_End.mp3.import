@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Endurance_Chill_End.mp3-5b56cc7fa931d192f05f379962dc4af4.mp3str"
+
+[deps]
+
+source_file="res://Sound/Endurance_Chill_End.mp3"
+dest_files=[ "res://.import/Endurance_Chill_End.mp3-5b56cc7fa931d192f05f379962dc4af4.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

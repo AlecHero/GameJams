@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bcxr4pswqhmql"
+path="res://.godot/imported/Ancient Ruins - Loopable - Wolfgang_ - CCBY.mp3-5a127f09f63af9b94fddfa2eff78f16f.mp3str"
+
+[deps]
+
+source_file="res://Audio/Music/Unused/Ancient Ruins - Loopable - Wolfgang_ - CCBY.mp3"
+dest_files=["res://.godot/imported/Ancient Ruins - Loopable - Wolfgang_ - CCBY.mp3-5a127f09f63af9b94fddfa2eff78f16f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bhf77dldorhki"
+path="res://.godot/imported/monster-8.wav-6ef634e0c5e5e9b982a472e2483a3b82.sample"
+
+[deps]
+
+source_file="res://Audio/monster_sfx_pack_2 - Ogrebane - CC0/monster-8.wav"
+dest_files=["res://.godot/imported/monster-8.wav-6ef634e0c5e5e9b982a472e2483a3b82.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

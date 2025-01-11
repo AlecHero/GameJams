@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b350i2d0tbg2x"
+path="res://.godot/imported/bleeding_out2 - Brandon Morris - CC0.mp3-164b92a02caab57807d8b87725ed164b.mp3str"
+
+[deps]
+
+source_file="res://Audio/Music/Unused/bleeding_out2 - Brandon Morris - CC0.mp3"
+dest_files=["res://.godot/imported/bleeding_out2 - Brandon Morris - CC0.mp3-164b92a02caab57807d8b87725ed164b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://on8n6jsludfb"
+path="res://.godot/imported/skweak1.ogg-5804a094c53e8a2b23dbbb373e80579d.oggvorbisstr"
+
+[deps]
+
+source_file="res://Music & Sound/skweak1.ogg"
+dest_files=["res://.godot/imported/skweak1.ogg-5804a094c53e8a2b23dbbb373e80579d.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

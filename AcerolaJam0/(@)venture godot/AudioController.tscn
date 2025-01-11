@@ -1,0 +1,127 @@
+[gd_scene load_steps=13 format=3 uid="uid://r4v2xehyxc38"]
+
+[ext_resource type="Script" path="res://AudioController.gd" id="1"]
+[ext_resource type="AudioStream" uid="uid://doqrs1u1d4cp5" path="res://Music & Sound/Music/Peer Gynt Morning Mood.mp3" id="1_41jku"]
+[ext_resource type="AudioStream" uid="uid://bwjhink4lqedd" path="res://Music & Sound/wavy.wav" id="2_sm8gy"]
+[ext_resource type="AudioStream" uid="uid://bmksy6xh6pvre" path="res://Music & Sound/HeartBite.mp3" id="4_to6ou"]
+[ext_resource type="AudioStream" uid="uid://b5ao0jjwfsvlk" path="res://Music & Sound/paper_sound.mp3" id="5_tfs7w"]
+[ext_resource type="AudioStream" uid="uid://qqqiymiqq0um" path="res://Music & Sound/dripboing.mp3" id="6_vpoqw"]
+[ext_resource type="AudioStream" uid="uid://4kaj71hf7ncq" path="res://Music & Sound/dripboing3x.mp3" id="7_tlxb7"]
+[ext_resource type="AudioStream" uid="uid://b6p8at1i411x6" path="res://Music & Sound/Boo-womp.mp3" id="8_2v47w"]
+[ext_resource type="AudioStream" uid="uid://cd8b6l2gdo2lp" path="res://Music & Sound/sss.wav" id="9_gwahy"]
+
+[sub_resource type="Animation" id="2"]
+resource_name = "FadeIn"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(0.63728, 1),
+"update": 0,
+"values": [-80.0, -8.7]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="1"]
+resource_name = "FadeOut"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-8.7, -80.0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qsfki"]
+_data = {
+"FadeIn": SubResource("2"),
+"FadeOut": SubResource("1")
+}
+
+[node name="Music" type="AudioStreamPlayer"]
+stream = ExtResource("1_41jku")
+volume_db = -5.0
+autoplay = true
+script = ExtResource("1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qsfki")
+}
+
+[node name="RainbowPickup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_sm8gy")
+volume_db = -10.991
+pitch_scale = 0.83
+
+[node name="HeartFruitPickup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_to6ou")
+volume_db = -5.0
+pitch_scale = 1.15
+
+[node name="InvertingColor" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_tfs7w")
+volume_db = -12.289
+pitch_scale = 0.87
+max_polyphony = 4
+
+[node name="PointPickup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_vpoqw")
+volume_db = -35.0
+pitch_scale = 1.2
+max_polyphony = 4
+
+[node name="PointPickup3x" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_tlxb7")
+volume_db = -28.0
+max_polyphony = 4
+
+[node name="Oof" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_2v47w")
+volume_db = -24.547
+pitch_scale = 1.39
+
+[node name="Woosh" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_gwahy")
+volume_db = -16.43
+pitch_scale = 0.19
+
+[connection signal="finished" from="." to="." method="_on_finished"]

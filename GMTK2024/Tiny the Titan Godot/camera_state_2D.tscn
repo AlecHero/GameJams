@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxppjes3lleaw"]
+
+[ext_resource type="Script" path="res://camera_state_2D.gd" id="1_f7v0x"]
+
+[sub_resource type="Curve" id="Curve_86yet"]
+_data = [Vector2(0, 0), 0.0, 1.0, 0, 1, Vector2(1, 1), 1.0, 0.0, 1, 0]
+point_count = 2
+
+[node name="CameraState" type="Node2D"]
+z_index = 5
+script = ExtResource("1_f7v0x")
+camera_type = 3
+activation_collision_shape = null
+transition_curve = SubResource("Curve_86yet")
+zoom = Vector2(1, 1)
+
+[node name="AreaActivation" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaActivation"]
+
+[connection signal="body_entered" from="AreaActivation" to="." method="_on_area_activation_body_entered"]
+[connection signal="body_exited" from="AreaActivation" to="." method="_on_area_activation_body_exited"]

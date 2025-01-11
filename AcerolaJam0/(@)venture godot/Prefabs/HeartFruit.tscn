@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://cnwl1v58owo0o"]
+
+[ext_resource type="Shader" path="res://Shaders/Wavy.gdshader" id="1_piuoo"]
+[ext_resource type="Script" path="res://Prefabs/HeartFruit.gd" id="1_qnddl"]
+[ext_resource type="Texture2D" uid="uid://mnb04moy345k" path="res://Tiles & Art/PrintChars.png" id="3_buvkb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2d7qx"]
+shader = ExtResource("1_piuoo")
+shader_parameter/Strength = 20.0
+shader_parameter/RandomOffset = 1.0
+shader_parameter/speed = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ay12q"]
+radius = 100.0
+
+[node name="HeartFruit" type="Area2D"]
+scale = Vector2(0.25, 0.25)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_qnddl")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_2d7qx")
+texture = ExtResource("3_buvkb")
+centered = false
+hframes = 9
+vframes = 5
+frame = 29
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(128, 128)
+shape = SubResource("CircleShape2D_ay12q")
+metadata/_edit_lock_ = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://dmojt6bbwtjwi"]
+
+[ext_resource type="Shader" path="res://Shaders/Rainbow.gdshader" id="1_0pn5v"]
+[ext_resource type="Texture2D" uid="uid://mnb04moy345k" path="res://Tiles & Art/PrintChars.png" id="1_b0akr"]
+[ext_resource type="Script" path="res://Prefabs/RainbowLetter.gd" id="2_405ol"]
+[ext_resource type="AudioStream" uid="uid://cgjxpxbw7dvky" path="res://Music & Sound/rumble.mp3" id="4_wpgbl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sbj53"]
+shader = ExtResource("1_0pn5v")
+shader_parameter/do_rainbow = true
+shader_parameter/density = 10.0
+shader_parameter/speed = 20.0
+shader_parameter/non_uniform_rainbow = false
+shader_parameter/factor = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ay12q"]
+radius = 100.0
+
+[node name="RainbowLetter" type="Area2D"]
+material = SubResource("ShaderMaterial_sbj53")
+scale = Vector2(0.25, 0.25)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("2_405ol")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+use_parent_material = true
+texture = ExtResource("1_b0akr")
+centered = false
+hframes = 9
+vframes = 5
+frame = 16
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(128, 128)
+shape = SubResource("CircleShape2D_ay12q")
+metadata/_edit_lock_ = true
+
+[node name="Rumble" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_wpgbl")
+volume_db = 5.0
+autoplay = true
+max_distance = 900.0
+attenuation = 2.63901
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

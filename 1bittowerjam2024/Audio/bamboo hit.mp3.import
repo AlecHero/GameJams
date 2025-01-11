@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bdnu2ijxu48d6"
+path="res://.godot/imported/bamboo hit.mp3-7ae68c5318818dfc0da537b841332f33.mp3str"
+
+[deps]
+
+source_file="res://Audio/bamboo hit.mp3"
+dest_files=["res://.godot/imported/bamboo hit.mp3-7ae68c5318818dfc0da537b841332f33.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

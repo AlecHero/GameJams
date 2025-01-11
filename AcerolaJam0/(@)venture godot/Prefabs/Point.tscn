@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://s5mhw0ms0ws5"]
+
+[ext_resource type="Script" path="res://Prefabs/Point.gd" id="1_s0yas"]
+[ext_resource type="Texture2D" uid="uid://mnb04moy345k" path="res://Tiles & Art/PrintChars.png" id="2_austx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nvnoh"]
+radius = 32.0
+
+[node name="Point" type="Area2D"]
+modulate = Color(0, 0, 0, 1)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_s0yas")
+point_sound = "PointPickup"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_austx")
+hframes = 9
+vframes = 5
+frame = 36
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_nvnoh")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

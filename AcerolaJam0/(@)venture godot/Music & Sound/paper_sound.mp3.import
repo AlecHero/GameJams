@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b5ao0jjwfsvlk"
+path="res://.godot/imported/paper_sound.mp3-a77cbb484ced538630284bb738097819.mp3str"
+
+[deps]
+
+source_file="res://Music & Sound/paper_sound.mp3"
+dest_files=["res://.godot/imported/paper_sound.mp3-a77cbb484ced538630284bb738097819.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

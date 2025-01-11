@@ -1,0 +1,69 @@
+[gd_scene load_steps=9 format=3 uid="uid://220b2ors3vwe"]
+
+[ext_resource type="Shader" path="res://tester2.gdshader" id="1_4suv7"]
+[ext_resource type="Texture2D" uid="uid://dej267nd5a6h7" path="res://Textures/button_sheet.png" id="2_jojme"]
+[ext_resource type="Shader" path="res://outlinenovertex.gdshader" id="3_04p5a"]
+[ext_resource type="Texture2D" uid="uid://cgw58igdl5vg4" path="res://Textures/fireballer_sheet.png" id="4_0gqj4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_imuaf"]
+shader = ExtResource("1_4suv7")
+shader_parameter/anim_speed = 10.0
+shader_parameter/squish_amount = 0.0
+shader_parameter/alpha = 1.0
+shader_parameter/amplitude = 24.825
+shader_parameter/frequency = 60.0
+shader_parameter/angle = 0.0
+shader_parameter/t = 0.0
+shader_parameter/spread = 45.0
+shader_parameter/columns = 5.0
+shader_parameter/rows = 4.0
+shader_parameter/frame_coords = Vector2(0, 0)
+shader_parameter/frame_size = Vector2(18, 18)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3mgfi"]
+texture = ExtResource("2_jojme")
+texture_region_size = Vector2i(18, 18)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_6r3xg"]
+tile_size = Vector2i(18, 18)
+sources/0 = SubResource("TileSetAtlasSource_3mgfi")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gqw4h"]
+shader = ExtResource("3_04p5a")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 1.0
+
+[node name="Node2D" type="Node2D"]
+material = SubResource("ShaderMaterial_imuaf")
+
+[node name="Node2D" type="TileMapLayer" parent="."]
+texture_filter = 1
+use_parent_material = true
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+tile_set = SubResource("TileSet_6r3xg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_gqw4h")
+position = Vector2(-72, 12)
+texture = ExtResource("4_0gqj4")

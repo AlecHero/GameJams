@@ -1,0 +1,38 @@
+missing: tutorial UI
+dmg sound
+add dmg if falling too fast
+final area with star podium and portal back to previous checkpoints? or jsut beginning
+speedrun timer/ progress end screen / keep playing
+Water effects? finish water level
+touch up looks of jungle area
+playtest
+
+additional music depending on area?
+finish 3 last stars
+
+remove debug effects, for export.
+
+challenges that involves being stuck between two blocks because you are now bigger, (jump up and get big, so you get stuck so you get an extra jump)
+
+
+Tiny the Titan
+Small Steps, Great Heights, and a Sizeable Adventure.
+
+You are Tiny.
+Can you go the distance?
+Will you ascend the heights?
+Can you reclaim the 4 lost artifacts?
+Will you recover the 7 forgotten stars? 
+
+
+TODO:
+Add star podium to the beginning
+Add tp to the beginning at the end
+Lav mountain top stjerne tydeligere
+
+Later TODO:
+Breakable pots
+
+Vignette shader around player and torches/lighting.
+Lighting affects some puzzle that requires sight to not take forever to complete.
+Levers that trigger light? proximity light?

@@ -1,0 +1,2 @@
+# Ignore all subdirectories named "exports" (case-insensitive)
+**/[Ee][Xx][Pp][Oo][Rr][Tt][Ss]/

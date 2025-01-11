@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://q2apatts0p42"
+path="res://.godot/imported/hauntedcastle - Wolfgang_ CC0.mp3-0c462bf6f0ee846bef4bc9795405b1c6.mp3str"
+
+[deps]
+
+source_file="res://Audio/Music/Songs/hauntedcastle - Wolfgang_ CC0.mp3"
+dest_files=["res://.godot/imported/hauntedcastle - Wolfgang_ CC0.mp3-0c462bf6f0ee846bef4bc9795405b1c6.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

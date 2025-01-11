@@ -1,0 +1,250 @@
+[gd_scene load_steps=19 format=3 uid="uid://dlup0j6aj5wss"]
+
+[ext_resource type="Shader" path="res://Shaders/Halftone_Dots2.gdshader" id="1_bc2rp"]
+[ext_resource type="Script" path="res://Main.gd" id="1_jtdpk"]
+[ext_resource type="PackedScene" uid="uid://dgwpn2u6hpj3y" path="res://Player.tscn" id="2_4lfwt"]
+[ext_resource type="Script" path="res://UI.gd" id="2_ma65l"]
+[ext_resource type="Texture2D" uid="uid://cwk07bat6p6l7" path="res://Tiles & Art/CMYK.png" id="3_3y5gw"]
+[ext_resource type="Shader" path="res://Shaders/Blur.gdshader" id="3_g8psc"]
+[ext_resource type="Texture2D" uid="uid://chaqwiwlc44fq" path="res://Tiles & Art/HealthMini.png" id="3_gu6yb"]
+[ext_resource type="Texture2D" uid="uid://dq3iofy3plj8v" path="res://Tiles & Art/PointsBack.png" id="3_p1lfi"]
+[ext_resource type="Texture2D" uid="uid://hdin6ftiyptm" path="res://Tiles & Art/CMYK_Back.png" id="4_utmqu"]
+[ext_resource type="FontFile" uid="uid://cbw04xeg0xo57" path="res://Fonts/AveriaSerifGWF-Regular.ttf" id="4_xuear"]
+[ext_resource type="Shader" path="res://Shaders/whirl.gdshader" id="35_jpjfn"]
+
+[sub_resource type="Animation" id="Animation_ddn6q"]
+resource_name = "lerp_CMYK"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CMYK:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(0.196146, 1),
+"update": 0,
+"values": [Vector2(896, -128), Vector2(896, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gt10o"]
+resource_name = "lerp_Hearts"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Health:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(0.196146, 1),
+"update": 0,
+"values": [Vector2(0, -128), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dnh2r"]
+resource_name = "lerp_Points"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Points:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(0.189465, 1),
+"update": 0,
+"values": [Vector2(256, -128), Vector2(256, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gvbof"]
+_data = {
+"lerp_CMYK": SubResource("Animation_ddn6q"),
+"lerp_Hearts": SubResource("Animation_gt10o"),
+"lerp_Points": SubResource("Animation_dnh2r")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1jxj6"]
+shader = ExtResource("35_jpjfn")
+shader_parameter/rotation = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d5ax0"]
+shader = ExtResource("1_bc2rp")
+shader_parameter/aspect_ratio = 1.667
+shader_parameter/contrast = 1.0
+shader_parameter/grayscale = false
+shader_parameter/dynamic_halftone = true
+shader_parameter/dynamic_noise = true
+shader_parameter/feather = 0.15
+shader_parameter/noise_ratio = 1.0
+shader_parameter/pattern_offset = 0.005
+shader_parameter/fill = 2.0
+shader_parameter/frequency = 200.0
+shader_parameter/k_ratio = 1.0
+shader_parameter/rich_black = false
+shader_parameter/paper_color = Color(0.99, 0.93, 0.8, 1)
+shader_parameter/C = Color(0.4, 0.85098, 0.85098, 1)
+shader_parameter/M = Color(0.85, 0.25, 0.5, 1)
+shader_parameter/Y = Color(0.85, 0.85, 0.2, 1)
+shader_parameter/K = Color(0, 0, 0, 1)
+shader_parameter/C_angle = 165.0
+shader_parameter/M_angle = 45.0
+shader_parameter/Y_angle = 90.0
+shader_parameter/K_angle = 105.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r8egw"]
+shader = ExtResource("3_g8psc")
+shader_parameter/strength = 2
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_jtdpk")
+metadata/_edit_lock_ = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 5
+script = ExtResource("2_ma65l")
+
+[node name="Points" type="Node2D" parent="UI"]
+position = Vector2(256, -128)
+scale = Vector2(0.25, 0.25)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/Points"]
+texture = ExtResource("3_p1lfi")
+centered = false
+
+[node name="PointLabel" type="Label" parent="UI/Points"]
+offset_left = 256.0
+offset_top = 128.0
+offset_right = 768.0
+offset_bottom = 384.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_xuear")
+theme_override_font_sizes/font_size = 200
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Node2D" parent="UI"]
+scale = Vector2(0.25, 0.25)
+
+[node name="Health" type="Node2D" parent="UI"]
+position = Vector2(0, -128)
+scale = Vector2(0.25, 0.25)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/Health"]
+texture = ExtResource("3_gu6yb")
+centered = false
+vframes = 2
+
+[node name="CMYK" type="Node2D" parent="UI"]
+position = Vector2(896, -128)
+scale = Vector2(0.25, 0.25)
+metadata/_edit_group_ = true
+
+[node name="Cyan" type="Sprite2D" parent="UI/CMYK"]
+visible = false
+texture = ExtResource("3_3y5gw")
+centered = false
+offset = Vector2(256, 128)
+hframes = 4
+
+[node name="Magenta" type="Sprite2D" parent="UI/CMYK"]
+visible = false
+position = Vector2(256, 0)
+texture = ExtResource("3_3y5gw")
+centered = false
+offset = Vector2(256, 128)
+hframes = 4
+frame = 1
+
+[node name="Yellow" type="Sprite2D" parent="UI/CMYK"]
+visible = false
+position = Vector2(512, 0)
+texture = ExtResource("3_3y5gw")
+centered = false
+offset = Vector2(256, 128)
+hframes = 4
+frame = 2
+
+[node name="Black" type="Sprite2D" parent="UI/CMYK"]
+visible = false
+position = Vector2(768, 0)
+texture = ExtResource("3_3y5gw")
+centered = false
+offset = Vector2(256, 128)
+hframes = 4
+frame = 3
+
+[node name="Back" type="Sprite2D" parent="UI/CMYK"]
+z_index = -1
+texture = ExtResource("4_utmqu")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI"]
+libraries = {
+"": SubResource("AnimationLibrary_gvbof")
+}
+
+[node name="Shaders" type="Node" parent="."]
+
+[node name="Whirl" type="CanvasLayer" parent="Shaders"]
+layer = 5
+
+[node name="ColorRect" type="ColorRect" parent="Shaders/Whirl"]
+modulate = Color(0, 0, 0, 1)
+material = SubResource("ShaderMaterial_1jxj6")
+offset_top = 160.0
+offset_right = 1280.0
+offset_bottom = 928.0
+metadata/_edit_lock_ = true
+
+[node name="Halftone" type="CanvasLayer" parent="Shaders"]
+layer = 5
+
+[node name="ColorRect" type="ColorRect" parent="Shaders/Halftone"]
+material = SubResource("ShaderMaterial_d5ax0")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Blur" type="CanvasLayer" parent="Shaders"]
+layer = 3
+
+[node name="ColorRect" type="ColorRect" parent="Shaders/Blur"]
+material = SubResource("ShaderMaterial_r8egw")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="World" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="Player" parent="World" instance=ExtResource("2_4lfwt")]
+z_index = 10
+position = Vector2(608, 352)
+motion_mode = 1
+floor_stop_on_slope = false
+RUMBLE_DISTANCE = 600.0
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true

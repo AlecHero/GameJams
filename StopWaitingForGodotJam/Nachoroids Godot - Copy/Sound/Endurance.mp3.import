@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Endurance.mp3-0c2cce69224d6703ad445d3bd0e1e2d9.mp3str"
+
+[deps]
+
+source_file="res://Sound/Endurance.mp3"
+dest_files=[ "res://.import/Endurance.mp3-0c2cce69224d6703ad445d3bd0e1e2d9.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

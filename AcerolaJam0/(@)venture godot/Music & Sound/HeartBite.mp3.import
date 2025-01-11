@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bmksy6xh6pvre"
+path="res://.godot/imported/HeartBite.mp3-b5d63ca0bb237d59b8711084a14c7a10.mp3str"
+
+[deps]
+
+source_file="res://Music & Sound/HeartBite.mp3"
+dest_files=["res://.godot/imported/HeartBite.mp3-b5d63ca0bb237d59b8711084a14c7a10.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

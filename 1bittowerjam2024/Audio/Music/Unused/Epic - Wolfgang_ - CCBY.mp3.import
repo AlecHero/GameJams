@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cccy1okowecel"
+path="res://.godot/imported/Epic - Wolfgang_ - CCBY.mp3-3175a5e52e0901e86b6806d90ecb9856.mp3str"
+
+[deps]
+
+source_file="res://Audio/Music/Unused/Epic - Wolfgang_ - CCBY.mp3"
+dest_files=["res://.godot/imported/Epic - Wolfgang_ - CCBY.mp3-3175a5e52e0901e86b6806d90ecb9856.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=12.0
+bpm=0.0
+beat_count=0
+bar_beats=4

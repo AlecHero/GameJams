@@ -1,0 +1,136 @@
+[gd_scene load_steps=12 format=3 uid="uid://biauc0iwk28tb"]
+
+[ext_resource type="Texture2D" uid="uid://cc7fyopj3x85w" path="res://Textures/tower.png" id="1_akn7n"]
+[ext_resource type="Script" path="res://Prefabs/tower.gd" id="1_xo8ps"]
+[ext_resource type="Shader" path="res://Shaders/dotted_outline.gdshader" id="2_1ivxw"]
+[ext_resource type="Texture2D" uid="uid://dej267nd5a6h7" path="res://Textures/button_sheet.png" id="3_mbv6h"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xb5rg"]
+radius = 5.0
+height = 26.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ri14m"]
+size = Vector2(80, 72)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iutvr"]
+shader = ExtResource("2_1ivxw")
+shader_parameter/frequency = 16.0
+shader_parameter/phase_speed = 4.0
+shader_parameter/size = 0.0
+shader_parameter/t = 0.95
+shader_parameter/is_square = false
+shader_parameter/is_line = false
+
+[sub_resource type="Shader" id="Shader_8tr0y"]
+code = "shader_type canvas_item;
+
+uniform float alpha : hint_range(0, 1) = 1;
+uniform float progress : hint_range(0, 1) = 1;
+//uniform float grille_size = 1.0;
+uniform float grille_amount : hint_range(0, 40, 1) = 5.0;
+
+vec3 grille(vec2 uv, vec4 color){
+	float unit = PI / 3.0;
+	float scale = 2.0 * unit * grille_amount;
+	float r1 = smoothstep(0.5, 0.8, cos(uv.x*scale - unit));
+	float r2 = smoothstep(0.5, 0.8, cos(uv.x*scale + unit));
+	float r3 = smoothstep(0.5, 0.8, cos(uv.x*scale + 3.0*unit));
+	float grille_size = max(1.0, grille_amount / 3.0);
+	return mix(color.rgb, vec3(r1+r2+r3), grille_size);
+}
+
+void fragment() {
+	if (COLOR.rgb == vec3(1., 1., 1.)) {
+		COLOR.rgb = round(grille(UV, COLOR));
+		if (UV.x > progress) { COLOR.rgb = vec3(0.0); }
+		//COLOR.gb = vec2(0.0); // make RED
+	}
+	COLOR.a *= alpha;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wcwiy"]
+resource_local_to_scene = true
+shader = SubResource("Shader_8tr0y")
+shader_parameter/alpha = 1.0
+shader_parameter/progress = 1.0
+shader_parameter/grille_amount = 15.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yjfmv"]
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ir8v1"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="Tower" type="StaticBody2D"]
+z_index = 1
+texture_filter = 1
+position = Vector2(336, 232)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_xo8ps")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture = ExtResource("1_akn7n")
+offset = Vector2(0, -26)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_xb5rg")
+
+[node name="TowerZone" type="Area2D" parent="."]
+visible = false
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TowerZone"]
+position = Vector2(0, -12)
+shape = SubResource("RectangleShape2D_ri14m")
+
+[node name="Marker2D" type="Marker2D" parent="TowerZone"]
+position = Vector2(0, -24.175)
+
+[node name="KeyE" type="Sprite2D" parent="."]
+visible = false
+z_index = 1
+position = Vector2(0, -24)
+texture = ExtResource("3_mbv6h")
+hframes = 5
+vframes = 4
+frame = 4
+
+[node name="SelfOutline" type="Node2D" parent="."]
+visible = false
+show_behind_parent = true
+position = Vector2(0, -2.42)
+scale = Vector2(1.07, 0.55)
+
+[node name="ColorRect" type="ColorRect" parent="SelfOutline"]
+material = SubResource("ShaderMaterial_iutvr")
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+
+[node name="Healthbar" type="Node2D" parent="."]
+position = Vector2(0, -64)
+metadata/_edit_group_ = true
+
+[node name="HealthBar" type="ProgressBar" parent="Healthbar"]
+z_index = 4
+material = SubResource("ShaderMaterial_wcwiy")
+offset_left = -36.19
+offset_top = -5.915
+offset_right = 183.57
+offset_bottom = 27.96
+scale = Vector2(0.325, 0.325)
+theme_override_styles/background = SubResource("StyleBoxFlat_yjfmv")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ir8v1")
+value = 100.0
+show_percentage = false

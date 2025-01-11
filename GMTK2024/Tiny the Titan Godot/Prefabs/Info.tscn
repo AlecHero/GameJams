@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3 uid="uid://cduky20iyr24n"]
+
+[ext_resource type="Texture2D" uid="uid://b4kl0xeayxqly" path="res://Art/text_sprite.png" id="1_mbigx"]
+[ext_resource type="Script" path="res://Prefabs/Info.gd" id="1_o7q2g"]
+[ext_resource type="FontFile" uid="uid://cbw04xeg0xo57" path="res://Art/Fonts/AveriaSerifGWF-Regular.ttf" id="3_750av"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6pq58"]
+radius = 73.5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rm1uv"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[node name="Info" type="Area2D"]
+scale = Vector2(4, 4)
+collision_layer = 0
+script = ExtResource("1_o7q2g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_6pq58")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_mbigx")
+
+[node name="InfoPopup" type="Node2D" parent="."]
+visible = false
+
+[node name="PopupPanel" type="Panel" parent="InfoPopup"]
+offset_left = -150.0
+offset_top = -200.0
+offset_right = 150.0
+offset_bottom = -100.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_rm1uv")
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="InfoPopup/PopupPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_right = 252
+
+[node name="InfoLabel" type="Label" parent="InfoPopup/PopupPanel/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_750av")
+theme_override_font_sizes/font_size = 28
+text = "asdas asd asd asd asd asda  awdqwr a sd qwer asr qwra sr awr qwr"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

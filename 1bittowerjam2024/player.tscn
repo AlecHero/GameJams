@@ -1,0 +1,113 @@
+[gd_scene load_steps=9 format=3 uid="uid://c4b1p1vj0ft3d"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_rlrln"]
+[ext_resource type="Shader" path="res://Shaders/player.gdshader" id="2_uxr2g"]
+[ext_resource type="Texture2D" uid="uid://da0xyug67hlhc" path="res://Textures/player_sheet.png" id="3_uxg65"]
+[ext_resource type="Shader" path="res://Shaders/dotted_outline.gdshader" id="4_2p3lq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y0yca"]
+shader = ExtResource("2_uxr2g")
+shader_parameter/anim_speed = 0.0
+shader_parameter/center = Vector2(0, 0)
+shader_parameter/squish_amount = 0.0
+shader_parameter/alpha = 1.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ad60f"]
+radius = 1.0
+height = 4.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xa2al"]
+shader = ExtResource("4_2p3lq")
+shader_parameter/frequency = 7.0
+shader_parameter/phase_speed = 4.0
+shader_parameter/size = 0.0
+shader_parameter/t = 0.937
+shader_parameter/is_square = true
+shader_parameter/is_line = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_osf1h"]
+resource_local_to_scene = true
+shader = ExtResource("4_2p3lq")
+shader_parameter/frequency = 16.0
+shader_parameter/phase_speed = 2.0
+shader_parameter/size = 0.0
+shader_parameter/t = 0.991
+shader_parameter/is_square = true
+shader_parameter/is_line = false
+
+[node name="Player" type="CharacterBody2D"]
+z_index = 1
+position = Vector2(336, 250)
+collision_mask = 262
+motion_mode = 1
+script = ExtResource("1_rlrln")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 2
+texture_filter = 1
+material = SubResource("ShaderMaterial_y0yca")
+texture = ExtResource("3_uxg65")
+offset = Vector2(0, -3)
+hframes = 4
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+z_index = 1
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ad60f")
+
+[node name="AreaSearch" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaSearch"]
+z_index = 1
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ad60f")
+
+[node name="TimerSword" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true
+
+[node name="TimerBow" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="TimerHammer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[node name="TargetOutline" type="Node2D" parent="."]
+unique_name_in_owner = true
+z_index = 1
+material = SubResource("ShaderMaterial_xa2al")
+
+[node name="ColorRect" type="ColorRect" parent="TargetOutline"]
+use_parent_material = true
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="RangeOutline" type="Node2D" parent="."]
+unique_name_in_owner = true
+z_index = -1
+material = SubResource("ShaderMaterial_osf1h")
+scale = Vector2(7, 7)
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="RangeOutline"]
+z_index = 20
+z_as_relative = false
+use_parent_material = true
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[connection signal="area_shape_entered" from="AreaSearch" to="." method="_on_tower_search_area_shape_entered"]
+[connection signal="area_shape_exited" from="AreaSearch" to="." method="_on_tower_search_area_shape_exited"]

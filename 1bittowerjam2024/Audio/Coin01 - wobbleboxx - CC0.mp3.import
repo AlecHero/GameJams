@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://csib3m0tjpoxy"
+path="res://.godot/imported/Coin01 - wobbleboxx - CC0.mp3-7a27eb06692ffbe4773b87c7fb4d155b.mp3str"
+
+[deps]
+
+source_file="res://Audio/Coin01 - wobbleboxx - CC0.mp3"
+dest_files=["res://.godot/imported/Coin01 - wobbleboxx - CC0.mp3-7a27eb06692ffbe4773b87c7fb4d155b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

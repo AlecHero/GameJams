@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://dl4sgbmdji32v"]
+
+[sub_resource type="Shader" id="Shader_snam7"]
+code = "shader_type canvas_item;
+
+uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
+
+uniform float alpha = 1.0;
+uniform float inner_radius = 0.0;
+uniform float outer_radius = 1.0;
+
+void fragment() {
+	vec2 uv = UV;
+	float x = abs(uv.r-.5)*2.0;
+	float y = abs(uv.g-.5)*3.0;
+	float q = 1.0-(1.0-sqrt(x*x+y*y)/outer_radius)/(1.0-inner_radius);
+	COLOR = vec4(0, 0, 0, q*alpha);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o4x1q"]
+shader = SubResource("Shader_snam7")
+shader_parameter/alpha = 0.42
+shader_parameter/inner_radius = 0.475
+shader_parameter/outer_radius = 0.75
+
+[node name="ScreenShaders" type="CanvasLayer"]
+
+[node name="Vignette" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_o4x1q")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b6p8at1i411x6"
+path="res://.godot/imported/Boo-womp.mp3-3fecb3521575a4651d090af2348022a8.mp3str"
+
+[deps]
+
+source_file="res://Music & Sound/Boo-womp.mp3"
+dest_files=["res://.godot/imported/Boo-womp.mp3-3fecb3521575a4651d090af2348022a8.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

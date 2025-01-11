@@ -1,0 +1,104 @@
+[gd_scene load_steps=11 format=3 uid="uid://2ovmgj8jfnuq"]
+
+[ext_resource type="Script" path="res://Prefabs/fireballer.gd" id="1_v85lp"]
+[ext_resource type="Shader" path="res://Shaders/armor.gdshader" id="2_utu1q"]
+[ext_resource type="Texture2D" uid="uid://cgw58igdl5vg4" path="res://Textures/fireballer_sheet.png" id="3_jrla6"]
+[ext_resource type="Shader" path="res://Shaders/dotted_outline.gdshader" id="4_hhug1"]
+[ext_resource type="Shader" path="res://Shaders/dashed_line.gdshader" id="5_eq35l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gvaum"]
+size = Vector2(16, 12)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_soxxf"]
+resource_local_to_scene = true
+shader = ExtResource("2_utu1q")
+shader_parameter/t = 0.0
+shader_parameter/amplitude = 10.0
+shader_parameter/frequecy = 5.0
+shader_parameter/x_axis = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vho8v"]
+resource_local_to_scene = true
+shader = ExtResource("4_hhug1")
+shader_parameter/frequency = 7.0
+shader_parameter/phase_speed = 4.0
+shader_parameter/size = 0.0
+shader_parameter/t = 0.937
+shader_parameter/is_square = true
+shader_parameter/is_line = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v3qnr"]
+resource_local_to_scene = true
+shader = ExtResource("5_eq35l")
+shader_parameter/angle = null
+shader_parameter/spacing = 0.025
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h4cie"]
+resource_local_to_scene = true
+shader = ExtResource("4_hhug1")
+shader_parameter/frequency = 4.0
+shader_parameter/phase_speed = 4.0
+shader_parameter/size = 0.0
+shader_parameter/t = 0.95
+shader_parameter/is_square = false
+shader_parameter/is_line = false
+
+[node name="Fireballer" type="Area2D"]
+z_as_relative = false
+collision_layer = 8
+script = ExtResource("1_v85lp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_gvaum")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+texture_filter = 1
+material = SubResource("ShaderMaterial_soxxf")
+position = Vector2(0, -9)
+texture = ExtResource("3_jrla6")
+
+[node name="SelfOutline" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_vho8v")
+offset_left = -8.0
+offset_top = -9.0
+offset_right = 8.0
+offset_bottom = 7.0
+metadata/_edit_lock_ = true
+
+[node name="TargetLine" type="Line2D" parent="."]
+z_index = 20
+texture_filter = 1
+material = SubResource("ShaderMaterial_v3qnr")
+position = Vector2(0, -4)
+points = PackedVector2Array(0, 0, 0, 0)
+width = 1.0
+begin_cap_mode = 2
+end_cap_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="TargetOutline" type="Node2D" parent="."]
+z_index = 20
+z_as_relative = false
+material = SubResource("ShaderMaterial_h4cie")
+position = Vector2(0, -4)
+scale = Vector2(1.5, 1.5)
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="TargetOutline"]
+use_parent_material = true
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="TimerFireball" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

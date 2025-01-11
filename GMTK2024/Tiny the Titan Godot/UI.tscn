@@ -1,0 +1,711 @@
+[gd_scene load_steps=18 format=3 uid="uid://bdaytb7doktcc"]
+
+[ext_resource type="Script" path="res://UI.gd" id="1_iifpo"]
+[ext_resource type="Texture2D" uid="uid://rafokhk6loan" path="res://Art/item_sheet.png" id="2_d1diw"]
+[ext_resource type="FontFile" uid="uid://cbw04xeg0xo57" path="res://Art/Fonts/AveriaSerifGWF-Regular.ttf" id="2_fry0q"]
+[ext_resource type="Texture2D" uid="uid://3q0gyb08jbc2" path="res://Art/status_sheet.png" id="2_j064m"]
+[ext_resource type="StyleBox" uid="uid://bsmbk4qkj6ix4" path="res://Prefabs/PanelStyle.tres" id="3_8r1hc"]
+[ext_resource type="AudioStream" uid="uid://di86xta4hmo3h" path="res://Audio/Sounds/life_pickup reverb - Blender Foundation CCBY.mp3" id="4_evxpd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h7dsh"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="Theme" id="Theme_1fddk"]
+
+[sub_resource type="Animation" id="Animation_rm0y5"]
+resource_name = "HeartDance"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StatusBar/PanelContainer/StatusUI/Top/Hearts/Control1/Heart1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5, 0.8),
+"transitions": PackedFloat32Array(1, 0.5, 2, 2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 5), Vector2(0, -10), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StatusBar/PanelContainer/StatusUI/Top/Hearts/Control2/Heart2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.6, 0.9),
+"transitions": PackedFloat32Array(1, 0.5, 2, 2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 5), Vector2(0, -10), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StatusBar/PanelContainer/StatusUI/Top/Hearts/Control3/Heart3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 0.4, 0.7, 1),
+"transitions": PackedFloat32Array(1, 0.5, 2, 2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 5), Vector2(0, -10), Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StatusBar/PanelContainer/StatusUI/Top/Hearts/Control1/Heart1:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("StatusBar/PanelContainer/StatusUI/Top/Hearts/Control2/Heart2:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("StatusBar/PanelContainer/StatusUI/Top/Hearts/Control3/Heart3:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.2, 0.3, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HeartAudio")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_c45pp"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StatusBar/PanelContainer/StatusUI/Top/Hearts/Control1/Heart1:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StatusBar/PanelContainer/StatusUI/Top/Hearts/Control2/Heart2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StatusBar/PanelContainer/StatusUI/Top/Hearts/Control3/Heart3:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_eepkl"]
+resource_name = "StarDance"
+length = 1.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StatusBar/PanelContainer/StatusUI/Top/StarContainer/Control1/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5, 0.8),
+"transitions": PackedFloat32Array(1, 0.5, 2, 2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 5), Vector2(0, -10), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StatusBar/PanelContainer/StatusUI/Top/StarContainer/Control2/Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.6, 0.9),
+"transitions": PackedFloat32Array(1, 0.5, 2, 2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 5), Vector2(0, -10), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StatusBar/PanelContainer/StatusUI/Top/StarContainer/Control3/Sprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 0.4, 0.7, 1),
+"transitions": PackedFloat32Array(1, 0.5, 2, 2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 5), Vector2(0, -10), Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StatusBar/PanelContainer/StatusUI/Top/StarContainer/Control4/Sprite2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.3, 0.5, 0.8, 1.1),
+"transitions": PackedFloat32Array(1, 0.5, 2, 2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 5), Vector2(0, -10), Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("StatusBar/PanelContainer/StatusUI/Top/StarContainer/Control5/Sprite2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.4, 0.6, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 0.5, 2, 2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 5), Vector2(0, -10), Vector2(0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("StatusBar/PanelContainer/StatusUI/Top/StarContainer/Control6/Sprite2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.5, 0.7, 1, 1.3),
+"transitions": PackedFloat32Array(1, 0.5, 2, 2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 5), Vector2(0, -10), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t0glh"]
+_data = {
+"HeartDance": SubResource("Animation_rm0y5"),
+"RESET": SubResource("Animation_c45pp"),
+"StarDance": SubResource("Animation_eepkl")
+}
+
+[sub_resource type="Animation" id="Animation_qvx8g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("InfoUI:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_gellt"]
+resource_name = "info_animate_text"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("InfoUI/MarginContainer/PanelContainer/MarginContainer/InfoLabel:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.027027, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_6wwe6"]
+resource_name = "info_hide"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("InfoUI/MarginContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(2.73208, 0.170755),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -250)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("InfoUI:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_lp5fd"]
+resource_name = "info_show"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("InfoUI:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("InfoUI/MarginContainer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(0.170755, 2.73208),
+"update": 0,
+"values": [Vector2(0, -250), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wl8pd"]
+_data = {
+"RESET": SubResource("Animation_qvx8g"),
+"info_animate_text": SubResource("Animation_gellt"),
+"info_hide": SubResource("Animation_6wwe6"),
+"info_show": SubResource("Animation_lp5fd")
+}
+
+[node name="UI" type="CanvasLayer"]
+layer = 3
+script = ExtResource("1_iifpo")
+
+[node name="InfoUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="InfoUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -95.0
+offset_bottom = 95.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 450
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 450
+theme_override_constants/margin_bottom = 900
+
+[node name="PanelContainer" type="PanelContainer" parent="InfoUI/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_h7dsh")
+
+[node name="MarginContainer" type="MarginContainer" parent="InfoUI/MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="InfoLabel" type="Label" parent="InfoUI/MarginContainer/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fry0q")
+theme_override_font_sizes/font_size = 48
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="StatusBar" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="StatusBar"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -100.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = ExtResource("3_8r1hc")
+
+[node name="StatusUI" type="MarginContainer" parent="StatusBar/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 41
+
+[node name="Top" type="HBoxContainer" parent="StatusBar/PanelContainer/StatusUI"]
+layout_direction = 2
+layout_mode = 2
+theme_override_constants/separation = 60
+
+[node name="Hearts" type="HBoxContainer" parent="StatusBar/PanelContainer/StatusUI/Top"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Control1" type="Control" parent="StatusBar/PanelContainer/StatusUI/Top/Hearts"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Heart1" type="Sprite2D" parent="StatusBar/PanelContainer/StatusUI/Top/Hearts/Control1"]
+unique_name_in_owner = true
+texture_filter = 1
+scale = Vector2(6, 6)
+texture = ExtResource("2_j064m")
+centered = false
+hframes = 4
+
+[node name="Control2" type="Control" parent="StatusBar/PanelContainer/StatusUI/Top/Hearts"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Heart2" type="Sprite2D" parent="StatusBar/PanelContainer/StatusUI/Top/Hearts/Control2"]
+unique_name_in_owner = true
+texture_filter = 1
+scale = Vector2(6, 6)
+texture = ExtResource("2_j064m")
+centered = false
+hframes = 4
+
+[node name="Control3" type="Control" parent="StatusBar/PanelContainer/StatusUI/Top/Hearts"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Heart3" type="Sprite2D" parent="StatusBar/PanelContainer/StatusUI/Top/Hearts/Control3"]
+unique_name_in_owner = true
+texture_filter = 1
+scale = Vector2(6, 6)
+texture = ExtResource("2_j064m")
+centered = false
+hframes = 4
+
+[node name="StarContainer" type="HBoxContainer" parent="StatusBar/PanelContainer/StatusUI/Top"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Control1" type="Control" parent="StatusBar/PanelContainer/StatusUI/Top/StarContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="StatusBar/PanelContainer/StatusUI/Top/StarContainer/Control1"]
+texture_filter = 1
+scale = Vector2(6, 6)
+texture = ExtResource("2_j064m")
+centered = false
+hframes = 4
+frame = 2
+
+[node name="Control2" type="Control" parent="StatusBar/PanelContainer/StatusUI/Top/StarContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="StatusBar/PanelContainer/StatusUI/Top/StarContainer/Control2"]
+texture_filter = 1
+scale = Vector2(6, 6)
+texture = ExtResource("2_j064m")
+centered = false
+hframes = 4
+frame = 2
+
+[node name="Control3" type="Control" parent="StatusBar/PanelContainer/StatusUI/Top/StarContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="StatusBar/PanelContainer/StatusUI/Top/StarContainer/Control3"]
+texture_filter = 1
+scale = Vector2(6, 6)
+texture = ExtResource("2_j064m")
+centered = false
+hframes = 4
+frame = 2
+
+[node name="Control4" type="Control" parent="StatusBar/PanelContainer/StatusUI/Top/StarContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="StatusBar/PanelContainer/StatusUI/Top/StarContainer/Control4"]
+texture_filter = 1
+scale = Vector2(6, 6)
+texture = ExtResource("2_j064m")
+centered = false
+hframes = 4
+frame = 2
+
+[node name="Control5" type="Control" parent="StatusBar/PanelContainer/StatusUI/Top/StarContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="StatusBar/PanelContainer/StatusUI/Top/StarContainer/Control5"]
+texture_filter = 1
+scale = Vector2(6, 6)
+texture = ExtResource("2_j064m")
+centered = false
+hframes = 4
+frame = 2
+
+[node name="Control6" type="Control" parent="StatusBar/PanelContainer/StatusUI/Top/StarContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="StatusBar/PanelContainer/StatusUI/Top/StarContainer/Control6"]
+texture_filter = 1
+scale = Vector2(6, 6)
+texture = ExtResource("2_j064m")
+centered = false
+hframes = 4
+frame = 2
+
+[node name="Control7" type="Control" parent="StatusBar/PanelContainer/StatusUI/Top/StarContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="StatusBar/PanelContainer/StatusUI/Top/StarContainer/Control7"]
+texture_filter = 1
+scale = Vector2(6, 6)
+texture = ExtResource("2_j064m")
+centered = false
+hframes = 4
+frame = 2
+
+[node name="Items" type="MarginContainer" parent="StatusBar/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 40
+
+[node name="Items" type="HBoxContainer" parent="StatusBar/PanelContainer/Items"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 24
+
+[node name="Ring" type="Control" parent="StatusBar/PanelContainer/Items/Items"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="RingSprite" type="Sprite2D" parent="StatusBar/PanelContainer/Items/Items/Ring"]
+unique_name_in_owner = true
+texture_filter = 1
+scale = Vector2(6, 6)
+texture = ExtResource("2_d1diw")
+centered = false
+hframes = 5
+vframes = 2
+
+[node name="Boots" type="Control" parent="StatusBar/PanelContainer/Items/Items"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="BootsSprite" type="Sprite2D" parent="StatusBar/PanelContainer/Items/Items/Boots"]
+unique_name_in_owner = true
+texture_filter = 1
+scale = Vector2(6, 6)
+texture = ExtResource("2_d1diw")
+centered = false
+hframes = 5
+vframes = 2
+frame = 1
+
+[node name="Wings" type="Control" parent="StatusBar/PanelContainer/Items/Items"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="WingsSprite" type="Sprite2D" parent="StatusBar/PanelContainer/Items/Items/Wings"]
+unique_name_in_owner = true
+texture_filter = 1
+scale = Vector2(6, 6)
+texture = ExtResource("2_d1diw")
+centered = false
+hframes = 5
+vframes = 2
+frame = 3
+
+[node name="Claws" type="Control" parent="StatusBar/PanelContainer/Items/Items"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="ClawsSprite" type="Sprite2D" parent="StatusBar/PanelContainer/Items/Items/Claws"]
+unique_name_in_owner = true
+texture_filter = 1
+scale = Vector2(6, 6)
+texture = ExtResource("2_d1diw")
+centered = false
+hframes = 5
+vframes = 2
+frame = 2
+
+[node name="DebugUI" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_right = 83.0
+offset_bottom = 31.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = SubResource("Theme_1fddk")
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Panel" type="Panel" parent="DebugUI"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="DebugContainer" type="VBoxContainer" parent="DebugUI"]
+layout_mode = 2
+alignment = 2
+
+[node name="VBoxContainer" type="HBoxContainer" parent="DebugUI/DebugContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="ItemMenuButton" type="MenuButton" parent="DebugUI/DebugContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+mouse_default_cursor_shape = 2
+text = "Add Item"
+flat = false
+item_count = 4
+popup/item_0/text = "Ring"
+popup/item_1/text = "Boots"
+popup/item_1/id = 1
+popup/item_2/text = "Wings"
+popup/item_2/id = 2
+popup/item_3/text = "Claws"
+popup/item_3/id = 3
+
+[node name="MousePixelButton" type="Button" parent="DebugUI/DebugContainer/VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "Mouse Pixel"
+
+[node name="ResetCamButton" type="Button" parent="DebugUI/DebugContainer/VBoxContainer"]
+layout_mode = 2
+text = "Reset Cam"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_t0glh")
+}
+
+[node name="HeartAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_evxpd")
+bus = &"SFX"
+
+[node name="InfoTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="InfoAnim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wl8pd")
+}
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="FPS" type="Label" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+
+[connection signal="mouse_entered" from="DebugUI/DebugContainer/VBoxContainer/ItemMenuButton" to="." method="_on_debug_menu_mouse_entered"]

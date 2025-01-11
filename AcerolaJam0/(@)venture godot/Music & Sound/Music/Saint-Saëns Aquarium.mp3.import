@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cpq5m0p1iyxpc"
+path="res://.godot/imported/Saint-Saëns Aquarium.mp3-250c2000b90351162344616091c3dfdb.mp3str"
+
+[deps]
+
+source_file="res://Music & Sound/Music/Saint-Saëns Aquarium.mp3"
+dest_files=["res://.godot/imported/Saint-Saëns Aquarium.mp3-250c2000b90351162344616091c3dfdb.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

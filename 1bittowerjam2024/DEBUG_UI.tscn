@@ -1,0 +1,62 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8gnd6byq0u5m"]
+
+[ext_resource type="Script" path="res://DEBUG_UI.gd" id="1_37maq"]
+
+[node name="DEBUG_UI" type="CanvasLayer"]
+script = ExtResource("1_37maq")
+
+[node name="FPSUI" type="PanelContainer" parent="."]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 30.0
+grow_horizontal = 0
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="FPS" type="Label" parent="FPSUI"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_font_sizes/font_size = 21
+text = "120"
+
+[node name="DebugUI" type="MarginContainer" parent="."]
+visible = false
+anchors_preset = -1
+anchor_right = 0.964
+anchor_bottom = 1.238
+offset_right = -752.528
+offset_bottom = -685.224
+mouse_filter = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Panel" type="PanelContainer" parent="DebugUI"]
+clip_contents = true
+layout_mode = 2
+
+[node name="DebugMenu" type="VBoxContainer" parent="DebugUI/Panel"]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Title" type="Label" parent="DebugUI/Panel/DebugMenu"]
+layout_mode = 2
+text = "DEBUG MENU"
+horizontal_alignment = 1
+
+[node name="BeastDropdown" type="OptionButton" parent="DebugUI/Panel/DebugMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ToggleShader" type="CheckButton" parent="DebugUI/Panel/DebugMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Toggle Shader"

@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Fonts/SansFontBold.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Fonts/SansFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Shader.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Sprites/Back0.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Back1.png" type="Texture" id=5]
+[ext_resource path="res://Misc/Credits.gd" type="Script" id=6]
+
+[node name="Credits" type="Node"]
+script = ExtResource( 6 )
+
+[node name="Shader" parent="." instance=ExtResource( 3 )]
+
+[node name="Credits" type="Label" parent="."]
+anchor_left = 0.418229
+anchor_top = 0.122222
+anchor_right = 0.595312
+anchor_bottom = 0.215741
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "Credits"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": true,
+"_editor_description_": ""
+}
+
+[node name="Text" type="Label" parent="Credits"]
+anchor_left = 0.460937
+anchor_top = 0.257947
+anchor_right = 0.942708
+anchor_bottom = 0.73665
+margin_left = -461.015
+margin_top = 174.53
+margin_right = 300.183
+margin_bottom = 623.181
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "Music by Centurion_of_war
+Explosion by Master484
+
+Art and development by
+AlecHero"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": true,
+"_editor_description_": ""
+}
+
+[node name="TextureButton" type="TextureButton" parent="."]
+anchor_left = 0.895
+anchor_top = 0.833
+anchor_right = 0.947
+anchor_bottom = 0.926
+margin_left = 0.259766
+margin_top = -6.10352e-05
+margin_right = -3.23999
+margin_bottom = -0.0800781
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": true,
+"_editor_description_": ""
+}
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]

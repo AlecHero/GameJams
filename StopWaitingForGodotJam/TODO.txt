@@ -1,0 +1,14 @@
+
+ - Add more sound cues for different better clarity
+ - Add more sfx
+ - Add more obstacles (enemies)
+ - Add pickup? (maybe a laser weapon O.o)
+ - Add cooler thruster
+ - Transitions?
+ - Add a way to see your score even if you didn't make it into the top 10 highscores?
+ - Add QOL?
+ - Make the stage return button a cool protected (amongus red button)
+ - add custom drawn explosion
+ - add a way to indicate damage on the spaceship
+ - add custom drawn nachoroid (and other obstacles!?)
+ - add custom drawn title

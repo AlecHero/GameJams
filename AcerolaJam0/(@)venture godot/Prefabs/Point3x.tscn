@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmttp1q3asmqv"]
+
+[ext_resource type="PackedScene" uid="uid://s5mhw0ms0ws5" path="res://Prefabs/Point.tscn" id="1_87stg"]
+
+[node name="Point3x" instance=ExtResource("1_87stg")]
+point_reward = 3
+point_sound = "PointPickup3x"
+
+[node name="Sprite2D" parent="." index="0"]
+offset = Vector2(0, -14)
+frame = 38
+
+[node name="CollisionShape2D" parent="." index="1"]
+scale = Vector2(1.08, 1.08)

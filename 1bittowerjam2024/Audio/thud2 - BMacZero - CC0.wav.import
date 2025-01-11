@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cp4kltweaadkh"
+path="res://.godot/imported/thud2 - BMacZero - CC0.wav-c407e0fb21a10cb7748c8abbb48952ba.sample"
+
+[deps]
+
+source_file="res://Audio/thud2 - BMacZero - CC0.wav"
+dest_files=["res://.godot/imported/thud2 - BMacZero - CC0.wav-c407e0fb21a10cb7748c8abbb48952ba.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

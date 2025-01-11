@@ -1,0 +1,141 @@
+[gd_scene load_steps=21 format=3 uid="uid://co075slgkb25r"]
+
+[ext_resource type="Script" path="res://Prefabs/checkpoint.gd" id="1_3pj2v"]
+[ext_resource type="Shader" path="res://Prefabs/checkpoint.gdshader" id="1_uvvvy"]
+[ext_resource type="Texture2D" uid="uid://cbiavrjlrp81p" path="res://Art/flag_sheet.png" id="2_wypws"]
+[ext_resource type="AudioStream" uid="uid://cv00ysq1gfk6h" path="res://Audio/Sounds/limp.mp3" id="4_6o3gl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rfcbt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_edkat"]
+size = Vector2(16, 68)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c8jq5"]
+shader = ExtResource("1_uvvvy")
+shader_parameter/rot_speed = 0.0
+shader_parameter/rot_angle = 45.0
+shader_parameter/center = Vector2(-2, 32)
+shader_parameter/squish_amount = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8jqkm"]
+atlas = ExtResource("2_wypws")
+region = Rect2(40, 0, 8, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_63d75"]
+atlas = ExtResource("2_wypws")
+region = Rect2(48, 0, 8, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxeh3"]
+atlas = ExtResource("2_wypws")
+region = Rect2(56, 0, 8, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8hsb"]
+atlas = ExtResource("2_wypws")
+region = Rect2(64, 0, 8, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3h7ky"]
+atlas = ExtResource("2_wypws")
+region = Rect2(72, 0, 8, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbudn"]
+atlas = ExtResource("2_wypws")
+region = Rect2(80, 0, 8, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbvgh"]
+atlas = ExtResource("2_wypws")
+region = Rect2(88, 0, 8, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sh0eo"]
+atlas = ExtResource("2_wypws")
+region = Rect2(0, 0, 8, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thk7a"]
+atlas = ExtResource("2_wypws")
+region = Rect2(8, 0, 8, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rst0h"]
+atlas = ExtResource("2_wypws")
+region = Rect2(16, 0, 8, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_72ggs"]
+atlas = ExtResource("2_wypws")
+region = Rect2(24, 0, 8, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxij0"]
+atlas = ExtResource("2_wypws")
+region = Rect2(32, 0, 8, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o8gfd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8jqkm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_63d75")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uxeh3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f8hsb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3h7ky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mbudn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mbvgh")
+}],
+"loop": true,
+"name": &"big",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.1,
+"texture": SubResource("AtlasTexture_sh0eo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thk7a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rst0h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_72ggs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxij0")
+}],
+"loop": true,
+"name": &"rise",
+"speed": 5.0
+}]
+
+[node name="Checkpoint" type="Area2D"]
+material = SubResource("ShaderMaterial_rfcbt")
+collision_layer = 64
+script = ExtResource("1_3pj2v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -30)
+shape = SubResource("RectangleShape2D_edkat")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_c8jq5")
+position = Vector2(2, -28)
+sprite_frames = SubResource("SpriteFrames_o8gfd")
+animation = &"rise"
+
+[node name="Bounce" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_6o3gl")
+volume_db = -10.0
+pitch_scale = 1.41
+bus = &"SFX"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]

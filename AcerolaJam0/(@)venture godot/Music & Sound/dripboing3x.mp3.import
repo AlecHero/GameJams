@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://4kaj71hf7ncq"
+path="res://.godot/imported/dripboing3x.mp3-5edfed2b3e59cfae4cdcd9bed3727df0.mp3str"
+
+[deps]
+
+source_file="res://Music & Sound/dripboing3x.mp3"
+dest_files=["res://.godot/imported/dripboing3x.mp3-5edfed2b3e59cfae4cdcd9bed3727df0.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://cfpsrog51llhe"]
+
+[ext_resource type="Script" path="res://Prefabs/items_old/item.gd" id="1_wetrd"]
+[ext_resource type="Texture2D" uid="uid://rafokhk6loan" path="res://Art/item_sheet.png" id="2_6b7j4"]
+[ext_resource type="Shader" path="res://Prefabs/items_old/item.gdshader" id="2_ewt56"]
+[ext_resource type="AudioStream" uid="uid://dfp200gcwklsq" path="res://Audio/Sounds/rumble.mp3" id="4_fnk0u"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u0kwa"]
+radius = 5.75
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l4s6f"]
+shader = ExtResource("2_ewt56")
+shader_parameter/amplitude = 400.0
+shader_parameter/speed2 = 1.0
+shader_parameter/anim_speed = 0.0
+shader_parameter/center = Vector2(0, 8)
+
+[node name="GenericItem" type="Area2D"]
+texture_filter = 1
+collision_layer = 128
+script = ExtResource("1_wetrd")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_u0kwa")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_l4s6f")
+texture = ExtResource("2_6b7j4")
+hframes = 5
+vframes = 2
+
+[node name="Rumble" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_fnk0u")
+pitch_scale = 0.5
+autoplay = true
+max_distance = 900.0
+attenuation = 6.94061
+bus = &"Rumble"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

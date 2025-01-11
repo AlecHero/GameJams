@@ -1,0 +1,16 @@
+res://Titlescreen.tscn
+res://Fonts/SansFontBold2.tres
+res://Fonts/SansFontBold1.tres
+res://Fonts/SansFont.tres
+res://Fonts/TitleFont.tres
+res://General.gd
+res://Shader.tscn
+res://Shaders/Chromatic Abberation.gdshader
+res://Shaders/Bloom.gdshader
+res://Shaders/Blur.gdshader
+res://Shaders/Chromatic Abberation 2.gdshader
+res://Shaders/CRT.gdshader
+res://Shaders/Glow.gdshader
+res://Shaders/Grey.gdshader
+res://Shaders/HUEchange.gdshader
+res://Shaders/Noise Overlay.gdshader

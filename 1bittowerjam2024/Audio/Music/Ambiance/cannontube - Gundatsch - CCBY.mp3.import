@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://p4tie2oujjpq"
+path="res://.godot/imported/cannontube - Gundatsch - CCBY.mp3-b53ba35fe98f8a6b47158da3c975e256.mp3str"
+
+[deps]
+
+source_file="res://Audio/Music/Ambiance/cannontube - Gundatsch - CCBY.mp3"
+dest_files=["res://.godot/imported/cannontube - Gundatsch - CCBY.mp3-b53ba35fe98f8a6b47158da3c975e256.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

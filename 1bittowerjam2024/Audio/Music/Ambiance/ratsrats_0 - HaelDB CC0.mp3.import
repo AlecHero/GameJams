@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c2xuxwx2asyw3"
+path="res://.godot/imported/ratsrats_0 - HaelDB CC0.mp3-22a04fc25d8ac3cb59ae9e0d7539640b.mp3str"
+
+[deps]
+
+source_file="res://Audio/Music/Ambiance/ratsrats_0 - HaelDB CC0.mp3"
+dest_files=["res://.godot/imported/ratsrats_0 - HaelDB CC0.mp3-22a04fc25d8ac3cb59ae9e0d7539640b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

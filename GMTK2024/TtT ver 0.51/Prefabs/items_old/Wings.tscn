@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://yao3tgxtlc0"]
+
+[ext_resource type="PackedScene" uid="uid://cfpsrog51llhe" path="res://Prefabs/items_old/item.tscn" id="1_d6llg"]
+
+[node name="GenericItem" instance=ExtResource("1_d6llg")]
+item_name = "wings"
+
+[node name="Sprite2D" parent="." index="1"]
+frame = 3

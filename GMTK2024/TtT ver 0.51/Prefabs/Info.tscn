@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cduky20iyr24n"]
+
+[ext_resource type="Texture2D" uid="uid://b4kl0xeayxqly" path="res://Art/text_sprite.png" id="1_mbigx"]
+[ext_resource type="Script" path="res://Prefabs/Info.gd" id="1_o7q2g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6pq58"]
+
+[node name="Info" type="Area2D"]
+scale = Vector2(4, 4)
+collision_layer = 512
+collision_mask = 0
+script = ExtResource("1_o7q2g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6pq58")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_mbigx")

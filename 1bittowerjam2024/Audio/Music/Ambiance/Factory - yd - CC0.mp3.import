@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://kdw51pxsogiw"
+path="res://.godot/imported/Factory - yd - CC0.mp3-ce857f7f0406f4eefb603970b38b27ef.mp3str"
+
+[deps]
+
+source_file="res://Audio/Music/Ambiance/Factory - yd - CC0.mp3"
+dest_files=["res://.godot/imported/Factory - yd - CC0.mp3-ce857f7f0406f4eefb603970b38b27ef.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
