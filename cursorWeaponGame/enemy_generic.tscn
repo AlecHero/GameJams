@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://csc5ciaeo6avi"]
+
+[ext_resource type="Shader" path="res://enemy.gdshader" id="1_synvi"]
+[ext_resource type="Texture2D" uid="uid://drmqhdd73flag" path="res://raptor.png" id="2_sfvht"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0b8sh"]
+shader = ExtResource("1_synvi")
+shader_parameter/anim_speed = 10.0
+shader_parameter/squish_amount = 0.0
+shader_parameter/alpha = 1.0
+shader_parameter/rand = 0.0
+shader_parameter/gt = null
+shader_parameter/is_flying = false
+shader_parameter/is_ghost = false
+shader_parameter/is_wavy = false
+shader_parameter/is_climby = false
+shader_parameter/is_dying = false
+shader_parameter/death_type = 0
+shader_parameter/columns = 1.0
+shader_parameter/rows = 1.0
+shader_parameter/frame = 0.0
+shader_parameter/angle = 0.0
+shader_parameter/t = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7pg0r"]
+radius = 26.0192
+
+[node name="EnemyGeneric" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_0b8sh")
+texture = ExtResource("2_sfvht")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7pg0r")
