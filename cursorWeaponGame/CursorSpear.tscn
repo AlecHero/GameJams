@@ -9,7 +9,7 @@ shader = ExtResource("2_ypkej")
 shader_parameter/drop_shadow_color = Color(0, 0, 0, 0.5)
 shader_parameter/shadow_offset = 0.2
 shader_parameter/f = 3.14
-shader_parameter/dir_factor = null
+shader_parameter/dir_factor = 1.0
 
 [node name="CursorSpear" type="Area2D" groups=["CursorWeapon"]]
 material = SubResource("ShaderMaterial_8ilb8")
