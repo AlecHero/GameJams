@@ -1,0 +1,75 @@
+[gd_scene load_steps=11 format=3 uid="uid://cwnxchldcdkvi"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_fku5e"]
+[ext_resource type="Script" path="res://debugger.gd" id="2_cps2i"]
+[ext_resource type="Texture2D" uid="uid://dhfjjdssug347" path="res://seamless-rope-PNG-free-thumb22.png" id="2_rqapq"]
+[ext_resource type="Texture2D" uid="uid://brggirb4h1axr" path="res://protect_orb.png" id="3_dkh5s"]
+[ext_resource type="PackedScene" uid="uid://csc5ciaeo6avi" path="res://enemy_generic.tscn" id="3_pq1vd"]
+[ext_resource type="PackedScene" uid="uid://bcxwrhd03e3n" path="res://CursorSword.tscn" id="4_i7uuf"]
+[ext_resource type="Script" path="res://life_ball.gd" id="4_r1nko"]
+[ext_resource type="PackedScene" uid="uid://dko267kiwqrej" path="res://Cursor.tscn" id="4_rtaki"]
+[ext_resource type="Script" path="res://rope.gd" id="4_stxyo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0f4qn"]
+radius = 22.0227
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_fku5e")
+
+[node name="Cursor" parent="." instance=ExtResource("4_rtaki")]
+unique_name_in_owner = true
+
+[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="."]
+node_a = NodePath("../Cursor")
+node_b = NodePath("../LifeBall")
+length = 100.0
+damping = 0.18
+
+[node name="Line2D" type="Line2D" parent="."]
+texture_repeat = 2
+closed = true
+width = 12.0
+texture = ExtResource("2_rqapq")
+texture_mode = 1
+script = ExtResource("4_stxyo")
+
+[node name="LifeBall" type="RigidBody2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 2
+collision_mask = 20
+gravity_scale = 0.0
+linear_damp = 2.0
+script = ExtResource("4_r1nko")
+
+[node name="Sprite2D" type="Sprite2D" parent="LifeBall"]
+texture = ExtResource("3_dkh5s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LifeBall"]
+shape = SubResource("CircleShape2D_0f4qn")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("2_cps2i")
+
+[node name="EnemyGeneric" parent="." instance=ExtResource("3_pq1vd")]
+position = Vector2(89, 528)
+collision_layer = 4
+collision_mask = 7
+
+[node name="CursorSword" parent="." instance=ExtResource("4_i7uuf")]
+collision_mask = 4
+
+[node name="Wall" type="StaticBody2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall"]
+polygon = PackedVector2Array(0, 1080, 0, 0, 1920, 0, 1920, 1080, 1920, 1164, 2031, 1165, 2024, -115, -115, -112, -107, 1169, 1920, 1164, 1920, 1080)

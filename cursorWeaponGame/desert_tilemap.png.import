@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmmqi0pa5hptm"
-path="res://.godot/imported/monster.png-a5296aff78da41743f6f0135a765b7f7.ctex"
+uid="uid://b4io1udu228v"
+path="res://.godot/imported/desert_tilemap.png-499c9583562726c88cdeae353d5994f7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://monster.png"
-dest_files=["res://.godot/imported/monster.png-a5296aff78da41743f6f0135a765b7f7.ctex"]
+source_file="res://desert_tilemap.png"
+dest_files=["res://.godot/imported/desert_tilemap.png-499c9583562726c88cdeae353d5994f7.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvr4on23q7mms"
-path="res://.godot/imported/set_of_different_style_swords_flat.png-00407e83416456e7d3f9fe5171df1113.ctex"
+uid="uid://cgbss4mbjf3ki"
+path="res://.godot/imported/path_arrow.png-0674c5d4d1851cfdfc24d5a8ffccbd30.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://set_of_different_style_swords_flat.png"
-dest_files=["res://.godot/imported/set_of_different_style_swords_flat.png-00407e83416456e7d3f9fe5171df1113.ctex"]
+source_file="res://path_arrow.png"
+dest_files=["res://.godot/imported/path_arrow.png-0674c5d4d1851cfdfc24d5a8ffccbd30.ctex"]
 
 [params]
 
