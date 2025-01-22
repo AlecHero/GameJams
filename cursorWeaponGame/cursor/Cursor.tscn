@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dko267kiwqrej"]
+
+[ext_resource type="Script" path="res://cursor/cursor.gd" id="2_7bh8p"]
+[ext_resource type="Texture2D" uid="uid://3jdtgxf5wch0" path="res://cursor/arrow_smaller.png" id="2_v2squ"]
+
+[node name="Cursor" type="CharacterBody2D"]
+script = ExtResource("2_7bh8p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = ExtResource("2_v2squ")
+offset = Vector2(17.36, 0)

@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bcxwrhd03e3n"]
+
+[ext_resource type="Script" path="res://weapons/cursor_sword.gd" id="1_nuvnt"]
+[ext_resource type="Shader" path="res://shadow.gdshader" id="2_17nwf"]
+[ext_resource type="Texture2D" uid="uid://1ftb6yahfvp7" path="res://weapons/sword.png" id="2_61pcg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hnxdq"]
+shader = ExtResource("2_17nwf")
+shader_parameter/drop_shadow_color = Color(0, 0, 0, 0.3)
+shader_parameter/shadow_offset = 0.2
+shader_parameter/f = 1.9
+shader_parameter/dir_factor = 1.0
+shader_parameter/offset = null
+
+[node name="CursorSword" type="Area2D" groups=["CursorWeapon"]]
+z_index = 5
+material = SubResource("ShaderMaterial_hnxdq")
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_nuvnt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+use_parent_material = true
+rotation = -0.785398
+scale = Vector2(3, 3)
+texture = ExtResource("2_61pcg")
+offset = Vector2(16, -16)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(26.3158, -23.6842)
+polygon = PackedVector2Array(-12.3158, -30.3158, -14.3158, -88.9825, -26.3158, -118.982, -39.6491, -89.6491, -39.6491, -30.3158, -25.6491, 0.350866)

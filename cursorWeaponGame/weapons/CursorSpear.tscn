@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhm17hdfa3v45"]
+
+[ext_resource type="Script" path="res://weapons/cursor_spear.gd" id="1_ibp1b"]
+[ext_resource type="Texture2D" uid="uid://c6va5afriovhq" path="res://weapons/spear.png" id="2_thvob"]
+[ext_resource type="Shader" path="res://shadow.gdshader" id="2_ypkej"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8ilb8"]
+shader = ExtResource("2_ypkej")
+shader_parameter/drop_shadow_color = Color(0, 0, 0, 0.301961)
+shader_parameter/shadow_offset = 0.2
+shader_parameter/f = 1.6
+shader_parameter/dir_factor = 1.0
+shader_parameter/offset = Vector2(0, 0)
+
+[node name="CursorSpear" type="Area2D" groups=["CursorWeapon"]]
+material = SubResource("ShaderMaterial_8ilb8")
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_ibp1b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(0, -91.26)
+rotation = -0.785398
+scale = Vector2(3, 3)
+texture = ExtResource("2_thvob")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, 26.965)
+polygon = PackedVector2Array(-19, -161, -19, -174, 0, -193, 19, -174, 19, -161, 0, -180)

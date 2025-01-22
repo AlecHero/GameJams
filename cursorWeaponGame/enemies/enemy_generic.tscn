@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=3 uid="uid://csc5ciaeo6avi"]
+
+[ext_resource type="Script" path="res://enemies/enemy_generic.gd" id="1_g61k1"]
+[ext_resource type="Shader" path="res://shadow.gdshader" id="1_lxdmw"]
+[ext_resource type="Shader" path="res://enemies/enemy.gdshader" id="1_synvi"]
+[ext_resource type="Texture2D" uid="uid://imrxuxwd0jwx" path="res://enemies/snake.png" id="3_2nkcl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pwv6q"]
+shader = ExtResource("1_lxdmw")
+shader_parameter/drop_shadow_color = Color(0, 0, 0, 0.3)
+shader_parameter/shadow_offset = 0.2
+shader_parameter/f = 3.14
+shader_parameter/dir_factor = null
+shader_parameter/offset = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0b8sh"]
+shader = ExtResource("1_synvi")
+shader_parameter/anim_speed = 7.0
+shader_parameter/squish_amount = 0.0
+shader_parameter/alpha = 1.0
+shader_parameter/rand = 0.0
+shader_parameter/drop_shadow_color = Color(0, 0, 0, 0.3)
+shader_parameter/shadow_offset = 0.2
+shader_parameter/f = 0.9
+shader_parameter/dir_factor = 1.0
+shader_parameter/offset = null
+shader_parameter/is_flying = false
+shader_parameter/is_ghost = false
+shader_parameter/is_wavy = false
+shader_parameter/is_climby = false
+shader_parameter/is_dying = false
+shader_parameter/death_type = 0
+shader_parameter/columns = 1.0
+shader_parameter/rows = 1.0
+shader_parameter/frame = 0.0
+shader_parameter/angle = 0.0
+shader_parameter/t = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7pg0r"]
+radius = 12.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4wtm0"]
+radius = 21.0238
+
+[node name="EnemyGeneric" type="CharacterBody2D"]
+material = SubResource("ShaderMaterial_pwv6q")
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_g61k1")
+is_directional = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_0b8sh")
+scale = Vector2(3, 3)
+texture = ExtResource("3_2nkcl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7pg0r")
+
+[node name="HitArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+shape = SubResource("CircleShape2D_4wtm0")
+
+[connection signal="area_entered" from="HitArea" to="." method="_on_hit_area_area_entered"]

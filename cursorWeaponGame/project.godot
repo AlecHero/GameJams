@@ -24,7 +24,15 @@ Helper="*res://helper.gd"
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=2
-mouse_cursor/custom_image="res://cursor.png"
+mouse_cursor/custom_image="res://cursor/cursor.png"
+
+[file_customization]
+
+folder_colors={
+"res://cursor/": "yellow",
+"res://enemies/": "red",
+"res://weapons/": "blue"
+}
 
 [global_group]
 
