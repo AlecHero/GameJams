@@ -1,6 +1,9 @@
 extends Node
 
 const ENEMY_GENERIC = preload("res://enemies/enemy_generic.tscn")
+const SNAKE = preload("res://enemies/flat_enemy_generic.tscn")
+
+@export var main : Node2D
 
 func get_spawn_pos():
 	var vp = get_parent().get_viewport_rect().size
@@ -19,12 +22,12 @@ func get_spawn_pos():
 		3:  # Right
 			return Vector2(vp.x + padding, randf() * vp.y)
 
-
 func spawn_enemy():
-	var enemy = ENEMY_GENERIC.instantiate()
+	var rand_enemy = [ENEMY_GENERIC, SNAKE].pick_random()
+	var enemy = rand_enemy.instantiate()
 	enemy.position = get_spawn_pos()
 	#enemy.base_life 
-	get_parent().add_child(enemy)
+	main.add_child(enemy)
 
 
 func _on_timer_timeout() -> void:

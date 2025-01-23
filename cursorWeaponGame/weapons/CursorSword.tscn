@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bcxwrhd03e3n"]
 
-[ext_resource type="Script" path="res://weapons/cursor_sword.gd" id="1_nuvnt"]
-[ext_resource type="Shader" path="res://shadow.gdshader" id="2_17nwf"]
+[ext_resource type="Script" uid="uid://vmjccmjb77ep" path="res://weapons/cursor_sword.gd" id="1_nuvnt"]
+[ext_resource type="Shader" uid="uid://73g6ramepv1w" path="res://shadow.gdshader" id="2_17nwf"]
 [ext_resource type="Texture2D" uid="uid://1ftb6yahfvp7" path="res://weapons/sword.png" id="2_61pcg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hnxdq"]
@@ -21,11 +21,9 @@ script = ExtResource("1_nuvnt")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 use_parent_material = true
-rotation = -0.785398
 scale = Vector2(3, 3)
 texture = ExtResource("2_61pcg")
 offset = Vector2(16, -16)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(26.3158, -23.6842)
-polygon = PackedVector2Array(-12.3158, -30.3158, -14.3158, -88.9825, -26.3158, -118.982, -39.6491, -89.6491, -39.6491, -30.3158, -25.6491, 0.350866)
+polygon = PackedVector2Array(14.6667, -14.6667, 24.6667, -44.6667, 63.3333, -84, 96, -93.3333, 84, -62.6667, 44.6667, -21.3333)

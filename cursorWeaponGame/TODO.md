@@ -23,8 +23,8 @@ the game ends after some decided wave ? boss enemy? idk.
 - [x] basic weapon sprites
 - [x] basic background
 - [x] basic cursor/player sprites
+- [x] shadows for line2D's (has to be done with instancing of another line2D unfortunately? cannot be done with shader)
 - [ ] basic enemy sprites
-- [ ] shadows for line2D's (has to be done with instancing of another line2D unfortunately? cannot be done with shader)
 
 
 # Weapon types
@@ -40,3 +40,8 @@ the game ends after some decided wave ? boss enemy? idk.
 - [ ] A caster type which can make another enemy "invulnerable" which in this case means your cursor cant enter the area 
 - [ ] Enemy that "grabs" the cursor by setting Input.warp_mouse(pos) constantly until you get out of it somehow idk
 - [ ] enemy or environmental debuff that slows or makes the lifeball stuck.
+
+
+
+## CREDIT:
+- immortalbean's shadow shader (Godot Shaders) partly used for many of the shadows

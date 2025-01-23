@@ -1,0 +1,18 @@
+Z-Ordering
+--- high ---
+Cursor and Cursor weapons
+
+
+rope_balls
+rope
+life_ball
+pin
+pin_mark
+
+
+enemies
+
+arrow_indicator
+path_arrow
+tilemap_ground
+--- low ---

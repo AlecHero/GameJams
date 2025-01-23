@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bhm17hdfa3v45"]
 
-[ext_resource type="Script" path="res://weapons/cursor_spear.gd" id="1_ibp1b"]
+[ext_resource type="Script" uid="uid://k3we0h6hrpkq" path="res://weapons/cursor_spear.gd" id="1_ibp1b"]
 [ext_resource type="Texture2D" uid="uid://c6va5afriovhq" path="res://weapons/spear.png" id="2_thvob"]
-[ext_resource type="Shader" path="res://shadow.gdshader" id="2_ypkej"]
+[ext_resource type="Shader" uid="uid://73g6ramepv1w" path="res://shadow.gdshader" id="2_ypkej"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8ilb8"]
 shader = ExtResource("2_ypkej")
@@ -13,6 +13,7 @@ shader_parameter/dir_factor = 1.0
 shader_parameter/offset = Vector2(0, 0)
 
 [node name="CursorSpear" type="Area2D" groups=["CursorWeapon"]]
+z_index = 5
 material = SubResource("ShaderMaterial_8ilb8")
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_ibp1b")

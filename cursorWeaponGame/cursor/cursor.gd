@@ -25,15 +25,15 @@ func _process(delta: float) -> void:
 	rotation = lerp_angle(rotation, current_velocity.angle(), ROTATION_LERP * delta)
 
 
-var current_arc_line = null
-var current_dir_line = null
-func add_lines():
-	var arc_line = Line2D.new()
-	arc_line.add_point(pin_position, 0)
-	arc_line.add_point(pin_position, 1)
-	arc_line.width = 2
-	current_arc_line = arc_line
-	get_parent().add_child(current_arc_line)
+#var current_arc_line = null
+#var current_dir_line = null
+#func add_lines():
+	#var arc_line = Line2D.new()
+	#arc_line.add_point(pin_position, 0)
+	#arc_line.add_point(pin_position, 1)
+	#arc_line.width = 2
+	#current_arc_line = arc_line
+	#get_parent().add_child(current_arc_line)
 	
 	#var dir_line = Line2D.new()
 	#dir_line.add_point(pin_position, 0)
@@ -62,10 +62,10 @@ func _input(event: InputEvent) -> void:
 				pin_mark.global_position = pin_position
 				pin.show()
 				pin_mark.show()
-				add_lines()
+				#add_lines()
 			else:
 				is_pinning = false
 				pin_mark.hide()
 				pin.hide()
-				if is_instance_valid(current_arc_line):
-					current_arc_line.queue_free()
+				#if is_instance_valid(current_arc_line):
+					#current_arc_line.queue_free()

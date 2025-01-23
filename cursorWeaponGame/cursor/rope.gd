@@ -26,4 +26,3 @@ func _process(delta: float) -> void:
 	var ang = (cursor.position + offset).angle_to_point(life_ball.position+Vector2(0,3) + offset)
 	shadow_rope_ball_2.global_position = cursor.position + offset# + Vector2(0.0, 3.0)
 	shadow_rope_ball_2.rotation = ang
-	print(ang)

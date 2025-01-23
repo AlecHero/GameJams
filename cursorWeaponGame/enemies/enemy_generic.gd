@@ -1,42 +1,71 @@
 extends CharacterBody2D
 
-@export var base_life := 10
-const MOVE_SPEED = 50
+@onready var sprite: Sprite2D = $Sprite2D
+@onready var rng = RandomNumberGenerator.new()
 
+@export var base_life := 10.0
 @export var is_directional := false
-var current_life = base_life
+@export var knockback_recovery = 3.5
+@export var move_speed = 30.0
 
-func damage(n):
-	current_life -= n
+const MIN_KNOCKBACK = 500.0
+const MAX_KNOCKBACK = 500.0
+
+@onready var current_life = base_life
+var squish_amount = 0.0
+var target
+var target_pos := Vector2.ZERO
+var knockback = Vector2.ZERO
+
+
+func damage(weapon_damage, weapon_knockback, attack_origin):
+	print(current_life)
+	print("weapon", weapon_damage)
+	current_life -= weapon_damage
+	print(current_life)
 	if current_life > 0:
-		# knockback
-		pass
-	else: # die
+		var pct_lost = weapon_damage/base_life
+		squish_amount = 2.0*pct_lost
+		var dir = global_position.direction_to(attack_origin)
+		knockback = -dir * clamp(MIN_KNOCKBACK * pct_lost * weapon_knockback, 0, MAX_KNOCKBACK)
+	else:
 		queue_free()
 
 
-var life_ball
 func _ready() -> void:
-	life_ball = get_parent().get_node("CursorHandler").get_node("%LifeBall")
+	target = get_parent().get_node("CursorHandler").get_node("%LifeBall")
+	sprite.material.set_shader_parameter("rand", rng.randf())
+	if is_directional:
+		sprite.flip_h = (rng.randf() > 0.5)
 
 
 func _process(delta: float) -> void:
-	if is_directional and is_instance_valid(life_ball):
-		look_at(life_ball.global_position)
+	if !is_equal_approx(squish_amount, 0.0):
+		squish_amount = lerp(squish_amount, 0.0, delta * 6.0)
+		sprite.material.set_shader_parameter("squish_amount", squish_amount)
+	
+	target_pos = target.global_position
+	
+	if is_directional and is_instance_valid(target):
+		look_at(target_pos)
 		rotation += PI/4
+		if sprite.flip_h:
+			rotation += PI/2
+	else:
+		sprite.flip_h = target_pos.x < global_position.x
+	
+	sprite.material.set_shader_parameter("shadow_angle", -rotation)
 
 
-@export var knockback_recovery = 3.5
-var knockback = Vector2.ZERO
 func _physics_process(delta: float) -> void:
 	knockback = knockback.move_toward(Vector2.ZERO, knockback_recovery)
-	if life_ball != null:
-		var direction = global_position.direction_to(life_ball.global_position)
-		velocity = direction*MOVE_SPEED
+	if target != null:
+		var direction = global_position.direction_to(target.global_position)
+		velocity = direction * move_speed
 		velocity += knockback
 		move_and_slide()
 
 
 func _on_hit_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("CursorWeapon"):
-		damage(area.dmg)
+		damage(area.dmg, area.knockback, area.global_position)
