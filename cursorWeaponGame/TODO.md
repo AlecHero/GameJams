@@ -23,10 +23,19 @@ the game ends after some decided wave ? boss enemy? idk.
 - [ ] adding life to the ball, and a heart beat effect when it gets hit? maybe a cracking heart depending on life? or it gets drained of color?
 - [ ] setting all export values for enemies
 - [ ] ticket system for enemies to be spawned in waves with the handler controlling their life/dmg
+- [ ] wave system WITH counters in mind
 - [ ] basic wave / weapon UI
 - [ ] basic shop ?
 - [ ] damage/knockback affected by velocity of weapon
 - [ ] directional knockback
+- [ ] way to heal the ball could be an environemnetal hp-up which moves in a difficult to reach/catch path
+- [ ] buff which makes the heart ball invulnerable and exploding on touch with enemies
+- [ ] timer UI (VS style)
+
+
+# Misc features
+- [ ] lava / ice / spiked flooring as environments
+- [ ] a limited area zone which you have to stay in for the time to progress?
 
 
 # Visual features
@@ -54,6 +63,13 @@ the game ends after some decided wave ? boss enemy? idk.
 - [ ] Enemy that "grabs" the cursor by setting Input.warp_mouse(pos) constantly until you get out of it somehow idk
 - [ ] enemy or environmental debuff that slows or makes the lifeball stuck.
 - [ ] debuff that makes the heartball very big or slippery etc.
+- [ ] enemy that shoots and tries to stay slightly out of reach of the shortranged weapons
+- [ ] static enemy which shoots projectiles (much like the circles spawning around you in VS)
+
+- [ ] rushers which can resist one hit completely one time perhaps (magic shield or some shit)
+- [ ] enemy with square collision that block you in
+- [ ] enemy that makes nearby enemies faster
+- [ ] 
 
 
 ## CREDIT:
