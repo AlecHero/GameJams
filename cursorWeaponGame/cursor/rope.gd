@@ -1,6 +1,6 @@
 extends Line2D
 
-@onready var cursor: CharacterBody2D = %Cursor
+@onready var cursor: Node2D = %Cursor
 @onready var life_ball: RigidBody2D = %LifeBall
 @onready var rope_ball: Sprite2D = $RopeBall
 @onready var rope_ball2: Sprite2D = $RopeBall2

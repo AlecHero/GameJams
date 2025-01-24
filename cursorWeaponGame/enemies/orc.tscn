@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://gcarmpxewf5o"]
+
+[ext_resource type="PackedScene" uid="uid://csc5ciaeo6avi" path="res://enemies/enemy_generic.tscn" id="1_gvr3w"]
+[ext_resource type="Shader" uid="uid://bgsdv5cdl7thg" path="res://enemies/enemy.gdshader" id="2_bnwed"]
+[ext_resource type="Texture2D" uid="uid://bopuao5utm5iq" path="res://enemies/orc.png" id="3_bnwed"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fkakg"]
+resource_local_to_scene = true
+shader = ExtResource("2_bnwed")
+shader_parameter/anim_speed = 4.0
+shader_parameter/squish_amount = 0.0
+shader_parameter/alpha = 1.0
+shader_parameter/rand = 0.5
+shader_parameter/hue_factor = 0.1
+shader_parameter/turn_factor = 0.4
+shader_parameter/shadow_angle = 0.7
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/has_shadow = false
+
+[node name="EnemyGeneric" instance=ExtResource("1_gvr3w")]
+
+[node name="Sprite2D" parent="." index="0"]
+material = SubResource("ShaderMaterial_fkakg")
+texture = ExtResource("3_bnwed")

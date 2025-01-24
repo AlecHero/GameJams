@@ -17,6 +17,7 @@ z_index = 5
 material = SubResource("ShaderMaterial_8ilb8")
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_ibp1b")
+knockback = 0.8
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1

@@ -1,7 +1,18 @@
-extends Node
+extends Node2D
 
-const ENEMY_GENERIC = preload("res://enemies/enemy_generic.tscn")
+# REGULAR
+const SKELLET_1 = preload("res://enemies/skellet1.tscn")
+const ORC = preload("res://enemies/orc.tscn")
+const CYCLOP = preload("res://enemies/cyclop.tscn")
+const HARVESTER = preload("res://enemies/harvester.tscn")
+const KNIGHT = preload("res://enemies/knight.tscn")
+const PIG_1 = preload("res://enemies/pig1.tscn")
+const PIG_2 = preload("res://enemies/pig2.tscn")
+
+# FLAT
 const SNAKE = preload("res://enemies/flat_enemy_generic.tscn")
+
+var all_enemies = [SKELLET_1, ORC, CYCLOP, HARVESTER, KNIGHT, PIG_1, PIG_2, SNAKE]
 
 @export var main : Node2D
 
@@ -23,11 +34,11 @@ func get_spawn_pos():
 			return Vector2(vp.x + padding, randf() * vp.y)
 
 func spawn_enemy():
-	var rand_enemy = [ENEMY_GENERIC, SNAKE].pick_random()
+	var rand_enemy = all_enemies.pick_random()
 	var enemy = rand_enemy.instantiate()
 	enemy.position = get_spawn_pos()
-	#enemy.base_life 
-	main.add_child(enemy)
+	enemy.main = main
+	add_child(enemy)
 
 
 func _on_timer_timeout() -> void:

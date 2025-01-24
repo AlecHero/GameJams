@@ -28,6 +28,7 @@ z_as_relative = false
 y_sort_enabled = true
 collision_layer = 4
 collision_mask = 7
+motion_mode = 1
 script = ExtResource("1_1iib3")
 is_directional = true
 

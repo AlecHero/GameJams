@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://cyydnu01fasxl"]
+
+[ext_resource type="PackedScene" uid="uid://csc5ciaeo6avi" path="res://enemies/enemy_generic.tscn" id="1_fgu83"]
+[ext_resource type="Shader" uid="uid://bgsdv5cdl7thg" path="res://enemies/enemy.gdshader" id="2_oimey"]
+[ext_resource type="Texture2D" uid="uid://bnlebbn376r8a" path="res://enemies/knight.png" id="3_oimey"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7hoow"]
+resource_local_to_scene = true
+shader = ExtResource("2_oimey")
+shader_parameter/anim_speed = 4.0
+shader_parameter/squish_amount = 0.0
+shader_parameter/alpha = 1.0
+shader_parameter/rand = 0.5
+shader_parameter/hue_factor = 0.1
+shader_parameter/turn_factor = 0.4
+shader_parameter/shadow_angle = 0.7
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/has_shadow = false
+
+[node name="EnemyGeneric" instance=ExtResource("1_fgu83")]
+
+[node name="Sprite2D" parent="." index="0"]
+material = SubResource("ShaderMaterial_7hoow")
+texture = ExtResource("3_oimey")

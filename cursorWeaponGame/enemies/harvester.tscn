@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bribg82w0fmwh"]
+
+[ext_resource type="PackedScene" uid="uid://csc5ciaeo6avi" path="res://enemies/enemy_generic.tscn" id="1_gcocj"]
+[ext_resource type="Shader" uid="uid://bgsdv5cdl7thg" path="res://enemies/enemy.gdshader" id="2_5kowr"]
+[ext_resource type="Texture2D" uid="uid://dn7giost46djw" path="res://enemies/harvester.png" id="3_5kowr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2n06c"]
+resource_local_to_scene = true
+shader = ExtResource("2_5kowr")
+shader_parameter/anim_speed = 4.0
+shader_parameter/squish_amount = 0.0
+shader_parameter/alpha = 1.0
+shader_parameter/rand = 0.5
+shader_parameter/hue_factor = 0.1
+shader_parameter/turn_factor = 0.4
+shader_parameter/shadow_angle = 0.7
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/has_shadow = false
+
+[node name="EnemyGeneric" instance=ExtResource("1_gcocj")]
+
+[node name="Sprite2D" parent="." index="0"]
+material = SubResource("ShaderMaterial_2n06c")
+texture = ExtResource("3_5kowr")
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = false
+
+[node name="CollisionShape2D" parent="HitArea" index="0"]
+visible = false

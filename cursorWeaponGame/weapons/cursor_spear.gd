@@ -67,7 +67,6 @@ func _process(delta: float) -> void:
 		first_pin = true
 		if arrow_path != null:
 			arrow_path.kill()
-		rotation = cursor.rotation + PI/2
 		global_position = mouse_pos
 	
 	lerp_scale()
@@ -86,3 +85,11 @@ func lerp_scale():
 			scale *= 0.9
 			sprite.modulate.a *= 0.95
 			scale = clamp(scale, Vector2.ZERO, Vector2.ONE)
+
+
+func _input(event: InputEvent) -> void:
+	if !is_processing(): return
+	if event is InputEventMouseButton:
+		if event.button_index == 1:
+			if !event.pressed:
+				Input.warp_mouse(cursor.pin_position)

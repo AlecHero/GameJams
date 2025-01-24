@@ -8,32 +8,33 @@ extends CharacterBody2D
 @export var knockback_recovery = 3.5
 @export var move_speed = 30.0
 
-const MIN_KNOCKBACK = 500.0
-const MAX_KNOCKBACK = 500.0
+@export var resistance = 0.0
+@export var resistance_flat = 0.0
+
+const MIN_KNOCKBACK = 200.0
+const MAX_KNOCKBACK = 400.0
 
 @onready var current_life = base_life
 var squish_amount = 0.0
 var target
 var target_pos := Vector2.ZERO
 var knockback = Vector2.ZERO
-
+var main : Node2D
 
 func damage(weapon_damage, weapon_knockback, attack_origin):
-	print(current_life)
-	print("weapon", weapon_damage)
 	current_life -= weapon_damage
-	print(current_life)
 	if current_life > 0:
 		var pct_lost = weapon_damage/base_life
 		squish_amount = 2.0*pct_lost
 		var dir = global_position.direction_to(attack_origin)
-		knockback = -dir * clamp(MIN_KNOCKBACK * pct_lost * weapon_knockback, 0, MAX_KNOCKBACK)
+		var knockback_strength = clamp(MIN_KNOCKBACK * pct_lost * weapon_knockback, 0, MAX_KNOCKBACK)
+		knockback = -dir * knockback_strength
+		print(knockback_strength)
 	else:
 		queue_free()
 
-
 func _ready() -> void:
-	target = get_parent().get_node("CursorHandler").get_node("%LifeBall")
+	target = main.get_node("CursorHandler").get_node("%LifeBall")
 	sprite.material.set_shader_parameter("rand", rng.randf())
 	if is_directional:
 		sprite.flip_h = (rng.randf() > 0.5)

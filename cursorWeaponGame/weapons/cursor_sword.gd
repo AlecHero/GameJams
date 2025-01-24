@@ -9,6 +9,7 @@ extends Area2D
 @export var knockback = 0.6
 
 const SWING_FACTOR = 5
+const DIR_FACTOR = 28
 const MOVE_LERP = 6
 const ROT_LERP = 35
 var last_angle = 0
@@ -31,7 +32,8 @@ func _process(delta: float) -> void:
 		sprite.rotation = -angle_diff * SWING_FACTOR
 		var dir_factor = material.get_shader_parameter("dir_factor")
 		if angle_diff != 0.0:
-			material.set_shader_parameter("dir_factor", lerp(dir_factor, sign(angle_diff), 0.2))
+			print(delta)
+			material.set_shader_parameter("dir_factor", lerp(dir_factor, sign(angle_diff), delta * DIR_FACTOR))
 		
 		material.set_shader_parameter("f", -rotation)
 	else:
@@ -61,6 +63,7 @@ func lerp_scale():
 
 
 func _input(event: InputEvent) -> void:
+	if !is_processing(): return
 	if event is InputEventMouseButton:
 		if event.button_index == 1:
 			if !event.pressed:

@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Node2D
 
 var last_mouse_pos = Vector2.ZERO
 const ROTATION_LERP = 6

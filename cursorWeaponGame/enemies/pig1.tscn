@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://doep1j84s0p2x"]
+
+[ext_resource type="PackedScene" uid="uid://csc5ciaeo6avi" path="res://enemies/enemy_generic.tscn" id="1_iv4bl"]
+[ext_resource type="Shader" uid="uid://bgsdv5cdl7thg" path="res://enemies/enemy.gdshader" id="2_k5k2f"]
+[ext_resource type="Texture2D" uid="uid://c2iut0mp6yfwu" path="res://enemies/pig1.png" id="3_k5k2f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k83m4"]
+resource_local_to_scene = true
+shader = ExtResource("2_k5k2f")
+shader_parameter/anim_speed = 4.0
+shader_parameter/squish_amount = 0.0
+shader_parameter/alpha = 1.0
+shader_parameter/rand = 0.5
+shader_parameter/hue_factor = 0.1
+shader_parameter/turn_factor = 0.4
+shader_parameter/shadow_angle = 0.7
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/has_shadow = false
+
+[node name="EnemyGeneric" instance=ExtResource("1_iv4bl")]
+
+[node name="Sprite2D" parent="." index="0"]
+material = SubResource("ShaderMaterial_k83m4")
+texture = ExtResource("3_k5k2f")
