@@ -2,11 +2,17 @@ extends CharacterBody2D
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var rng = RandomNumberGenerator.new()
+@onready var attack_cooldown: Timer = $AttackCooldown
 
 @export var base_life := 10.0
 @export var is_directional := false
 @export var knockback_recovery = 3.5
 @export var move_speed = 30.0
+@export var dmg = 5.0 :
+	get():
+		
+		attack_cooldown
+		return dmg
 
 @export var resistance = 0.0
 @export var resistance_flat = 0.0
@@ -29,7 +35,6 @@ func damage(weapon_damage, weapon_knockback, attack_origin):
 		var dir = global_position.direction_to(attack_origin)
 		var knockback_strength = clamp(MIN_KNOCKBACK * pct_lost * weapon_knockback, 0, MAX_KNOCKBACK)
 		knockback = -dir * knockback_strength
-		print(knockback_strength)
 	else:
 		queue_free()
 

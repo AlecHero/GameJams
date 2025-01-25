@@ -9,7 +9,7 @@ extends Area2D
 @export var knockback = 1.0
 @export var radius = 110.0
 
-
+const HIDE_FACTOR = 20.0
 const ARROW_PATH = preload("res://cursor/ArrowPath.tscn")
 var last_angle = 0
 var angle_diff = 0
@@ -69,22 +69,20 @@ func _process(delta: float) -> void:
 			arrow_path.kill()
 		global_position = mouse_pos
 	
-	lerp_scale()
-
-func lerp_scale():
-	if cursor.is_pinning and abs(get_global_mouse_position().distance_to(intersection_point) - radius) < 1:
-		if not is_equal_approx(scale.x, 1.0):
-			scale *= 1.1
-			sprite.modulate.a = 1.0
-			scale = clamp(scale, Vector2(0.1,0.1), Vector2.ONE)
-		elif scale.x > 0.5:
-			collision_polygon_2d.disabled = false
+	
+	var alph = material.get_shader_parameter("alpha")
+	if cursor.is_pinning:
+		scale = lerp(scale, Vector2.ONE, delta * HIDE_FACTOR)
+		material.set_shader_parameter("alpha", lerp(alph, 1.0, delta * HIDE_FACTOR))
+		collision_polygon_2d.disabled = false
 	else:
+		scale = lerp(scale, Vector2(0.25, 0.25), delta * HIDE_FACTOR)
+		material.set_shader_parameter("alpha", lerp(alph, 0.0, delta * HIDE_FACTOR))
 		collision_polygon_2d.disabled = true
-		if not is_equal_approx(scale.x, 0.0):
-			scale *= 0.9
-			sprite.modulate.a *= 0.95
-			scale = clamp(scale, Vector2.ZERO, Vector2.ONE)
+
+#abs(get_global_mouse_position().
+#distance_to(intersection_point) - radius) < 1:
+
 
 
 func _input(event: InputEvent) -> void:

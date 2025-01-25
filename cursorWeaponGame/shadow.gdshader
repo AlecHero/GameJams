@@ -6,6 +6,7 @@ uniform float f : hint_range(0.0, 6.28, 0.1) = 3.14;
 
 uniform float dir_factor : hint_range(-1.0, 1.0, 0.1);
 uniform vec2 offset;
+uniform float alpha = 1.0;
 
 const float angle = PI * 3.0/4.0;
 const float angle2 = PI/4.0;
@@ -53,4 +54,5 @@ void fragment()  {
 	} else {
 		COLOR = original_color;
 	}
+	COLOR.a *= alpha;
 }

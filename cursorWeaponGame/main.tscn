@@ -1,38 +1,21 @@
-[gd_scene load_steps=25 format=4 uid="uid://cwnxchldcdkvi"]
+[gd_scene load_steps=20 format=4 uid="uid://cwnxchldcdkvi"]
 
 [ext_resource type="Script" uid="uid://km2t01b03acp" path="res://main.gd" id="1_fku5e"]
 [ext_resource type="Script" uid="uid://3u5385pd3drn" path="res://enemies/enemy_handler.gd" id="2_bq0ln"]
 [ext_resource type="Script" uid="uid://b3csjd2rdkjc2" path="res://debugger.gd" id="2_cps2i"]
 [ext_resource type="PackedScene" uid="uid://cyytl5d4uu180" path="res://shaders.tscn" id="2_vsgp8"]
-[ext_resource type="Script" uid="uid://btf3n3b7oscxf" path="res://cursor/life_ball.gd" id="4_r1nko"]
 [ext_resource type="PackedScene" uid="uid://dko267kiwqrej" path="res://cursor/Cursor.tscn" id="4_rtaki"]
 [ext_resource type="Script" uid="uid://sapmodxt0cvn" path="res://cursor/rope.gd" id="4_stxyo"]
 [ext_resource type="Script" uid="uid://djyg3pbn3u6gp" path="res://cursor_handler.gd" id="5_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://b1gmcluru8s03" path="res://cursor/rope.png" id="5_i5372"]
-[ext_resource type="Shader" uid="uid://73g6ramepv1w" path="res://shadow.gdshader" id="6_l4hvd"]
+[ext_resource type="PackedScene" uid="uid://ddemy4vy41wy8" path="res://life_ball.tscn" id="7_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://deyn8nsn645gn" path="res://cursor/rope_end.png" id="7_yenny"]
-[ext_resource type="Texture2D" uid="uid://dhhetpvpvr2pu" path="res://cursor/heart.png" id="8_fada7"]
 [ext_resource type="Texture2D" uid="uid://b4io1udu228v" path="res://desert_tilemap.png" id="10_ayb05"]
 [ext_resource type="Texture2D" uid="uid://burfd7po53i7i" path="res://cursor/stake.png" id="10_hq60p"]
 [ext_resource type="Texture2D" uid="uid://mku8e652m06h" path="res://cursor/stake_mark.png" id="11_hvs2t"]
 [ext_resource type="Shader" uid="uid://bmyqrh76t55uj" path="res://into_shadow.gdshader" id="12_yykv7"]
 [ext_resource type="PackedScene" uid="uid://bhm17hdfa3v45" path="res://weapons/CursorSpear.tscn" id="14_rdhpw"]
 [ext_resource type="PackedScene" uid="uid://bcxwrhd03e3n" path="res://weapons/CursorSword.tscn" id="16_074og"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_34e40"]
-shader = ExtResource("6_l4hvd")
-shader_parameter/drop_shadow_color = Color(0, 0, 0, 0.3)
-shader_parameter/shadow_offset = 0.105
-shader_parameter/f = 0.8
-shader_parameter/dir_factor = 1.0
-shader_parameter/offset = null
-
-[sub_resource type="Curve" id="Curve_074og"]
-_data = [Vector2(0.166667, 0), 0.0, 0.0, 0, 0, Vector2(0.432292, 0.359551), 1.15758, 1.15758, 0, 0, Vector2(0.677083, 0.719101), 1.03175, 1.03175, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 4
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_0f4qn"]
-radius = 18.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cagjp"]
 shader = ExtResource("12_yykv7")
@@ -94,7 +77,7 @@ script = ExtResource("2_bq0ln")
 main = NodePath("..")
 
 [node name="Timer" type="Timer" parent="EnemyHandler"]
-wait_time = 0.6
+wait_time = 0.05
 autostart = true
 
 [node name="Wall" type="StaticBody2D" parent="."]
@@ -113,30 +96,10 @@ script = ExtResource("5_2cqfq")
 unique_name_in_owner = true
 position = Vector2(960, 540)
 
-[node name="LifeBall" type="RigidBody2D" parent="CursorHandler" node_paths=PackedStringArray("cursor")]
+[node name="LifeBall" parent="CursorHandler" node_paths=PackedStringArray("cursor") instance=ExtResource("7_2cqfq")]
 unique_name_in_owner = true
-z_index = 2
-material = SubResource("ShaderMaterial_34e40")
 position = Vector2(960, 540)
-collision_layer = 2
-collision_mask = 20
-gravity_scale = 0.0
-lock_rotation = true
-linear_damp = 4.5
-script = ExtResource("4_r1nko")
 cursor = NodePath("../Cursor")
-falloff = SubResource("Curve_074og")
-
-[node name="Sprite2D" type="Sprite2D" parent="CursorHandler/LifeBall"]
-texture_filter = 1
-use_parent_material = true
-scale = Vector2(3, 3)
-texture = ExtResource("8_fada7")
-offset = Vector2(2.785, -2.78)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CursorHandler/LifeBall"]
-visible = false
-shape = SubResource("CircleShape2D_0f4qn")
 
 [node name="Line2D" type="Line2D" parent="CursorHandler"]
 z_index = 2

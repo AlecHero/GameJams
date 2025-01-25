@@ -24,3 +24,7 @@ z_as_relative = true
 material = SubResource("ShaderMaterial_e04js")
 position = Vector2(0, -36)
 texture = ExtResource("3_5n0em")
+
+[node name="HitArea" parent="." index="2"]
+collision_layer = 1
+collision_mask = 1

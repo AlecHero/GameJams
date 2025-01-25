@@ -14,7 +14,10 @@ const SNAKE = preload("res://enemies/flat_enemy_generic.tscn")
 
 var all_enemies = [SKELLET_1, ORC, CYCLOP, HARVESTER, KNIGHT, PIG_1, PIG_2, SNAKE]
 
+const MAX_ENEMIES = 300
+
 @export var main : Node2D
+
 
 func get_spawn_pos():
 	var vp = get_parent().get_viewport_rect().size
@@ -42,4 +45,5 @@ func spawn_enemy():
 
 
 func _on_timer_timeout() -> void:
-	spawn_enemy()
+	if MAX_ENEMIES > get_child_count(false):
+		spawn_enemy()
