@@ -21,4 +21,8 @@ shader_parameter/has_shadow = false
 
 [node name="Sprite2D" parent="." index="0"]
 material = SubResource("ShaderMaterial_7hoow")
+position = Vector2(0, -36)
 texture = ExtResource("3_oimey")
+
+[node name="CollisionShape2D" parent="HitArea" index="0"]
+position = Vector2(0, 8.76)

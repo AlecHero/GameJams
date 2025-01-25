@@ -7,7 +7,7 @@ extends Area2D
 @export var arc_radius = 500.0
 @export var dmg = 10.0
 @export var knockback = 1.0
-@export var radius = 125.0
+@export var radius = 110.0
 
 
 const ARROW_PATH = preload("res://cursor/ArrowPath.tscn")
@@ -72,7 +72,7 @@ func _process(delta: float) -> void:
 	lerp_scale()
 
 func lerp_scale():
-	if cursor.is_pinning and has_intersection and abs(get_global_mouse_position().distance_to(intersection_point) - radius) < 20:
+	if cursor.is_pinning and abs(get_global_mouse_position().distance_to(intersection_point) - radius) < 1:
 		if not is_equal_approx(scale.x, 1.0):
 			scale *= 1.1
 			sprite.modulate.a = 1.0

@@ -11,7 +11,7 @@ shader_parameter/anim_speed = 4.0
 shader_parameter/squish_amount = 0.0
 shader_parameter/alpha = 1.0
 shader_parameter/rand = 0.5
-shader_parameter/hue_factor = 0.1
+shader_parameter/hue_factor = 0.03
 shader_parameter/turn_factor = 0.4
 shader_parameter/shadow_angle = 0.7
 shader_parameter/offset = Vector2(0, 0)
@@ -21,4 +21,5 @@ shader_parameter/has_shadow = false
 
 [node name="Sprite2D" parent="." index="0"]
 material = SubResource("ShaderMaterial_k83m4")
+position = Vector2(0, -39)
 texture = ExtResource("3_k5k2f")
