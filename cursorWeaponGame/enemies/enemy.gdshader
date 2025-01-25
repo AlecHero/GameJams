@@ -66,7 +66,7 @@ vec3 rgb2hsl(vec3 color) {
 
     if (delta != 0.0) {
         sat = (lightness < 0.5) ? (delta / (max_color + min_color)) : (delta / (2.0 - max_color - min_color));
-        
+
         if (max_color == color.r) {
             hue = (color.g - color.b) / delta + (color.g < color.b ? 6.0 : 0.0);
         } else if (max_color == color.g) {
@@ -118,11 +118,11 @@ void fragment()  {
 		vec4 original_color = sample_texture(TEXTURE, uv2);
 		vec2 unit_circle = vec2(cos(shadow_angle+PI/2.0), sin(shadow_angle+PI/2.0));
 		unit_circle += offset;
-		
+
 		vec4 shadow_color = vec4(drop_shadow_color.rgb, sample_texture(TEXTURE, uv2 - unit_circle * shadow_radius).a * drop_shadow_color.a);
 		vec3 ambientLightColor = vec3(1.0, 0.5, 0.3) * 0.6;
 		shadow_color.rgb = mix(shadow_color.rgb, ambientLightColor, shadow_color.a);
-		
+
 		if (shadow_color.a > float(0)) {
 			COLOR = mixcolor(shadow_color, original_color);
 		} else {
@@ -132,7 +132,7 @@ void fragment()  {
 		vec2 uv2 = UV * float(float(1) + float(2) * abs(shadow_radius)) - vec2(abs(shadow_radius));
 		COLOR = sample_texture(TEXTURE, uv2);
 	}
-	
+
 	vec3 hsl = rgb2hsl(COLOR.rgb);
 	hsl.x += hue_factor * (rand-0.5);
 	COLOR.rgb = hsl2rgb(hsl);
