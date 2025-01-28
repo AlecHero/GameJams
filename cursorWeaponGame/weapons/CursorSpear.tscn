@@ -12,14 +12,13 @@ shader_parameter/f = 1.6
 shader_parameter/dir_factor = 1.0
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/alpha = 1.0
+shader_parameter/saturation = 1.0
 
 [node name="CursorSpear" type="Area2D" groups=["CursorWeapon"]]
 z_index = 5
 material = SubResource("ShaderMaterial_8ilb8")
-scale = Vector2(1.5, 1.5)
 collision_mask = 4
 script = ExtResource("1_ibp1b")
-knockback = 0.8
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1

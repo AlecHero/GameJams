@@ -35,6 +35,6 @@ var current_weapon := WEAPON_TYPE.SWORD :
 			current_weapon = new_weapon
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if   Input.is_action_just_pressed("1"): current_weapon = WEAPON_TYPE.SWORD
 	elif Input.is_action_just_pressed("2"): current_weapon = WEAPON_TYPE.SPEAR

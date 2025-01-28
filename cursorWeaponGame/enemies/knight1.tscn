@@ -1,12 +1,12 @@
 [gd_scene load_steps=5 format=3 uid="uid://cyydnu01fasxl"]
 
-[ext_resource type="PackedScene" uid="uid://csc5ciaeo6avi" path="res://enemies/enemy_generic.tscn" id="1_fgu83"]
-[ext_resource type="Shader" uid="uid://bgsdv5cdl7thg" path="res://enemies/enemy.gdshader" id="2_oimey"]
-[ext_resource type="Texture2D" uid="uid://bnlebbn376r8a" path="res://enemies/knight.png" id="3_oimey"]
+[ext_resource type="PackedScene" uid="uid://csc5ciaeo6avi" path="res://enemies/enemy_generic.tscn" id="1_dkjop"]
+[ext_resource type="Shader" uid="uid://bgsdv5cdl7thg" path="res://enemies/enemy.gdshader" id="2_o7rp0"]
+[ext_resource type="Texture2D" uid="uid://bnlebbn376r8a" path="res://enemies/knight1.png" id="3_hoqi1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7hoow"]
 resource_local_to_scene = true
-shader = ExtResource("2_oimey")
+shader = ExtResource("2_o7rp0")
 shader_parameter/anim_speed = 4.0
 shader_parameter/squish_amount = 0.0
 shader_parameter/alpha = 1.0
@@ -17,12 +17,15 @@ shader_parameter/shadow_angle = 0.7
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/has_shadow = false
 
-[node name="EnemyGeneric" instance=ExtResource("1_fgu83")]
+[node name="EnemyGeneric" instance=ExtResource("1_dkjop")]
+base_life = 20.0
+move_speed = 70.0
+push_force = 300.0
 
 [node name="Sprite2D" parent="." index="0"]
 material = SubResource("ShaderMaterial_7hoow")
-position = Vector2(0, -36)
-texture = ExtResource("3_oimey")
+position = Vector2(0, -42.5)
+texture = ExtResource("3_hoqi1")
 
 [node name="CollisionShape2D" parent="HitArea" index="0"]
 position = Vector2(0, 8.76)

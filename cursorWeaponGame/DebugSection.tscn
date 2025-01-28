@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://dut8oml1yccwn"]
+
+[ext_resource type="Script" uid="uid://b1o8amujhv4kx" path="res://DebugSection.gd" id="1_daaiy"]
+
+[node name="MarginContainer" type="MarginContainer"]
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
+script = ExtResource("1_daaiy")
+
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+layout_mode = 2
+split_offset = 255
+dragger_visibility = 1
+
+[node name="property" type="Label" parent="HSplitContainer"]
+layout_mode = 2
+text = "property"
+
+[node name="state" type="Label" parent="HSplitContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "true"
+horizontal_alignment = 3

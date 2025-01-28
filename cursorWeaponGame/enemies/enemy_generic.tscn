@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://clrjmqhe4lblv" path="res://enemies/enemy_generic.gd" id="1_g61k1"]
 [ext_resource type="Shader" uid="uid://bgsdv5cdl7thg" path="res://enemies/enemy.gdshader" id="1_synvi"]
-[ext_resource type="Texture2D" uid="uid://drmqhdd73flag" path="res://enemies/raptor.png" id="3_dccvl"]
 [ext_resource type="Shader" uid="uid://cqywsqw100tpd" path="res://enemies/shadow_ball.gdshader" id="4_ttanq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0b8sh"]
@@ -18,7 +17,10 @@ shader_parameter/shadow_angle = 0.7
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/has_shadow = false
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_7pg0r"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dccvl"]
+load_path = "res://.godot/imported/raptor.png-a3a12f513cfb5a20e27fda452e9bbc72.ctex"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ttanq"]
 radius = 24.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4wtm0"]
@@ -33,6 +35,7 @@ y_sort_enabled = true
 collision_layer = 4
 collision_mask = 7
 motion_mode = 1
+safe_margin = 1.0
 script = ExtResource("1_g61k1")
 base_life = 11.0
 
@@ -42,10 +45,12 @@ texture_filter = 1
 material = SubResource("ShaderMaterial_0b8sh")
 position = Vector2(0, -49.5)
 scale = Vector2(3, 3)
-texture = ExtResource("3_dccvl")
+texture = SubResource("CompressedTexture2D_dccvl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_7pg0r")
+visible = false
+position = Vector2(0, -0.5)
+shape = SubResource("CircleShape2D_ttanq")
 
 [node name="HitArea" type="Area2D" parent="."]
 position = Vector2(0, -49.5)
@@ -53,11 +58,13 @@ collision_layer = 4
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+visible = false
 position = Vector2(0, 0.5)
 shape = SubResource("CircleShape2D_4wtm0")
 
 [node name="Shadow" type="ColorRect" parent="."]
-z_index = -2
+z_index = -3
+z_as_relative = false
 material = SubResource("ShaderMaterial_3h8ed")
 offset_left = -44.0
 offset_top = -19.5
@@ -68,3 +75,4 @@ metadata/_edit_lock_ = true
 [node name="AttackCooldown" type="Timer" parent="."]
 
 [connection signal="area_entered" from="HitArea" to="." method="_on_hit_area_area_entered"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

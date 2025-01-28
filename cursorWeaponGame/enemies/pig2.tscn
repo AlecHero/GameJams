@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://drtyclvdr0pky"]
+[gd_scene load_steps=6 format=3 uid="uid://drtyclvdr0pky"]
 
 [ext_resource type="PackedScene" uid="uid://doep1j84s0p2x" path="res://enemies/pig1.tscn" id="1_2io72"]
 [ext_resource type="Shader" uid="uid://bgsdv5cdl7thg" path="res://enemies/enemy.gdshader" id="2_5n0em"]
@@ -17,7 +17,11 @@ shader_parameter/shadow_angle = 0.7
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/has_shadow = false
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_7pg0r"]
+radius = 24.0
+
 [node name="EnemyGeneric" instance=ExtResource("1_2io72")]
+safe_margin = 0.08
 
 [node name="Sprite2D" parent="." index="0"]
 z_as_relative = true
@@ -25,6 +29,14 @@ material = SubResource("ShaderMaterial_e04js")
 position = Vector2(0, -36)
 texture = ExtResource("3_5n0em")
 
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 0)
+shape = SubResource("CircleShape2D_7pg0r")
+
 [node name="HitArea" parent="." index="2"]
 collision_layer = 1
 collision_mask = 1
+
+[node name="Shadow" parent="." index="3"]
+z_index = -2
+z_as_relative = true

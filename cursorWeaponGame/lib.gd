@@ -1,6 +1,58 @@
 extends Node
 
 
+@onready var rng = RandomNumberGenerator.new()
+func _ready() -> void:
+	rng.seed = hash("cursorGame")
+
+
+func lerp_shader_parameter(material, parameter, lerp_to, lerp_delta) -> void:
+	var get_param = material.get_shader_parameter(parameter)
+	material.set_shader_parameter(parameter, lerp(get_param, lerp_to, lerp_delta))
+
+
+func pick_random(arr):
+	return arr[rng.randi() % len(arr)]
+
+func pick_weighted(dict):
+	return dict.keys()[rng.rand_weighted(dict.values())]
+
+
+func mul(arr, m):
+	for i in len(arr):
+		arr[i] *= m
+
+
+func mean(arr):
+	var sum
+	if arr[0] is Vector2:
+		sum = Vector2.ZERO
+	else:
+		sum = 0 
+	var n := float(len(arr))
+	for i in n:
+		sum+=arr[i]
+	return sum/n
+
+func circle_encompassing_viewport(viewport_size) -> Dictionary:
+	var center = viewport_size / 2
+	var radius = viewport_size.length() / 2
+	return {"center": center, "radius": radius}
+
+func get_points_on_circle(center: Vector2, radius: float, n_points: int) -> Array:
+	var points = []
+	for i in range(n_points):
+		var angle = i * (2 * PI / n_points)
+		var x = center.x + radius * cos(angle)
+		var y = center.y + radius * sin(angle)
+		points.append(Vector2(x, y))
+	return points
+
+
+func rand_circle_position(circ):
+	var rand_angle = rng.randf_range(0, 2*PI)
+	return circ["radius"] * Vector2(cos(rand_angle), sin(rand_angle)) + circ["center"]
+
 func clamp_to_circle(to, from, radius):
 	var offset = to - from
 	if offset.length() > radius:
@@ -32,8 +84,6 @@ func find_circle_ray_intersections(circle_point, r, line_point, line_dir, ray_st
 	else:
 		var sqrt_discriminant = sqrt(discriminant)
 		var t1 = (-B + sqrt_discriminant) / (2 * A)
-		var t2 = (-B - sqrt_discriminant) / (2 * A)
-		
 		var intersect = Vector2(x0 + t1 * dx, y0 + t1 * dy)
 		
 		return clamp_to_ray(intersect, ray_start, line_dir)

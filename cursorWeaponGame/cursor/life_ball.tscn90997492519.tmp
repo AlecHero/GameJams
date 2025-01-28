@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://ddemy4vy41wy8"]
+
+[ext_resource type="Shader" uid="uid://73g6ramepv1w" path="res://shadow.gdshader" id="1_lwwvc"]
+[ext_resource type="Script" uid="uid://btf3n3b7oscxf" path="res://cursor/life_ball.gd" id="2_k15qq"]
+[ext_resource type="Texture2D" uid="uid://dhhetpvpvr2pu" path="res://cursor/heart.png" id="3_otnge"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_34e40"]
+shader = ExtResource("1_lwwvc")
+shader_parameter/drop_shadow_color = Color(0, 0, 0, 0.3)
+shader_parameter/shadow_offset = 0.105
+shader_parameter/f = 0.8
+shader_parameter/dir_factor = 1.0
+shader_parameter/offset = null
+shader_parameter/alpha = 1.0
+
+[sub_resource type="Curve" id="Curve_074og"]
+_data = [Vector2(0.151042, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0f4qn"]
+radius = 18.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_074og"]
+radius = 20.025
+
+[node name="LifeBall" type="RigidBody2D"]
+z_index = 2
+material = SubResource("ShaderMaterial_34e40")
+collision_layer = 2
+collision_mask = 20
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp = 4.5
+script = ExtResource("2_k15qq")
+falloff = SubResource("Curve_074og")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+use_parent_material = true
+scale = Vector2(3, 3)
+texture = ExtResource("3_otnge")
+offset = Vector2(2.785, -2.78)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_0f4qn")
+
+[node name="HitArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+visible = false
+shape = SubResource("CircleShape2D_074og")
+
+[node name="InvincibilityTimer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]
+[connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]

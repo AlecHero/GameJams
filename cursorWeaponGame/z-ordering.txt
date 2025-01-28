@@ -1,7 +1,7 @@
 Z-Ordering
 --- high ---
 Cursor and Cursor weapons
-
+arrow_indicator
 
 rope_balls
 rope
@@ -10,9 +10,9 @@ pin
 pin_mark
 
 
-enemies
 
-arrow_indicator
-path_arrow
-tilemap_ground
+
+-3 | enemies_shadow
+-4 | path_arrow
+-5 | tilemap_ground
 --- low ---

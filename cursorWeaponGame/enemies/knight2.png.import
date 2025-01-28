@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbeq0lgvo1qdd"
-path="res://.godot/imported/tyk_skellet.png-95a46ebc5f74895e278f8e5b9b91a477.ctex"
+uid="uid://bhd36p6moe3v5"
+path="res://.godot/imported/knight2.png-9c03df13bf0da930c05a7bbcd1d76f33.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://enemies/tyk_skellet.png"
-dest_files=["res://.godot/imported/tyk_skellet.png-95a46ebc5f74895e278f8e5b9b91a477.ctex"]
+source_file="res://enemies/knight2.png"
+dest_files=["res://.godot/imported/knight2.png-9c03df13bf0da930c05a7bbcd1d76f33.ctex"]
 
 [params]
 

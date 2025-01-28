@@ -12,13 +12,13 @@ shader_parameter/f = 3.14
 shader_parameter/dir_factor = 1.0
 shader_parameter/offset = null
 shader_parameter/alpha = 1.0
+shader_parameter/saturation = 1.0
 
 [node name="CursorSword" type="Area2D" groups=["CursorWeapon"]]
 z_index = 5
 material = SubResource("ShaderMaterial_hnxdq")
 collision_mask = 4
 script = ExtResource("1_nuvnt")
-knockback = 1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1

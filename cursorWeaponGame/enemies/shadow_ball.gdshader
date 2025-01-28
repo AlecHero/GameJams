@@ -18,7 +18,7 @@ void fragment() {
 	const float e = 0.2;
 	float value = smoothstep(r, r-e, length(uv));
 
-	vec4 shadow_color = vec4(vec3(0.0), value) * 0.3;
+	vec4 shadow_color = vec4(vec3(0.0), value) * 0.4;
 	vec3 ambientLightColor = vec3(1.0, 0.5, 0.3) * 0.6;
 	shadow_color.rgb = mix(shadow_color.rgb, ambientLightColor, shadow_color.a);
 	vec4 original_color = sample_texture(TEXTURE, uv);

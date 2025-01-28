@@ -1,12 +1,12 @@
 [gd_scene load_steps=5 format=3 uid="uid://t20sw131pa7c"]
 
-[ext_resource type="PackedScene" uid="uid://csc5ciaeo6avi" path="res://enemies/enemy_generic.tscn" id="1_bx1ph"]
-[ext_resource type="Shader" uid="uid://bgsdv5cdl7thg" path="res://enemies/enemy.gdshader" id="2_vndri"]
-[ext_resource type="Texture2D" uid="uid://dbeq0lgvo1qdd" path="res://enemies/tyk_skellet.png" id="3_ch2ss"]
+[ext_resource type="PackedScene" uid="uid://csc5ciaeo6avi" path="res://enemies/enemy_generic.tscn" id="1_pqjyr"]
+[ext_resource type="Shader" uid="uid://bgsdv5cdl7thg" path="res://enemies/enemy.gdshader" id="2_1c5ac"]
+[ext_resource type="Texture2D" uid="uid://dbeq0lgvo1qdd" path="res://enemies/skeleton1.png" id="3_5lhfw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rl6kf"]
 resource_local_to_scene = true
-shader = ExtResource("2_vndri")
+shader = ExtResource("2_1c5ac")
 shader_parameter/anim_speed = 4.0
 shader_parameter/squish_amount = 0.0
 shader_parameter/alpha = 1.0
@@ -17,8 +17,9 @@ shader_parameter/shadow_angle = 0.7
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/has_shadow = false
 
-[node name="EnemyGeneric" instance=ExtResource("1_bx1ph")]
+[node name="EnemyGeneric" instance=ExtResource("1_pqjyr")]
 
 [node name="Sprite2D" parent="." index="0"]
 material = SubResource("ShaderMaterial_rl6kf")
-texture = ExtResource("3_ch2ss")
+position = Vector2(0, -42.995)
+texture = ExtResource("3_5lhfw")

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnupfdv2v5lh7"]
+
+[ext_resource type="PackedScene" uid="uid://hya4mdnb7k01" path="res://enemies/flat_enemy_generic.tscn" id="1_llt57"]
+[ext_resource type="Shader" uid="uid://bgsdv5cdl7thg" path="res://enemies/enemy.gdshader" id="2_hy3hx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a5vgf"]
+resource_local_to_scene = true
+shader = ExtResource("2_hy3hx")
+shader_parameter/anim_speed = 6.0
+shader_parameter/squish_amount = 0.0
+shader_parameter/alpha = 1.0
+shader_parameter/rand = 0.5
+shader_parameter/hue_factor = 0.5
+shader_parameter/turn_factor = 1.0
+shader_parameter/shadow_angle = 0.7
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/has_shadow = true
+
+[node name="FlatEnemyGeneric" instance=ExtResource("1_llt57")]
+base_life = 5.0
+
+[node name="Sprite2D" parent="." index="0"]
+material = SubResource("ShaderMaterial_a5vgf")

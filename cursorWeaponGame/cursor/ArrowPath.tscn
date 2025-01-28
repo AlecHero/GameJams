@@ -73,7 +73,8 @@ _data = {
 }
 
 [node name="ArrowPath" type="Line2D"]
-z_index = -2
+z_index = -4
+z_as_relative = false
 texture_filter = 1
 texture_repeat = 2
 closed = true

@@ -23,9 +23,3 @@ shader_parameter/has_shadow = false
 material = SubResource("ShaderMaterial_2n06c")
 position = Vector2(0, -42)
 texture = ExtResource("3_5kowr")
-
-[node name="CollisionShape2D" parent="." index="1"]
-visible = false
-
-[node name="CollisionShape2D" parent="HitArea" index="0"]
-visible = false

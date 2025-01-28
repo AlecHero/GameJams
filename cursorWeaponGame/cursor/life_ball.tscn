@@ -12,16 +12,17 @@ shader_parameter/f = 0.8
 shader_parameter/dir_factor = 1.0
 shader_parameter/offset = null
 shader_parameter/alpha = 1.0
+shader_parameter/saturation = 1.0
 
 [sub_resource type="Curve" id="Curve_074og"]
-_data = [Vector2(0.166667, 0), 0.0, 0.0, 0, 0, Vector2(0.432292, 0.359551), 1.15758, 1.15758, 0, 0, Vector2(0.677083, 0.719101), 1.03175, 1.03175, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 4
+_data = [Vector2(0.151042, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0f4qn"]
 radius = 18.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_074og"]
-radius = 21.0238
+radius = 20.025
 
 [node name="LifeBall" type="RigidBody2D"]
 z_index = 2
@@ -42,11 +43,18 @@ texture = ExtResource("3_otnge")
 offset = Vector2(2.785, -2.78)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_0f4qn")
 
 [node name="HitArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+visible = false
 shape = SubResource("CircleShape2D_074og")
 
+[node name="InvincibilityTimer" type="Timer" parent="."]
+
 [connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]
+[connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]

@@ -8,6 +8,8 @@ uniform float dir_factor : hint_range(-1.0, 1.0, 0.1);
 uniform vec2 offset;
 uniform float alpha = 1.0;
 
+uniform float saturation : hint_range(0.0, 1.0) = 1.0;
+
 const float angle = PI * 3.0/4.0;
 const float angle2 = PI/4.0;
 const mat2 rot_pos = mat2(vec2(sin(angle), -cos(angle)), vec2(cos(angle), sin(angle)));
@@ -55,4 +57,7 @@ void fragment()  {
 		COLOR = original_color;
 	}
 	COLOR.a *= alpha;
+	
+	float gray = dot(COLOR.rgb, vec3( 0.3086, 0.6094, 0.0820 ));
+	COLOR.rgb = mix(vec3(gray), COLOR.rgb, saturation);
 }

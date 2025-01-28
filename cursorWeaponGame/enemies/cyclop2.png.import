@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bopuao5utm5iq"
-path="res://.godot/imported/orc.png-06c78224f6368e7e923e6fe436e92aa5.ctex"
+uid="uid://cr3wou3b3n3mr"
+path="res://.godot/imported/cyclop2.png-6f49cb245fb79d542053b31bdc82e12d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://enemies/orc.png"
-dest_files=["res://.godot/imported/orc.png-06c78224f6368e7e923e6fe436e92aa5.ctex"]
+source_file="res://enemies/cyclop2.png"
+dest_files=["res://.godot/imported/cyclop2.png-6f49cb245fb79d542053b31bdc82e12d.ctex"]
 
 [params]
 

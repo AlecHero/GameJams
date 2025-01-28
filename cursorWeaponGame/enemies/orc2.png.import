@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpylstsldovwr"
-path="res://.godot/imported/snek.png-30cefea7ebf23c15431f7aa9d72551fe.ctex"
+uid="uid://cb0llwj7s4ftd"
+path="res://.godot/imported/orc2.png-18a243c553044bfb19079875dfe176d2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://enemies/snek.png"
-dest_files=["res://.godot/imported/snek.png-30cefea7ebf23c15431f7aa9d72551fe.ctex"]
+source_file="res://enemies/orc2.png"
+dest_files=["res://.godot/imported/orc2.png-18a243c553044bfb19079875dfe176d2.ctex"]
 
 [params]
 
