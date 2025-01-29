@@ -13,6 +13,7 @@ shader_parameter/dir_factor = 1.0
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/alpha = 1.0
 shader_parameter/saturation = 1.0
+shader_parameter/squish_amount = 0.0
 
 [node name="CursorSpear" type="Area2D" groups=["CursorWeapon"]]
 z_index = 5

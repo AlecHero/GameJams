@@ -27,7 +27,9 @@ radius = 24.0
 radius = 35.0143
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3h8ed"]
+resource_local_to_scene = true
 shader = ExtResource("4_ttanq")
+shader_parameter/alpha = 1.0
 
 [node name="EnemyGeneric" type="CharacterBody2D" groups=["Enemy"]]
 z_as_relative = false
@@ -63,6 +65,7 @@ position = Vector2(0, 0.5)
 shape = SubResource("CircleShape2D_4wtm0")
 
 [node name="Shadow" type="ColorRect" parent="."]
+unique_name_in_owner = true
 z_index = -3
 z_as_relative = false
 material = SubResource("ShaderMaterial_3h8ed")

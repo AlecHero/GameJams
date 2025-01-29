@@ -11,6 +11,11 @@ func lerp_shader_parameter(material, parameter, lerp_to, lerp_delta) -> void:
 	material.set_shader_parameter(parameter, lerp(get_param, lerp_to, lerp_delta))
 
 
+func to_sec(mixed_time):
+	var mins = floor(mixed_time / 100)
+	return mixed_time-mins*40
+
+
 func pick_random(arr):
 	return arr[rng.randi() % len(arr)]
 

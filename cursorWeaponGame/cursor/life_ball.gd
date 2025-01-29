@@ -23,6 +23,7 @@ var t = 1.0
 var is_timing := false
 func _process(delta: float) -> void:
 	is_low = current_life/base_life < 0.25
+	Lib.lerp_shader_parameter(material, "squish_amount", 0.0, delta*10.0)
 	
 	if is_low:
 		if Music.is_playing(Music.SONG_LOW):
@@ -40,23 +41,25 @@ func heart_timeout():
 	t = 1.0
 	is_timing = false
 
+var is_invincible := false
 func damage(enemy_damage):
 	var mitigated_dmg = max(0, enemy_damage - resistance_flat) * (1.0 - resistance)
-	if mitigated_dmg > 0:
+	if mitigated_dmg > 0 and !is_invincible:
+		is_invincible = true
 		invincibility_timer.start()
-		hit_area.set_deferred("monitoring", false)
 		
 		current_life -= mitigated_dmg
 		current_life = max(0.0, current_life)
 		if current_life > 0:
-			#var pct_lost = enemy_damage/base_life
-			pass
+			var pct_lost = enemy_damage/base_life
+			material.set_shader_parameter("squish_amount", -20.0*pct_lost)
 		else:
 			die()
 
 
 func die():
 	pass
+
 
 func _physics_process(_delta: float) -> void:
 	var pin = cursor.pin_position if cursor.is_pinning else get_global_mouse_position()
@@ -75,4 +78,6 @@ func _on_hit_area_body_entered(body: Node2D) -> void:
 
 
 func _on_invincibility_timer_timeout() -> void:
-	hit_area.set_deferred("monitoring", true)
+	is_invincible = false
+	if hit_area.has_overlapping_bodies():
+		_on_hit_area_body_entered(hit_area.get_overlapping_bodies()[0])

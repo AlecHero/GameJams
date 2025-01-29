@@ -18,6 +18,14 @@ const mat2 rot_neg = mat2(vec2(sin(angle2), -cos(angle2)), vec2(cos(angle2), sin
 
 uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
 
+uniform float squish_amount = 0.0;
+
+vec2 squish_displacement(vec2 vertex, float time) {
+	vertex *= vec2(1.0 + 0.3*squish_amount,1.0 - 0.5*squish_amount);
+	return vertex / vec2(1);
+}
+
+
 void vertex() {
 	vec2 pivot = vec2(16.0, -16.0);
 	VERTEX -= pivot;
@@ -26,6 +34,8 @@ void vertex() {
 	VERTEX.x *= dir_factor;
 	VERTEX *= rot_neg;
 	VERTEX += pivot;
+
+	VERTEX = squish_displacement(VERTEX, TIME);
 }
 
 
@@ -50,14 +60,14 @@ void fragment()  {
 	vec4 shadow_color = vec4(drop_shadow_color.rgb, sample_texture(TEXTURE, uv - unit_circle * shadow_offset).a * drop_shadow_color.a);
 	vec3 ambientLightColor = vec3(1.0, 0.5, 0.3) * 0.6;
 	shadow_color.rgb = mix(shadow_color.rgb, ambientLightColor, shadow_color.a);
-	
+
 	if (shadow_color.a > float(0)) {
 		COLOR = mixcolor(shadow_color, original_color);
 	} else {
 		COLOR = original_color;
 	}
 	COLOR.a *= alpha;
-	
+
 	float gray = dot(COLOR.rgb, vec3( 0.3086, 0.6094, 0.0820 ));
 	COLOR.rgb = mix(vec3(gray), COLOR.rgb, saturation);
 }

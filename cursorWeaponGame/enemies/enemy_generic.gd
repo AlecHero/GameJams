@@ -19,38 +19,61 @@ const BASE_KNOCKBACK = 200.0
 const MAX_KNOCKBACK = 400.0
 
 @onready var current_life = base_life
+@onready var current_push_force = push_force
+
 var target = self
 var squish_amount = 0.0
 var can_push = true
 
+var is_golden := false
+
 var target_pos := Vector2.ZERO
 var knockback = Vector2.ZERO
 
+@onready var hit_area: Area2D = $HitArea
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+
+var is_dying := false
 func damage(weapon_damage, weapon_knockback, attack_origin):
 	current_life -= weapon_damage
-	if current_life > 0:
-		var pct_lost = weapon_damage/base_life
-		squish_amount = 2.0*pct_lost
-		var dir = global_position.direction_to(attack_origin)
-		var knockback_strength = clamp(BASE_KNOCKBACK * pct_lost * weapon_knockback, 0, MAX_KNOCKBACK)
-		knockback = -dir * knockback_strength
-	else:
-		queue_free()
+	var pct_lost = weapon_damage/base_life
+	squish_amount = 2.0*pct_lost
+	var dir = global_position.direction_to(attack_origin)
+	var knockback_strength = clamp(BASE_KNOCKBACK * pct_lost * weapon_knockback, 0, MAX_KNOCKBACK)
+	knockback = -dir * knockback_strength
+	if current_life <= 0:
+		if is_golden:
+			pass
+		
+		set_deferred("hit_area.monitorable", false)
+		set_deferred("collision_shape_2d.disabled", true)
+		is_dying = true
 
 
+var shadow
 func _ready() -> void:
 	var rand_float = Lib.rng.randf()
 	sprite.material.set_shader_parameter("rand", rand_float)
 	if is_directional:
 		sprite.flip_h = (rand_float > 0.5)
 	
+	current_push_force = 50*Lib.rng.randf()
 	sprite.material.set_shader_parameter("anim_speed", move_speed*4.0/30.0)
+	
+	shadow = get_node_or_null("%Shadow")
 
 
 func _process(delta: float) -> void:
 	if !is_equal_approx(squish_amount, 0.0):
 		squish_amount = lerp(squish_amount, 0.0, delta * 6.0)
 		sprite.material.set_shader_parameter("squish_amount", squish_amount)
+	
+	if is_dying:
+		Lib.lerp_shader_parameter(sprite.material, "alpha", 0.0, delta*25.0)
+		if is_instance_valid(shadow):
+			Lib.lerp_shader_parameter(shadow.material, "alpha", 0.0, delta*25.0)
+		if is_zero_approx(sprite.material.get_shader_parameter("alpha")):
+			queue_free()
 	
 	target_pos = target.global_position
 	
@@ -76,7 +99,7 @@ func _physics_process(_delta: float) -> void:
 			var collision = get_last_slide_collision()
 			var collider = collision.get_collider()
 			if collider.is_in_group("Enemy") and can_push:
-				var true_push = clamp(push_force - collider.push_force, 0, 1000)
+				var true_push = clamp(current_push_force - collider.current_push_force, 0, 1000)
 				if true_push > 0:
 					var swap = Vector2(collision.get_normal().y, collision.get_normal().x)
 					var cross = (target.global_position-global_position).cross(global_position-collider.global_position)
@@ -90,5 +113,4 @@ func _physics_process(_delta: float) -> void:
 
 func _on_hit_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("CursorWeapon"):
-		print(area.current_dmg, " ", area.velocity_factor)
 		damage(area.current_dmg, area.current_knockback, area.global_position)

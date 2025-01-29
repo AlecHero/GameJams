@@ -1,30 +1,48 @@
-[gd_scene load_steps=9 format=3 uid="uid://c53y0mcf5k7nn"]
+[gd_scene load_steps=15 format=3 uid="uid://c53y0mcf5k7nn"]
 
 [ext_resource type="Script" uid="uid://bxctwg4i1u5r7" path="res://UI.gd" id="1_iifpo"]
 [ext_resource type="Texture2D" uid="uid://umsstqws67ok" path="res://cursor/rope_ball.png" id="2_3b2b5"]
+[ext_resource type="Texture2D" uid="uid://c4q2rfmttvagu" path="res://cursor/number_font.png" id="3_g6l6n"]
+[ext_resource type="Shader" uid="uid://bmyqrh76t55uj" path="res://into_shadow.gdshader" id="3_qui0h"]
+[ext_resource type="Texture2D" uid="uid://b8oe7obynokb5" path="res://cursor/wood_panel.png" id="3_vrfts"]
 
 [sub_resource type="Theme" id="Theme_1fddk"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_3b2b5"]
 
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_g6l6n"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qui0h"]
+texture = ExtResource("3_vrfts")
+texture_margin_bottom = 15.0
+expand_margin_bottom = 24.0
+axis_stretch_horizontal = 2
+draw_center = false
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_0mc3e"]
 grow_begin = 0.0
 grow_end = 0.0
-thickness = 16
+thickness = 24
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vrfts"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_qui0h"]
 color = Color(0.803922, 0, 0, 1)
 grow_begin = 0.0
 grow_end = 0.0
-thickness = 16
+thickness = 24
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vrfts"]
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_g6l6n"]
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 24
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_3b2b5"]
 color = Color(0.894517, 0.702975, 0.202931, 1)
 grow_begin = 0.0
 grow_end = 0.0
 thickness = 16
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vrfts"]
+shader = ExtResource("3_qui0h")
 
 [node name="UI" type="CanvasLayer"]
 layer = 3
@@ -70,20 +88,38 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="HealthSlider" type="HSlider" parent="MarginContainer/VBoxContainer"]
+[node name="backdrop" type="HSlider" parent="MarginContainer/VBoxContainer2"]
+texture_filter = 1
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 mouse_filter = 2
 theme_override_icons/grabber = SubResource("ImageTexture_3b2b5")
-theme_override_styles/slider = SubResource("StyleBoxLine_g6l6n")
-theme_override_styles/grabber_area = SubResource("StyleBoxLine_qui0h")
+theme_override_styles/slider = SubResource("StyleBoxTexture_qui0h")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_0mc3e")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_vrfts")
 value = 100.0
 
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="HealthSlider" type="HSlider" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+texture_filter = 1
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+mouse_filter = 2
+theme_override_icons/grabber = SubResource("ImageTexture_3b2b5")
+theme_override_styles/slider = SubResource("StyleBoxTexture_qui0h")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_qui0h")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_vrfts")
+value = 84.0
+
 [node name="SpeedSlider" type="HSlider" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 mouse_filter = 2
@@ -92,3 +128,168 @@ theme_override_styles/slider = SubResource("StyleBoxLine_g6l6n")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_3b2b5")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_vrfts")
 value = 100.0
+
+[node name="Timer" type="MarginContainer" parent="."]
+material = SubResource("ShaderMaterial_vrfts")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 41
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Timer"]
+use_parent_material = true
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Timer/VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+theme_override_constants/separation = -2
+alignment = 1
+
+[node name="Control" type="MarginContainer" parent="Timer/VBoxContainer/HBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 5
+theme_override_constants/margin_left = 96
+theme_override_constants/margin_top = 126
+
+[node name="10min" type="Sprite2D" parent="Timer/VBoxContainer/HBoxContainer/Control"]
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = ExtResource("3_g6l6n")
+centered = false
+hframes = 11
+frame = 1
+
+[node name="10min2" type="Sprite2D" parent="Timer/VBoxContainer/HBoxContainer/Control"]
+z_index = -1
+texture_filter = 1
+use_parent_material = true
+scale = Vector2(3, 3)
+texture = ExtResource("3_g6l6n")
+centered = false
+offset = Vector2(-1.785, 1.875)
+hframes = 11
+frame = 1
+
+[node name="Control2" type="MarginContainer" parent="Timer/VBoxContainer/HBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 5
+theme_override_constants/margin_left = 96
+theme_override_constants/margin_top = 126
+
+[node name="1min" type="Sprite2D" parent="Timer/VBoxContainer/HBoxContainer/Control2"]
+texture_filter = 1
+position = Vector2(-4, 0)
+scale = Vector2(3, 3)
+texture = ExtResource("3_g6l6n")
+centered = false
+hframes = 11
+frame = 1
+
+[node name="1min2" type="Sprite2D" parent="Timer/VBoxContainer/HBoxContainer/Control2"]
+z_index = -1
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-4, 0)
+scale = Vector2(3, 3)
+texture = ExtResource("3_g6l6n")
+centered = false
+offset = Vector2(-1.785, 1.875)
+hframes = 11
+frame = 1
+
+[node name="Control3" type="MarginContainer" parent="Timer/VBoxContainer/HBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 5
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 126
+theme_override_constants/margin_right = 32
+
+[node name="colon" type="Sprite2D" parent="Timer/VBoxContainer/HBoxContainer/Control3"]
+texture_filter = 1
+position = Vector2(-8, 0)
+scale = Vector2(3, 3)
+texture = ExtResource("3_g6l6n")
+centered = false
+hframes = 11
+
+[node name="colon2" type="Sprite2D" parent="Timer/VBoxContainer/HBoxContainer/Control3"]
+z_index = -1
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-8, 0)
+scale = Vector2(3, 3)
+texture = ExtResource("3_g6l6n")
+centered = false
+offset = Vector2(-1.785, 1.875)
+hframes = 11
+
+[node name="Control5" type="MarginContainer" parent="Timer/VBoxContainer/HBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 5
+theme_override_constants/margin_left = 96
+theme_override_constants/margin_top = 126
+
+[node name="10sec" type="Sprite2D" parent="Timer/VBoxContainer/HBoxContainer/Control5"]
+texture_filter = 1
+position = Vector2(-8, 0)
+scale = Vector2(3, 3)
+texture = ExtResource("3_g6l6n")
+centered = false
+hframes = 11
+frame = 1
+
+[node name="10sec2" type="Sprite2D" parent="Timer/VBoxContainer/HBoxContainer/Control5"]
+z_index = -1
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-8, 0)
+scale = Vector2(3, 3)
+texture = ExtResource("3_g6l6n")
+centered = false
+offset = Vector2(-1.785, 1.875)
+hframes = 11
+frame = 1
+
+[node name="Control4" type="MarginContainer" parent="Timer/VBoxContainer/HBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 5
+theme_override_constants/margin_left = 96
+theme_override_constants/margin_top = 126
+
+[node name="1sec" type="Sprite2D" parent="Timer/VBoxContainer/HBoxContainer/Control4"]
+texture_filter = 1
+position = Vector2(-12, 0)
+scale = Vector2(3, 3)
+texture = ExtResource("3_g6l6n")
+centered = false
+hframes = 11
+frame = 1
+
+[node name="1sec2" type="Sprite2D" parent="Timer/VBoxContainer/HBoxContainer/Control4"]
+z_index = -1
+texture_filter = 1
+use_parent_material = true
+position = Vector2(-12, 0)
+scale = Vector2(3, 3)
+texture = ExtResource("3_g6l6n")
+centered = false
+offset = Vector2(-1.785, 1.875)
+hframes = 11
+frame = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="Timer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4

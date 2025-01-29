@@ -5,22 +5,24 @@ extends Area2D
 @onready var collision_polygon_2d: CollisionPolygon2D = $CollisionPolygon2D
 
 @export var arc_radius = 100.0
-@export var dmg = 4.0
+@export var dmg = 3.0
 @export var knockback = 1.0
 
 var current_dmg = dmg
 var current_knockback = knockback
 
-const HIDE_FACTOR = 20.0
-const SWING_FACTOR = 5
-const DIR_FACTOR = 28
-const MOVE_LERP = 6
-const ROT_LERP = 35
+@export var SWING_FACTOR = 4.0 # 5 how stiff the rotation is
+@export var MOVE_LERP = 7.0 # 6 how quickly the node moves
+@export var ROT_LERP = 45.0 # 35 how quickly the node orientates itself
+
+const HIDE_FACTOR = 20.0 # how quickly the sprite fades
+const DIR_FACTOR = 28 # how quickly the sprite "flips" on dir change
+
+
 var last_angle = 0
 var angle_diff = 0
 var last_mouse_pos = Vector2.ZERO
 var velocity_factor := 0.0
-
 
 var angle_differences = [0]
 var last_angle_diff = 0

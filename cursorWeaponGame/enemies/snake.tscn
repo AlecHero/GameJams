@@ -6,7 +6,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a5vgf"]
 resource_local_to_scene = true
 shader = ExtResource("2_hy3hx")
-shader_parameter/anim_speed = 6.0
+shader_parameter/anim_speed = 4.0
 shader_parameter/squish_amount = 0.0
 shader_parameter/alpha = 1.0
 shader_parameter/rand = 0.5
@@ -17,7 +17,9 @@ shader_parameter/offset = Vector2(0, 0)
 shader_parameter/has_shadow = true
 
 [node name="FlatEnemyGeneric" instance=ExtResource("1_llt57")]
-base_life = 5.0
+base_life = 6.0
+dmg = 1.0
+move_speed = 45.0
 
 [node name="Sprite2D" parent="." index="0"]
 material = SubResource("ShaderMaterial_a5vgf")

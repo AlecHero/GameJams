@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://7xgfccd2w1i3"]
+[gd_scene load_steps=7 format=3 uid="uid://7xgfccd2w1i3"]
 
 [ext_resource type="PackedScene" uid="uid://csc5ciaeo6avi" path="res://enemies/enemy_generic.tscn" id="1_rx3ye"]
 [ext_resource type="Shader" uid="uid://bgsdv5cdl7thg" path="res://enemies/enemy.gdshader" id="2_5qs6a"]
 [ext_resource type="Texture2D" uid="uid://cpixhrg18ulwe" path="res://enemies/raptor.png" id="3_5qs6a"]
+[ext_resource type="Shader" uid="uid://cqywsqw100tpd" path="res://enemies/shadow_ball.gdshader" id="4_ngge3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ngge3"]
 resource_local_to_scene = true
@@ -17,9 +18,21 @@ shader_parameter/shadow_angle = 0.7
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/has_shadow = false
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xnpau"]
+resource_local_to_scene = true
+shader = ExtResource("4_ngge3")
+shader_parameter/alpha = 1.0
+
 [node name="EnemyGeneric" instance=ExtResource("1_rx3ye")]
+base_life = 15.0
+dmg = 4.0
+move_speed = 50.0
+push_force = 150.0
 
 [node name="Sprite2D" parent="." index="0"]
 material = SubResource("ShaderMaterial_ngge3")
 position = Vector2(7.025, -40.56)
 texture = ExtResource("3_5qs6a")
+
+[node name="Shadow" parent="." index="3"]
+material = SubResource("ShaderMaterial_xnpau")

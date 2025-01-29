@@ -24,6 +24,8 @@ Music="*res://Music.tscn"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1056
+window/size/mode=3
+window/stretch/mode="canvas_items"
 mouse_cursor/custom_image="res://cursor/cursor.png"
 
 [file_customization]

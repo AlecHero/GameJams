@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1ftb6yahfvp7"
-path="res://.godot/imported/sword.png-3b6436b6ce014cf5aac0157858171c53.ctex"
+uid="uid://uyg5xfcggg1e"
+path="res://.godot/imported/Saracen_Portrait.webp-a7a2ca45f72f95745af605896aae1886.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://weapons/sword.png"
-dest_files=["res://.godot/imported/sword.png-3b6436b6ce014cf5aac0157858171c53.ctex"]
+source_file="res://New folder/Saracen_Portrait.webp"
+dest_files=["res://.godot/imported/Saracen_Portrait.webp-a7a2ca45f72f95745af605896aae1886.ctex"]
 
 [params]
 

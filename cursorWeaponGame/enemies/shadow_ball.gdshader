@@ -1,5 +1,7 @@
 shader_type canvas_item;
 
+uniform float alpha = 1.0;
+
 vec4 mixcolor(vec4 colA, vec4 colB)  {
 	return vec4((colA.rgb + colB.a * (colB.rgb - colA.rgb)), colA.a + colB.a);
 }
@@ -28,4 +30,5 @@ void fragment() {
 	} else {
 		COLOR = original_color;
 	}
+	COLOR.a *= alpha;
 }
