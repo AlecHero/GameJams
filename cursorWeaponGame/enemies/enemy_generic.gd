@@ -10,10 +10,14 @@ extends CharacterBody2D
 @export var dmg = 5.0
 @export var move_speed = 30.0
 
+
+
 @export var resistance = 0.0
 @export var resistance_flat = 0.0
 
 @export var push_force = 100.0
+
+@export var size = 1.0
 
 const BASE_KNOCKBACK = 200.0
 const MAX_KNOCKBACK = 400.0
@@ -73,6 +77,8 @@ func damage(weapon_damage, weapon_knockback, attack_origin):
 
 var shadow
 func _ready() -> void:
+	scale *= size
+	
 	var rand_float = Lib.rng.randf()
 	sprite.material.set_shader_parameter("rand", rand_float)
 	if is_directional:

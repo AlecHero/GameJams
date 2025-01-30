@@ -15,14 +15,15 @@ const low_life = preload("res://audio/music/Firebrand.mp3")
 
 func _ready() -> void:
 	Lib.wave_passed.connect(wave_passed)
+	Lib.next_wave.connect(next_wave)
+	Lib.start_wave.connect(next_wave)
 
 
 func wave_passed():
 	pass
-	#current_song = music_queue.pop_front()
 
 func next_wave(wave_num):
-	current_song = song_dict[wave_num]
+	current_song = wave_num
 
 
 enum SONG_TYPES { WAVE_INTRO, WAVE_SKELLY, WAVE_ORC, WAVE_CYCLOP, WAVE_HARVESTER, WAVE_PIG, WAVE_KNIGHT, LOW_LIFE, MERCHANT_DESERT}

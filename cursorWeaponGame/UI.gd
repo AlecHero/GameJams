@@ -44,6 +44,8 @@ func _ready():
 		"wave_progress_idx": func(): return enemy_handler.wave_progress_index,
 		"wave_list_idx": func(): return enemy_handler.wave_index,
 		"wave_list": func(): return enemy_handler.wave_list[min(len(enemy_handler.wave_list)-1, enemy_handler.wave_index)],
+		"has_passed_wave": func(): return enemy_handler.has_passed_wave,
+		"music_finished": func(): return enemy_handler.music_finished,
 		#"clamped_mouse_pos": func(): return spear.clamped_mouse_pos,
 		#"intersection_point": func(): return spear.intersection_point,
 		#"diff": func(): return spear.intersection_point - spear.clamped_mouse_pos,

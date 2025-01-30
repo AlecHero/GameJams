@@ -37,6 +37,7 @@ const enemy_dict = {
 func _ready() -> void:
 	Lib.wave_passed.connect(wave_passed)
 	Lib.next_wave.connect(next_wave)
+	Lib.start_wave.emit(start_wave)
 
 
 func get_square_pos():
@@ -104,15 +105,21 @@ var wave_dict = {
 
 var base_time = 0
 var time_shift = 0
+var music_finished := false
 func wave_passed():
 	base_time = Time.get_ticks_msec() / 1000.0
+	music_finished = true
 
+var has_passed_wave_timer := false
 func next_wave(wave_idx):
+	music_finished = false
 	has_passed_wave = false
 	time_shift += Time.get_ticks_msec() / 1000.0 - base_time
 
+
 #var start_time = Lib.to_sec(02_35)
-var start_time = Lib.to_sec(02_30)
+@onready var start_time = Lib.to_sec(03_00)
+@onready var start_wave = 1
 
 var wave_list = [
 	{"time":00_02, "enemy_type":ENEMY_TYPE.SNAKE, "wave_type":WAVE_TYPE.CLUSTER, "spawn_count":5},
@@ -121,12 +128,14 @@ var wave_list = [
 	{"time":00_08, "enemy_type":ENEMY_TYPE.SNAKE, "wave_type":WAVE_TYPE.CLUSTER, "spawn_count":16},
 	{"time":00_32, "enemy_type":ENEMY_TYPE.SNAKE, "wave_type":WAVE_TYPE.CIRCLE, "spawn_count":54},
 	{"time":00_40, "enemy_type":ENEMY_TYPE.SNAKE, "wave_type":WAVE_TYPE.CIRCLE, "spawn_count":32},
-	
 	{"time":01_00, "enemy_type":ENEMY_TYPE.RAPTOR, "wave_type":WAVE_TYPE.CLUSTER, "spawn_count":10},
 	{"time":01_10, "enemy_type":ENEMY_TYPE.RAPTOR, "wave_type":WAVE_TYPE.CLUSTER, "spawn_count":10},
 	{"time":01_20, "enemy_type":ENEMY_TYPE.RAPTOR, "wave_type":WAVE_TYPE.CLUSTER, "spawn_count":16},
 	{"time":01_33, "enemy_type":ENEMY_TYPE.RAPTOR, "wave_type":WAVE_TYPE.CLUSTER, "spawn_count":16},
-	{"time":01_42, "enemy_type":ENEMY_TYPE.RAPTOR, "wave_type":WAVE_TYPE.CIRCLE, "spawn_count":42},
+	{"time":01_42, "enemy_type":ENEMY_TYPE.RAPTOR, "wave_type":WAVE_TYPE.CIRCLE, "spawn_count":36},
+	
+	
+	#{}
 ]
 
 var wave_progress = [
@@ -134,9 +143,13 @@ var wave_progress = [
 	[01_00, { SNAKE: 2.0, LIZARD: 2.0, RAPTOR: 1.0 }],
 	[02_35, { SNAKE: 1.25, LIZARD: 1.25, RAPTOR: 1.0 }],
 	[02_40, {}],
-	[03_00, { RAPTOR: 2.0, ORC_1: 0.5, ORC_2: 0.5}]
+	
+	[03_10, { SKELETON_1: 1.0, RAPTOR: 0.3, SNAKE: 0.5}],
+	[03_20, { SKELETON_1: 6.0, SKELETON_2: 1.0, RAPTOR: 2.0, SNAKE: 4.0 }],
+	[03_30, { SKELETON_1: 3.0, SKELETON_2: 1.0 }],
+	[04_00, { SKELETON_1: 2.0, SKELETON_2: 1.0 }],
+	#[03_00, { SKELETON_1: 2.0, ORC_1: 0.5, ORC_2: 0.5}],
 ]
-
 
 
 var current_spawn_count := 32.0
@@ -149,27 +162,29 @@ func _process(delta: float) -> void:
 	var total_time = start_time + Time.get_ticks_msec() / 1000.0 - time_shift
 	
 	if !has_passed_wave:
-		if wave_progress_index <= (len(wave_progress)-1):
-			var WaveProgress = wave_progress[wave_progress_index]
-			if Lib.to_sec(WaveProgress[0]) < start_time:
-				wave_progress_index += 1
-			else:
-				current_enemy_dict = WaveProgress[1]
-				if Lib.to_sec(WaveProgress[0]) < total_time:
+		if !music_finished:
+			if wave_progress_index <= (len(wave_progress)-1):
+				var WaveProgress = wave_progress[wave_progress_index]
+				if Lib.to_sec(WaveProgress[0]) < start_time:
 					wave_progress_index += 1
-		
-		if wave_index <= (len(wave_list)-1):
-			var Wave = wave_list[wave_index]
-			if Lib.to_sec(Wave["time"]) < start_time:
-				wave_index += 1
-			else:
-				if Lib.to_sec(Wave["time"]) < total_time:
+				else:
+					current_enemy_dict = WaveProgress[1]
+					if Lib.to_sec(WaveProgress[0]) < total_time:
+						wave_progress_index += 1
+			
+			if wave_index <= (len(wave_list)-1):
+				var Wave = wave_list[wave_index]
+				if Lib.to_sec(Wave["time"]) < start_time:
 					wave_index += 1
-					wave_dict[Wave["wave_type"]].call(enemy_dict[Wave["enemy_type"]], Wave["spawn_count"])
+				else:
+					if Lib.to_sec(Wave["time"]) < total_time:
+						wave_index += 1
+						wave_dict[Wave["wave_type"]].call(enemy_dict[Wave["enemy_type"]], Wave["spawn_count"])
 		
-		if current_enemy_dict != null and current_enemy_dict.is_empty() and get_child_count() <= 1 and !has_passed_wave:
-			has_passed_wave = true
-			Lib.wave_cleared.emit()
+		if current_enemy_dict != null and current_enemy_dict.is_empty():
+			if get_child_count() <= 1 and !has_passed_wave and music_finished:
+				has_passed_wave = true
+				Lib.wave_cleared.emit()
 
 const MAX_ENEMIES = 320
 

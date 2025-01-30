@@ -4,6 +4,8 @@ signal wave_passed
 signal wave_cleared
 signal next_wave
 signal merchant_finished
+signal start_wave
+
 @onready var rng = RandomNumberGenerator.new()
 
 

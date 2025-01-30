@@ -26,7 +26,7 @@ shader_parameter/alpha = 1.0
 [node name="EnemyGeneric" instance=ExtResource("1_rx3ye")]
 base_life = 15.0
 dmg = 4.0
-move_speed = 50.0
+move_speed = 45.0
 push_force = 150.0
 
 [node name="Sprite2D" parent="." index="0"]
