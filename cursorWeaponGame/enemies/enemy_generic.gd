@@ -32,6 +32,27 @@ var knockback = Vector2.ZERO
 
 @onready var hit_area: Area2D = $HitArea
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var lightning_area: Area2D = $LightningArea
+
+var is_sparked := false
+var spark_cd := 4.0
+func spark(lightning_chain_number):
+	if not is_sparked:
+		is_sparked = true
+		sprite.material.set_shader_parameter("anim_speed", 0.0)
+		
+		get_tree().create_timer(spark_cd).timeout.connect(func():
+			is_sparked = false
+			sprite.material.set_shader_parameter("anim_speed", move_speed*4.0/30.0))
+		damage(10, 5, global_position)
+		
+		if lightning_area.has_overlapping_bodies():
+			var bodies = lightning_area.get_overlapping_bodies()
+			if len(bodies) > 0:
+				for body in bodies:
+					print(body.name)
+					body.spark(lightning_chain_number-1)
+
 
 var is_dying := false
 func damage(weapon_damage, weapon_knockback, attack_origin):
@@ -83,7 +104,8 @@ func _process(delta: float) -> void:
 		if sprite.flip_h:
 			rotation += PI/2
 	else:
-		sprite.flip_h = target_pos.x < global_position.x
+		sprite.scale.x = -3.0 if (target_pos.x < global_position.x) else 3.0
+		#sprite.flip_h = target_pos.x < global_position.x
 	
 	sprite.material.set_shader_parameter("shadow_angle", -rotation)
 
@@ -113,4 +135,6 @@ func _physics_process(_delta: float) -> void:
 
 func _on_hit_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("CursorWeapon"):
+		if area.sword_type == Lib.SWORD_TYPES.LIGHTNING:
+			spark(area.lightning_chain_number)
 		damage(area.current_dmg, area.current_knockback, area.global_position)

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://chdbxyvu31a26"]
+
+[ext_resource type="PackedScene" uid="uid://bcxwrhd03e3n" path="res://weapons/swords/GenericSword.tscn" id="1_yf3ct"]
+[ext_resource type="Texture2D" uid="uid://dtmcwh3ra6ty3" path="res://weapons/swords/steel_sword.png" id="2_xqssg"]
+
+[node name="SteelSword" instance=ExtResource("1_yf3ct")]
+dmg = 5.0
+knockback = 1.2
+MOVE_LERP = 6.0
+ROT_LERP = 40.0
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_xqssg")

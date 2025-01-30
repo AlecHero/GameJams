@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c53y0mcf5k7nn"]
+[gd_scene load_steps=19 format=3 uid="uid://c53y0mcf5k7nn"]
 
 [ext_resource type="Script" uid="uid://bxctwg4i1u5r7" path="res://UI.gd" id="1_iifpo"]
 [ext_resource type="Texture2D" uid="uid://umsstqws67ok" path="res://cursor/rope_ball.png" id="2_3b2b5"]
@@ -44,6 +44,60 @@ thickness = 16
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vrfts"]
 shader = ExtResource("3_qui0h")
 
+[sub_resource type="Animation" id="Animation_0mc3e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Timer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vrfts"]
+resource_name = "hide_timer"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Timer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(0.153893, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -172.53)]
+}
+
+[sub_resource type="Animation" id="Animation_2n5f6"]
+resource_name = "show_timer"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Timer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(0.176777, 1),
+"update": 0,
+"values": [Vector2(0, -180), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_27c8x"]
+_data = {
+&"RESET": SubResource("Animation_0mc3e"),
+&"hide_timer": SubResource("Animation_vrfts"),
+&"show_timer": SubResource("Animation_2n5f6")
+}
+
 [node name="UI" type="CanvasLayer"]
 layer = 3
 script = ExtResource("1_iifpo")
@@ -82,6 +136,7 @@ scale = Vector2(3, 3)
 texture = ExtResource("2_3b2b5")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -115,6 +170,7 @@ theme_override_icons/grabber = SubResource("ImageTexture_3b2b5")
 theme_override_styles/slider = SubResource("StyleBoxTexture_qui0h")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_qui0h")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_vrfts")
+step = 0.1
 value = 84.0
 
 [node name="SpeedSlider" type="HSlider" parent="MarginContainer/VBoxContainer"]
@@ -129,26 +185,33 @@ theme_override_styles/grabber_area = SubResource("StyleBoxLine_3b2b5")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_vrfts")
 value = 100.0
 
-[node name="Timer" type="MarginContainer" parent="."]
-material = SubResource("ShaderMaterial_vrfts")
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Timer" type="MarginContainer" parent="Control"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_vrfts")
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1056.0
 theme_override_constants/margin_top = 41
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Timer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Timer"]
 use_parent_material = true
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Timer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Timer/VBoxContainer"]
 use_parent_material = true
 layout_mode = 2
 theme_override_constants/separation = -2
 alignment = 1
 
-[node name="Control" type="MarginContainer" parent="Timer/VBoxContainer/HBoxContainer"]
+[node name="Control" type="MarginContainer" parent="Control/Timer/VBoxContainer/HBoxContainer"]
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -156,7 +219,7 @@ size_flags_vertical = 5
 theme_override_constants/margin_left = 96
 theme_override_constants/margin_top = 126
 
-[node name="10min" type="Sprite2D" parent="Timer/VBoxContainer/HBoxContainer/Control"]
+[node name="10min" type="Sprite2D" parent="Control/Timer/VBoxContainer/HBoxContainer/Control"]
 texture_filter = 1
 scale = Vector2(3, 3)
 texture = ExtResource("3_g6l6n")
@@ -164,18 +227,18 @@ centered = false
 hframes = 11
 frame = 1
 
-[node name="10min2" type="Sprite2D" parent="Timer/VBoxContainer/HBoxContainer/Control"]
+[node name="10min2" type="Sprite2D" parent="Control/Timer/VBoxContainer/HBoxContainer/Control"]
 z_index = -1
 texture_filter = 1
 use_parent_material = true
 scale = Vector2(3, 3)
 texture = ExtResource("3_g6l6n")
 centered = false
-offset = Vector2(-1.785, 1.875)
+offset = Vector2(-3.985, 4.26)
 hframes = 11
 frame = 1
 
-[node name="Control2" type="MarginContainer" parent="Timer/VBoxContainer/HBoxContainer"]
+[node name="Control2" type="MarginContainer" parent="Control/Timer/VBoxContainer/HBoxContainer"]
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -183,7 +246,7 @@ size_flags_vertical = 5
 theme_override_constants/margin_left = 96
 theme_override_constants/margin_top = 126
 
-[node name="1min" type="Sprite2D" parent="Timer/VBoxContainer/HBoxContainer/Control2"]
+[node name="1min" type="Sprite2D" parent="Control/Timer/VBoxContainer/HBoxContainer/Control2"]
 texture_filter = 1
 position = Vector2(-4, 0)
 scale = Vector2(3, 3)
@@ -192,7 +255,7 @@ centered = false
 hframes = 11
 frame = 1
 
-[node name="1min2" type="Sprite2D" parent="Timer/VBoxContainer/HBoxContainer/Control2"]
+[node name="1min2" type="Sprite2D" parent="Control/Timer/VBoxContainer/HBoxContainer/Control2"]
 z_index = -1
 texture_filter = 1
 use_parent_material = true
@@ -200,11 +263,11 @@ position = Vector2(-4, 0)
 scale = Vector2(3, 3)
 texture = ExtResource("3_g6l6n")
 centered = false
-offset = Vector2(-1.785, 1.875)
+offset = Vector2(-3.985, 4.26)
 hframes = 11
 frame = 1
 
-[node name="Control3" type="MarginContainer" parent="Timer/VBoxContainer/HBoxContainer"]
+[node name="Control3" type="MarginContainer" parent="Control/Timer/VBoxContainer/HBoxContainer"]
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -213,7 +276,7 @@ theme_override_constants/margin_left = 48
 theme_override_constants/margin_top = 126
 theme_override_constants/margin_right = 32
 
-[node name="colon" type="Sprite2D" parent="Timer/VBoxContainer/HBoxContainer/Control3"]
+[node name="colon" type="Sprite2D" parent="Control/Timer/VBoxContainer/HBoxContainer/Control3"]
 texture_filter = 1
 position = Vector2(-8, 0)
 scale = Vector2(3, 3)
@@ -221,7 +284,7 @@ texture = ExtResource("3_g6l6n")
 centered = false
 hframes = 11
 
-[node name="colon2" type="Sprite2D" parent="Timer/VBoxContainer/HBoxContainer/Control3"]
+[node name="colon2" type="Sprite2D" parent="Control/Timer/VBoxContainer/HBoxContainer/Control3"]
 z_index = -1
 texture_filter = 1
 use_parent_material = true
@@ -229,10 +292,10 @@ position = Vector2(-8, 0)
 scale = Vector2(3, 3)
 texture = ExtResource("3_g6l6n")
 centered = false
-offset = Vector2(-1.785, 1.875)
+offset = Vector2(-3.985, 4.26)
 hframes = 11
 
-[node name="Control5" type="MarginContainer" parent="Timer/VBoxContainer/HBoxContainer"]
+[node name="Control5" type="MarginContainer" parent="Control/Timer/VBoxContainer/HBoxContainer"]
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -240,7 +303,7 @@ size_flags_vertical = 5
 theme_override_constants/margin_left = 96
 theme_override_constants/margin_top = 126
 
-[node name="10sec" type="Sprite2D" parent="Timer/VBoxContainer/HBoxContainer/Control5"]
+[node name="10sec" type="Sprite2D" parent="Control/Timer/VBoxContainer/HBoxContainer/Control5"]
 texture_filter = 1
 position = Vector2(-8, 0)
 scale = Vector2(3, 3)
@@ -249,7 +312,7 @@ centered = false
 hframes = 11
 frame = 1
 
-[node name="10sec2" type="Sprite2D" parent="Timer/VBoxContainer/HBoxContainer/Control5"]
+[node name="10sec2" type="Sprite2D" parent="Control/Timer/VBoxContainer/HBoxContainer/Control5"]
 z_index = -1
 texture_filter = 1
 use_parent_material = true
@@ -257,11 +320,11 @@ position = Vector2(-8, 0)
 scale = Vector2(3, 3)
 texture = ExtResource("3_g6l6n")
 centered = false
-offset = Vector2(-1.785, 1.875)
+offset = Vector2(-3.985, 4.26)
 hframes = 11
 frame = 1
 
-[node name="Control4" type="MarginContainer" parent="Timer/VBoxContainer/HBoxContainer"]
+[node name="Control4" type="MarginContainer" parent="Control/Timer/VBoxContainer/HBoxContainer"]
 use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -269,7 +332,7 @@ size_flags_vertical = 5
 theme_override_constants/margin_left = 96
 theme_override_constants/margin_top = 126
 
-[node name="1sec" type="Sprite2D" parent="Timer/VBoxContainer/HBoxContainer/Control4"]
+[node name="1sec" type="Sprite2D" parent="Control/Timer/VBoxContainer/HBoxContainer/Control4"]
 texture_filter = 1
 position = Vector2(-12, 0)
 scale = Vector2(3, 3)
@@ -278,7 +341,7 @@ centered = false
 hframes = 11
 frame = 1
 
-[node name="1sec2" type="Sprite2D" parent="Timer/VBoxContainer/HBoxContainer/Control4"]
+[node name="1sec2" type="Sprite2D" parent="Control/Timer/VBoxContainer/HBoxContainer/Control4"]
 z_index = -1
 texture_filter = 1
 use_parent_material = true
@@ -286,10 +349,11 @@ position = Vector2(-12, 0)
 scale = Vector2(3, 3)
 texture = ExtResource("3_g6l6n")
 centered = false
-offset = Vector2(-1.785, 1.875)
+offset = Vector2(-3.985, 4.26)
 hframes = 11
 frame = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="Timer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_27c8x")
+}

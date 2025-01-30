@@ -1,6 +1,7 @@
 extends Node2D
 
 const SNAKE = preload("res://enemies/snake.tscn")
+const LIZARD = preload("res://enemies/lizard.tscn")
 const SKELETON_1 = preload("res://enemies/skeleton1.tscn")
 const SKELETON_2 = preload("res://enemies/skeleton2.tscn")
 const ORC_1 = preload("res://enemies/orc1.tscn")
@@ -32,6 +33,10 @@ const enemy_dict = {
 @export var cursor_handler: Node2D
 @onready var life_ball = cursor_handler.get_node("%LifeBall")
 @onready var vp = get_parent().get_viewport_rect().size
+
+func _ready() -> void:
+	Lib.wave_passed.connect(wave_passed)
+	Lib.next_wave.connect(next_wave)
 
 
 func get_square_pos():
@@ -68,7 +73,7 @@ func spawn_swarm(enemy_weights, spawn_count : float, time=5):
 
 func spawn_cluster(enemy_weights, spawn_count):
 	var circ = Lib.circle_encompassing_viewport(vp)
-	circ["radius"] *= 1.25
+	circ["radius"] *= 1.15
 	var spawn_position = Lib.rand_circle_position(circ)
 	var time_per_spawn = 0.5 / spawn_count
 	var n_side = ceilf(sqrt(spawn_count))
@@ -97,47 +102,77 @@ var wave_dict = {
 	WAVE_TYPE.SWARM: spawn_swarm,
 }
 
+var base_time = 0
+var time_shift = 0
+func wave_passed():
+	base_time = Time.get_ticks_msec() / 1000.0
+
+func next_wave(wave_idx):
+	has_passed_wave = false
+	time_shift += Time.get_ticks_msec() / 1000.0 - base_time
+
+#var start_time = Lib.to_sec(02_35)
+var start_time = Lib.to_sec(02_30)
+
 var wave_list = [
-	{"time":00_05, "enemy_type":ENEMY_TYPE.SNAKE, "wave_type":WAVE_TYPE.CIRCLE, "spawn_count":50},
-	{"time":00_15, "enemy_type":ENEMY_TYPE.SNAKE, "wave_type":WAVE_TYPE.CIRCLE, "spawn_count":50},
-	{"time":00_25, "enemy_type":ENEMY_TYPE.SNAKE, "wave_type":WAVE_TYPE.CLUSTER, "spawn_count":42},
-	{"time":00_30, "enemy_type":ENEMY_TYPE.SNAKE, "wave_type":WAVE_TYPE.CLUSTER, "spawn_count":42},
-	{"time":00_50, "enemy_type":ENEMY_TYPE.RAPTOR, "wave_type":WAVE_TYPE.CLUSTER, "spawn_count":16},
-	{"time":01_00, "enemy_type":ENEMY_TYPE.RAPTOR, "wave_type":WAVE_TYPE.CLUSTER, "spawn_count":16},
-	{"time":01_10, "enemy_type":ENEMY_TYPE.RAPTOR, "wave_type":WAVE_TYPE.CLUSTER, "spawn_count":16},
-	{"time":01_10, "enemy_type":ENEMY_TYPE.RAPTOR, "wave_type":WAVE_TYPE.CLUSTER, "spawn_count":16},
-	{"time":01_30, "enemy_type":ENEMY_TYPE.RAPTOR, "wave_type":WAVE_TYPE.CIRCLE, "spawn_count":42},
+	{"time":00_02, "enemy_type":ENEMY_TYPE.SNAKE, "wave_type":WAVE_TYPE.CLUSTER, "spawn_count":5},
+	{"time":00_04, "enemy_type":ENEMY_TYPE.SNAKE, "wave_type":WAVE_TYPE.CLUSTER, "spawn_count":8},
+	{"time":00_08, "enemy_type":ENEMY_TYPE.SNAKE, "wave_type":WAVE_TYPE.CLUSTER, "spawn_count":16},
+	{"time":00_08, "enemy_type":ENEMY_TYPE.SNAKE, "wave_type":WAVE_TYPE.CLUSTER, "spawn_count":16},
+	{"time":00_32, "enemy_type":ENEMY_TYPE.SNAKE, "wave_type":WAVE_TYPE.CIRCLE, "spawn_count":54},
+	{"time":00_40, "enemy_type":ENEMY_TYPE.SNAKE, "wave_type":WAVE_TYPE.CIRCLE, "spawn_count":32},
+	
+	{"time":01_00, "enemy_type":ENEMY_TYPE.RAPTOR, "wave_type":WAVE_TYPE.CLUSTER, "spawn_count":10},
+	{"time":01_10, "enemy_type":ENEMY_TYPE.RAPTOR, "wave_type":WAVE_TYPE.CLUSTER, "spawn_count":10},
+	{"time":01_20, "enemy_type":ENEMY_TYPE.RAPTOR, "wave_type":WAVE_TYPE.CLUSTER, "spawn_count":16},
+	{"time":01_33, "enemy_type":ENEMY_TYPE.RAPTOR, "wave_type":WAVE_TYPE.CLUSTER, "spawn_count":16},
+	{"time":01_42, "enemy_type":ENEMY_TYPE.RAPTOR, "wave_type":WAVE_TYPE.CIRCLE, "spawn_count":42},
 ]
 
 var wave_progress = [
-	[01_40, { SNAKE: 1.0 }],
-	[03_20, { SNAKE: 3.0, SKELETON_1: 1.0 }],
-	[05_00, { SNAKE: 5.0, SKELETON_1: 3.0, SKELETON_2: 1.0 }],
-	#[05_00, { SKELETON_1: 3.0, SKELETON_2: 1.0 }],
+	[00_45, { SNAKE: 1.0, LIZARD: 1.0 }],
+	[01_00, { SNAKE: 2.0, LIZARD: 2.0, RAPTOR: 1.0 }],
+	[02_35, { SNAKE: 1.25, LIZARD: 1.25, RAPTOR: 1.0 }],
+	[02_40, {}],
+	[03_00, { RAPTOR: 2.0, ORC_1: 0.5, ORC_2: 0.5}]
 ]
 
 
 
 var current_spawn_count := 32.0
 var current_enemy_dict
+var has_passed_wave := false
 
 var wave_progress_index := 0
 var wave_index := 0
 func _process(delta: float) -> void:
-	if wave_progress_index <= (len(wave_progress)-1):
-		var WaveProgress = wave_progress[wave_progress_index]
-		current_enemy_dict = WaveProgress[1]
-		if Lib.to_sec(WaveProgress[0]) < Time.get_ticks_msec() / 1000.0:
-			wave_progress_index += 1
+	var total_time = start_time + Time.get_ticks_msec() / 1000.0 - time_shift
 	
-	if wave_index <= (len(wave_list)-1):
-		var Wave = wave_list[wave_index]
-		if Lib.to_sec(Wave["time"]) < Time.get_ticks_msec() / 1000.0:
-			wave_index += 1
-			wave_dict[Wave["wave_type"]].call(enemy_dict[Wave["enemy_type"]], Wave["spawn_count"])
+	if !has_passed_wave:
+		if wave_progress_index <= (len(wave_progress)-1):
+			var WaveProgress = wave_progress[wave_progress_index]
+			if Lib.to_sec(WaveProgress[0]) < start_time:
+				wave_progress_index += 1
+			else:
+				current_enemy_dict = WaveProgress[1]
+				if Lib.to_sec(WaveProgress[0]) < total_time:
+					wave_progress_index += 1
+		
+		if wave_index <= (len(wave_list)-1):
+			var Wave = wave_list[wave_index]
+			if Lib.to_sec(Wave["time"]) < start_time:
+				wave_index += 1
+			else:
+				if Lib.to_sec(Wave["time"]) < total_time:
+					wave_index += 1
+					wave_dict[Wave["wave_type"]].call(enemy_dict[Wave["enemy_type"]], Wave["spawn_count"])
+		
+		if current_enemy_dict != null and current_enemy_dict.is_empty() and get_child_count() <= 1 and !has_passed_wave:
+			has_passed_wave = true
+			Lib.wave_cleared.emit()
 
 const MAX_ENEMIES = 320
 
 func _on_timer_timeout() -> void:
-	if MAX_ENEMIES > get_child_count():
+	if MAX_ENEMIES > get_child_count() and !current_enemy_dict.is_empty():
 		spawn_single(current_enemy_dict)

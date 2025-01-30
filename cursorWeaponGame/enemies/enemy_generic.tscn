@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://csc5ciaeo6avi"]
+[gd_scene load_steps=10 format=3 uid="uid://csc5ciaeo6avi"]
 
 [ext_resource type="Script" uid="uid://clrjmqhe4lblv" path="res://enemies/enemy_generic.gd" id="1_g61k1"]
 [ext_resource type="Shader" uid="uid://bgsdv5cdl7thg" path="res://enemies/enemy.gdshader" id="1_synvi"]
@@ -30,6 +30,9 @@ radius = 35.0143
 resource_local_to_scene = true
 shader = ExtResource("4_ttanq")
 shader_parameter/alpha = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dccvl"]
+radius = 94.2603
 
 [node name="EnemyGeneric" type="CharacterBody2D" groups=["Enemy"]]
 z_as_relative = false
@@ -76,6 +79,14 @@ offset_bottom = 19.5
 metadata/_edit_lock_ = true
 
 [node name="AttackCooldown" type="Timer" parent="."]
+
+[node name="LightningArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LightningArea"]
+shape = SubResource("CircleShape2D_dccvl")
 
 [connection signal="area_entered" from="HitArea" to="." method="_on_hit_area_area_entered"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

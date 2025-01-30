@@ -31,8 +31,9 @@ push_force = 150.0
 
 [node name="Sprite2D" parent="." index="0"]
 material = SubResource("ShaderMaterial_ngge3")
-position = Vector2(7.025, -40.56)
+position = Vector2(0, -40.5)
 texture = ExtResource("3_5qs6a")
+offset = Vector2(1.68, 0)
 
 [node name="Shadow" parent="." index="3"]
 material = SubResource("ShaderMaterial_xnpau")

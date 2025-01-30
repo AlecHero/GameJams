@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c06j6nqtdodss"
+path="res://.godot/imported/Big Drumming.mp3-d40ae7686f70769a4fc5e005129eb0e2.mp3str"
+
+[deps]
+
+source_file="res://audio/music/Big Drumming.mp3"
+dest_files=["res://.godot/imported/Big Drumming.mp3-d40ae7686f70769a4fc5e005129eb0e2.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

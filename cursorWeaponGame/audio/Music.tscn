@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://n7ltxqom5si7"]
+
+[ext_resource type="Script" uid="uid://f2lt87syrpgt" path="res://audio/Music.gd" id="1_bsdrq"]
+[ext_resource type="AudioStream" uid="uid://djd4s3at1itr6" path="res://audio/music/Big Mojo.mp3" id="2_xfoew"]
+
+[node name="Music" type="Node"]
+script = ExtResource("1_bsdrq")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_xfoew")
+volume_db = -10.0
+bus = &"Music"
+
+[connection signal="finished" from="MusicPlayer" to="." method="_on_music_player_finished"]

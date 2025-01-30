@@ -1,7 +1,15 @@
 extends Node
 
-
+signal wave_passed
+signal wave_cleared
+signal next_wave
+signal merchant_finished
 @onready var rng = RandomNumberGenerator.new()
+
+
+enum MERCHANT_TYPES { BEDOUIN }
+enum SWORD_TYPES { GENERIC, LIGHTNING, FIRE, ICE }
+
 func _ready() -> void:
 	rng.seed = hash("cursorGame")
 

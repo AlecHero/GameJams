@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://df12oeqgqsold"]
+
+[ext_resource type="PackedScene" uid="uid://di3boesgwti70" path="res://merchants/MerchantGeneric.tscn" id="1_lnyjv"]
+[ext_resource type="Shader" uid="uid://cqywsqw100tpd" path="res://enemies/shadow_ball.gdshader" id="2_7mqb3"]
+[ext_resource type="Texture2D" uid="uid://6c4kqltxgtla" path="res://merchants/upgrade5.png" id="3_hg2pw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qjvsy"]
+resource_local_to_scene = true
+shader = ExtResource("2_7mqb3")
+shader_parameter/alpha = 1.0
+
+[node name="MerchantGeneric" instance=ExtResource("1_lnyjv")]
+
+[node name="Shadow" parent="." index="2"]
+material = SubResource("ShaderMaterial_qjvsy")
+
+[node name="Sprite2D3" parent="carpet/AreaRight" index="0"]
+texture = ExtResource("3_hg2pw")

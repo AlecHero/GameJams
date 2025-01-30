@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://blyykt8n0c27i"
+path="res://.godot/imported/Drums of the Deep.mp3-fbe7f3b24416278b8cea6edac06d449a.mp3str"
+
+[deps]
+
+source_file="res://audio/music/Drums of the Deep.mp3"
+dest_files=["res://.godot/imported/Drums of the Deep.mp3-fbe7f3b24416278b8cea6edac06d449a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

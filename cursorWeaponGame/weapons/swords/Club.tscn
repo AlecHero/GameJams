@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3e6cdlaeiy1h"]
+
+[ext_resource type="PackedScene" uid="uid://bcxwrhd03e3n" path="res://weapons/swords/GenericSword.tscn" id="1_5romb"]
+[ext_resource type="Texture2D" uid="uid://d2f8kkvgpo4xj" path="res://weapons/swords/wooden_club.png" id="2_63yam"]
+
+[node name="Club" instance=ExtResource("1_5romb")]
+arc_radius = 80.0
+dmg = 5.0
+knockback = 3.0
+SWING_FACTOR = 6.0
+MOVE_LERP = 4.0
+ROT_LERP = 30.0
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_63yam")
+
+[node name="CollisionPolygon2D" parent="." index="1"]
+polygon = PackedVector2Array(14, -12, 16, -26, 46, -58, 54, -63, 65, -63, 69, -57, 66, -45, 42, -26, 29, -16)

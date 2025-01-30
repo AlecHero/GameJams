@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://deld4k4s7o2fj"]
+
+[ext_resource type="PackedScene" uid="uid://bcxwrhd03e3n" path="res://weapons/swords/GenericSword.tscn" id="1_5ppfh"]
+[ext_resource type="Texture2D" uid="uid://due07l54fjqcs" path="res://weapons/swords/steel_club.png" id="2_phurf"]
+
+[node name="SteelClub" instance=ExtResource("1_5ppfh")]
+arc_radius = 100.0
+knockback = 8.0
+SWING_FACTOR = 9.0
+MOVE_LERP = 2.0
+ROT_LERP = 30.0
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_phurf")
+
+[node name="CollisionPolygon2D" parent="." index="1"]
+polygon = PackedVector2Array(16, -15, 16, -26, 26, -46, 44, -69, 79, -105, 92, -108, 106, -98, 106, -80, 66, -42, 48, -27, 25, -16)

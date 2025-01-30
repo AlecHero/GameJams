@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bcxwrhd03e3n"]
+[gd_scene load_steps=6 format=3 uid="uid://bcxwrhd03e3n"]
 
 [ext_resource type="Script" uid="uid://vmjccmjb77ep" path="res://weapons/swords/generic_sword.gd" id="1_nuvnt"]
 [ext_resource type="Shader" uid="uid://73g6ramepv1w" path="res://shadow.gdshader" id="2_17nwf"]
 [ext_resource type="Texture2D" uid="uid://1ftb6yahfvp7" path="res://weapons/swords/wooden_sword.png" id="2_61pcg"]
+[ext_resource type="AudioStream" uid="uid://cdovwgm08mmr5" path="res://audio/rumble2.mp3" id="4_u7trf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hnxdq"]
 shader = ExtResource("2_17nwf")
@@ -20,6 +21,7 @@ z_index = 5
 material = SubResource("ShaderMaterial_hnxdq")
 collision_mask = 4
 script = ExtResource("1_nuvnt")
+arc_radius = 90.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -30,3 +32,8 @@ offset = Vector2(16, -16)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(12, -12, 19, -28, 64, -74, 77, -78, 74, -65, 28, -19)
+
+[node name="Rumble" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_u7trf")
+volume_db = -31.222
+autoplay = true

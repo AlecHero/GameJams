@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://uls12tiwx2d0"]
+
+[ext_resource type="PackedScene" uid="uid://di3boesgwti70" path="res://merchants/MerchantGeneric.tscn" id="1_uom1j"]
+[ext_resource type="Texture2D" uid="uid://cdvyxhgmxyn51" path="res://merchants/caver.png" id="2_dqcsy"]
+[ext_resource type="Shader" uid="uid://cqywsqw100tpd" path="res://enemies/shadow_ball.gdshader" id="3_wumtq"]
+[ext_resource type="Texture2D" uid="uid://bvkbux2oe7oln" path="res://merchants/barrels.png" id="4_gvhhs"]
+[ext_resource type="Texture2D" uid="uid://6c4kqltxgtla" path="res://merchants/upgrade5.png" id="5_4ht8m"]
+[ext_resource type="Texture2D" uid="uid://u3j038yr042u" path="res://merchants/upgrade6.png" id="6_5xx8y"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4377k"]
+resource_local_to_scene = true
+shader = ExtResource("3_wumtq")
+shader_parameter/alpha = 1.0
+
+[node name="MerchantGeneric" instance=ExtResource("1_uom1j")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_dqcsy")
+
+[node name="Shadow" parent="." index="2"]
+material = SubResource("ShaderMaterial_4377k")
+
+[node name="Panel1" parent="." index="3"]
+text = "DMG +
+SIZE +
+KNOCKBACK +
+SPEED  -"
+
+[node name="Panel2" parent="." index="4"]
+text = "DMG ++
+KNOCKBACK ++
+SIZE -"
+
+[node name="carpet" parent="." index="5"]
+texture = ExtResource("4_gvhhs")
+
+[node name="Sprite2D" parent="carpet/AreaLeft" index="0"]
+texture = ExtResource("5_4ht8m")
+
+[node name="Sprite2D3" parent="carpet/AreaRight" index="0"]
+texture = ExtResource("6_5xx8y")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://cwnxchldcdkvi"]
+[gd_scene load_steps=21 format=4 uid="uid://cwnxchldcdkvi"]
 
 [ext_resource type="Script" uid="uid://km2t01b03acp" path="res://main.gd" id="1_fku5e"]
 [ext_resource type="Script" uid="uid://3u5385pd3drn" path="res://enemies/enemy_handler.gd" id="2_bq0ln"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c53y0mcf5k7nn" path="res://UI.tscn" id="3_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://dko267kiwqrej" path="res://cursor/Cursor.tscn" id="4_rtaki"]
 [ext_resource type="Script" uid="uid://sapmodxt0cvn" path="res://cursor/rope.gd" id="4_stxyo"]
+[ext_resource type="Script" uid="uid://dfe4iweeqsjo8" path="res://level_handler.gd" id="4_yaehf"]
 [ext_resource type="Script" uid="uid://djyg3pbn3u6gp" path="res://cursor_handler.gd" id="5_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://b1gmcluru8s03" path="res://cursor/rope.png" id="5_i5372"]
 [ext_resource type="PackedScene" uid="uid://ddemy4vy41wy8" path="res://cursor/life_ball.tscn" id="7_2cqfq"]
@@ -64,6 +65,10 @@ enemy_handler = NodePath("../EnemyHandler")
 
 [node name="Shaders" parent="." instance=ExtResource("2_vsgp8")]
 layer = 2
+
+[node name="LevelHandler" type="Node2D" parent="."]
+position = Vector2(960, 253)
+script = ExtResource("4_yaehf")
 
 [node name="EnemyHandler" type="Node2D" parent="." node_paths=PackedStringArray("main", "cursor_handler")]
 y_sort_enabled = true

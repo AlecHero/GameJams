@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dm58o8mb0rsjv"]
+
+[ext_resource type="PackedScene" uid="uid://bcxwrhd03e3n" path="res://weapons/swords/GenericSword.tscn" id="1_e7ywb"]
+[ext_resource type="Texture2D" uid="uid://bq237spvfilgh" path="res://weapons/swords/steel_hammer.png" id="2_r4fhu"]
+
+[node name="SteelHammer" instance=ExtResource("1_e7ywb")]
+arc_radius = 115.0
+is_hammer = true
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_r4fhu")
+offset = Vector2(18.48, -18.53)
+
+[node name="CollisionPolygon2D" parent="." index="1"]
+position = Vector2(10.995, -11.015)
+polygon = PackedVector2Array(5, -45, 18, -58, 58, -17, 45, -5)

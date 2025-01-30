@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://hya4mdnb7k01"]
+[gd_scene load_steps=8 format=3 uid="uid://hya4mdnb7k01"]
 
 [ext_resource type="Script" uid="uid://clrjmqhe4lblv" path="res://enemies/enemy_generic.gd" id="1_1iib3"]
 [ext_resource type="Shader" uid="uid://bgsdv5cdl7thg" path="res://enemies/enemy.gdshader" id="2_ca2k0"]
@@ -22,6 +22,9 @@ radius = 24.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4wtm0"]
 radius = 19.2354
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t3ygg"]
+radius = 94.2603
 
 [node name="FlatEnemyGeneric" type="CharacterBody2D" groups=["Enemy"]]
 z_as_relative = false
@@ -54,6 +57,14 @@ shape = SubResource("CircleShape2D_4wtm0")
 
 [node name="PushCooldown" type="Timer" parent="."]
 wait_time = 4.0
+
+[node name="LightningArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LightningArea"]
+shape = SubResource("CircleShape2D_t3ygg")
 
 [connection signal="area_entered" from="HitArea" to="." method="_on_hit_area_area_entered"]
 [connection signal="timeout" from="PushCooldown" to="." method="_on_push_cooldown_timeout"]

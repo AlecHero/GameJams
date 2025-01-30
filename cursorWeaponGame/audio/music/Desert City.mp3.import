@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://k8t21ioh7au4"
+path="res://.godot/imported/Desert City.mp3-fe05995a2c739b3a8cf81afe1062ff12.mp3str"
+
+[deps]
+
+source_file="res://audio/music/Desert City.mp3"
+dest_files=["res://.godot/imported/Desert City.mp3-fe05995a2c739b3a8cf81afe1062ff12.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

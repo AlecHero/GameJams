@@ -1,11 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cl2fqv7x3focw"]
+[gd_scene load_steps=3 format=3 uid="uid://cl2fqv7x3focw"]
 
 [ext_resource type="PackedScene" uid="uid://bcxwrhd03e3n" path="res://weapons/swords/GenericSword.tscn" id="1_fygni"]
 [ext_resource type="Texture2D" uid="uid://6rv38oao4eup" path="res://weapons/swords/big_steel_sword.png" id="2_mqhqv"]
-[ext_resource type="Script" path="res://weapons/sword_sprites/generic_sword.gd" id="2_vi7y2"]
 
-[node name="GenericSword" instance=ExtResource("1_fygni")]
-script = ExtResource("2_vi7y2")
+[node name="BigSword" instance=ExtResource("1_fygni")]
 dmg = 10.0
 knockback = 1.5
 MOVE_LERP = 5.0

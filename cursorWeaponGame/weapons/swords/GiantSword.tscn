@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cafqvccmf4ryq"]
+
+[ext_resource type="PackedScene" uid="uid://bcxwrhd03e3n" path="res://weapons/swords/GenericSword.tscn" id="1_gbgis"]
+[ext_resource type="Texture2D" uid="uid://di524i22aq3qn" path="res://weapons/swords/giant_steel_sword.png" id="2_1dt2w"]
+
+[node name="GiantSword" instance=ExtResource("1_gbgis")]
+dmg = 20.0
+knockback = 2.0
+SWING_FACTOR = 9.0
+MOVE_LERP = 3.0
+ROT_LERP = 25.0
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_1dt2w")
+
+[node name="CollisionPolygon2D" parent="." index="1"]
+polygon = PackedVector2Array(12, -12, 16, -31, 100, -119, 121, -120, 120, -100, 31, -12)

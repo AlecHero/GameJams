@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://1ajcxxlmocob"]
+
+[ext_resource type="Texture2D" uid="uid://bmavcjs1mdoq0" path="res://merchants/pickup_life.png" id="1_0j0o2"]
+[ext_resource type="Script" uid="uid://dh6hf7xlci1xn" path="res://merchants/pickup_generic.gd" id="1_7w8tt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0j0o2"]
+radius = 14.0
+
+[node name="PickupGeneric" type="Area2D"]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_7w8tt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = ExtResource("1_0j0o2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_0j0o2")

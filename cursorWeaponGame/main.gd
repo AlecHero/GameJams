@@ -1,10 +1,11 @@
 extends Node2D
 
+@onready var enemy_handler: Node2D = $EnemyHandler
+
 func _ready() -> void:
+	Music.music_player.play(enemy_handler.start_time)
 	#Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	pass
-
 
 
 func _process(_delta: float) -> void:

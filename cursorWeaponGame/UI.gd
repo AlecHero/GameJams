@@ -20,8 +20,11 @@ extends CanvasLayer
 var debug_section = preload("res://DebugSection.tscn")
 var debug_list = {}
 
-
+var init_time := 0
 func _ready():
+	init_time = enemy_handler.start_time
+	Lib.wave_passed.connect(wave_passed)
+	Lib.next_wave.connect(next_wave)
 	debug_ui.hide()
 	
 	debug_list = {
@@ -32,8 +35,14 @@ func _ready():
 		"current_weapon": func(): return self.current_weapon_instance.name,
 		"weapon_dmg": func(): return self.current_weapon_instance.current_dmg,
 		"weapon_knockback": func(): return self.current_weapon_instance.current_knockback,
+		"weapon_position": func(): return self.current_weapon_instance.global_position,
+		"cursor": func(): return self.current_weapon_instance.cursor,
+		"velocity_factor": func(): return self.current_weapon_instance.velocity_factor,
+		"angle_diff": func(): return self.current_weapon_instance.angle_diff,
+		"rumble_db": func(): return self.current_weapon_instance.rumble.volume_db,
 		" ": func(): return "",
-		"wave_progress": func(): return enemy_handler.wave_progress_index,
+		"wave_progress_idx": func(): return enemy_handler.wave_progress_index,
+		"wave_list_idx": func(): return enemy_handler.wave_index,
 		"wave_list": func(): return enemy_handler.wave_list[min(len(enemy_handler.wave_list)-1, enemy_handler.wave_index)],
 		#"clamped_mouse_pos": func(): return spear.clamped_mouse_pos,
 		#"intersection_point": func(): return spear.intersection_point,
@@ -49,19 +58,34 @@ func _ready():
 		sec.state = debug_list[property]
 		debug_container.add_child(sec)
 
-@onready var _10_min: Sprite2D = $"Timer/VBoxContainer/HBoxContainer/Control/10min"
-@onready var _10_min_2: Sprite2D = $"Timer/VBoxContainer/HBoxContainer/Control/10min2"
-@onready var _1_min: Sprite2D = $"Timer/VBoxContainer/HBoxContainer/Control2/1min"
-@onready var _1_min_2: Sprite2D = $"Timer/VBoxContainer/HBoxContainer/Control2/1min2"
-@onready var _10_sec: Sprite2D = $"Timer/VBoxContainer/HBoxContainer/Control5/10sec"
-@onready var _10_sec_2: Sprite2D = $"Timer/VBoxContainer/HBoxContainer/Control5/10sec2"
-@onready var _1_sec: Sprite2D = $"Timer/VBoxContainer/HBoxContainer/Control4/1sec"
-@onready var _1_sec_2: Sprite2D = $"Timer/VBoxContainer/HBoxContainer/Control4/1sec2"
+
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+var base_time = 0
+var time_shift = 0
+func wave_passed():
+	base_time = Time.get_ticks_msec() / 1000.0
+	animation_player.play("hide_timer")
+
+func next_wave(wave_idx):
+	time_shift += Time.get_ticks_msec() / 1000.0 - base_time
+	animation_player.play("show_timer")
+
+
+@onready var _10_min: Sprite2D = $"%Timer/VBoxContainer/HBoxContainer/Control/10min"
+@onready var _10_min_2: Sprite2D = $"%Timer/VBoxContainer/HBoxContainer/Control/10min2"
+@onready var _1_min: Sprite2D = $"%Timer/VBoxContainer/HBoxContainer/Control2/1min"
+@onready var _1_min_2: Sprite2D = $"%Timer/VBoxContainer/HBoxContainer/Control2/1min2"
+@onready var _10_sec: Sprite2D = $"%Timer/VBoxContainer/HBoxContainer/Control5/10sec"
+@onready var _10_sec_2: Sprite2D = $"%Timer/VBoxContainer/HBoxContainer/Control5/10sec2"
+@onready var _1_sec: Sprite2D = $"%Timer/VBoxContainer/HBoxContainer/Control4/1sec"
+@onready var _1_sec_2: Sprite2D = $"%Timer/VBoxContainer/HBoxContainer/Control4/1sec2"
 
 var n = 0
 var current_weapon_instance
+
 func _process(_delta):
-	var ticks = Time.get_ticks_msec() / 1000.0
+	var ticks = Time.get_ticks_msec() / 1000.0 - time_shift
+	ticks += init_time
 	var sec = fmod(ticks, 60.0)
 	var min = floor(ticks / 60.0)
 	var sec1 = floori(sec) % 10

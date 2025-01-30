@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://djd4s3at1itr6"
+path="res://.godot/imported/Big Mojo.mp3-28d03d81eedda3ebfa53ff0fd47f7bef.mp3str"
+
+[deps]
+
+source_file="res://audio/music/Big Mojo.mp3"
+dest_files=["res://.godot/imported/Big Mojo.mp3-28d03d81eedda3ebfa53ff0fd47f7bef.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4
